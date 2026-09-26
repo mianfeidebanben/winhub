@@ -1394,7 +1394,7 @@ internal fun DxvkConfigDialog(
                 Spacer(Modifier.height(8.dp))
                 LabeledDropdown("VKD3D 功能级别", featureLevelEntries, selectedFeatureLevel, { selectedFeatureLevel = it })
                 Spacer(Modifier.height(8.dp))
-                LabeledDropdown("DDraw Wrapper", ddraEntries, selectedDdra, { selectedDdra = it })
+                LabeledDropdown("DDraw 包装器", ddraEntries, selectedDdra, { selectedDdra = it })
                 if (isVegas) {
                     Spacer(Modifier.height(8.dp))
                     LabeledDropdown("配置来源", configSourceEntries.value, selectedConfigSource, { selectedConfigSource = it })
@@ -1463,7 +1463,7 @@ internal fun WineD3DConfigDialog(
                 Spacer(Modifier.height(8.dp))
                 LabeledDropdown(stringResource(R.string.gpu_name), gpuNames, gpuName, { gpuName = it })
                 Spacer(Modifier.height(8.dp))
-                LabeledDropdown("DDraw Wrapper", ddraEntries, ddra, { ddra = it })
+                LabeledDropdown("DDraw 包装器", ddraEntries, ddra, { ddra = it })
                 Spacer(Modifier.height(8.dp))
                 LabeledDropdown(stringResource(R.string.graphics_driver_max_device_memory), videoMemEntries, videoMem, { videoMem = it })
                 Spacer(Modifier.height(8.dp))

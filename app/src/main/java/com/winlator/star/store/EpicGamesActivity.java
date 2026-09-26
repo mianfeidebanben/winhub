@@ -544,7 +544,7 @@ public class EpicGamesActivity extends Activity {
         expandSection.addView(statusTV, stLp);
 
         Button actionBtn = new Button(this);
-        actionBtn.setText(isInstalled ? "Add to Launcher" : "Install");
+        actionBtn.setText(isInstalled ? "添加到启动器" : "Install");
         actionBtn.setTextColor(0xFFFFFFFF);
         actionBtn.setBackgroundColor(isInstalled ? COLOR_ADD : COLOR_ACCENT);
         actionBtn.setTextSize(13f);
@@ -562,7 +562,7 @@ public class EpicGamesActivity extends Activity {
                 if (cancelRef[0] != null) cancelRef[0].run();
                 return;
             }
-            if ("Add to Launcher".equals(lbl) || "Add Game".equals(lbl)) {
+            if ("添加到启动器".equals(lbl) || "Add Game".equals(lbl)) {
                 String exe = prefs.getString("epic_exe_" + game.appName, null);
                 if (exe != null) StarLaunchBridge.addToLauncher(this, game.title, exe, game.artCover != null && !game.artCover.isEmpty() ? game.artCover : game.artSquare);
                 return;
@@ -763,7 +763,7 @@ public class EpicGamesActivity extends Activity {
         actionRow.addView(progressBar, new LinearLayout.LayoutParams(-1, dp(3)));
 
         Button actionBtn = new Button(this);
-        actionBtn.setText(isInstalled ? "Add to Launcher" : "Install");
+        actionBtn.setText(isInstalled ? "添加到启动器" : "Install");
         actionBtn.setTextColor(0xFFFFFFFF);
         actionBtn.setBackgroundColor(isInstalled ? COLOR_ADD : COLOR_ACCENT);
         actionBtn.setTextSize(10f);
@@ -780,7 +780,7 @@ public class EpicGamesActivity extends Activity {
                 if (cancelRef[0] != null) cancelRef[0].run();
                 return;
             }
-            if ("Add to Launcher".equals(lbl) || "Add Game".equals(lbl)) {
+            if ("添加到启动器".equals(lbl) || "Add Game".equals(lbl)) {
                 String exe = prefs.getString("epic_exe_" + game.appName, null);
                 if (exe != null) StarLaunchBridge.addToLauncher(this, game.title, exe, game.artCover != null && !game.artCover.isEmpty() ? game.artCover : game.artSquare);
                 return;

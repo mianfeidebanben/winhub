@@ -125,7 +125,7 @@ public class AmazonGameDetailActivity extends Activity {
         }
 
         // Info
-        body.addView(makeSectionHeader("GAME INFO"), new LinearLayout.LayoutParams(-1, -2));
+        body.addView(makeSectionHeader("游戏信息"), new LinearLayout.LayoutParams(-1, -2));
         body.addView(makeInfoCard(), new LinearLayout.LayoutParams(-1, -2));
 
         // Actions

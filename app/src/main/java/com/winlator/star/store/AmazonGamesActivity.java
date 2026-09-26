@@ -494,7 +494,7 @@ public class AmazonGamesActivity extends Activity {
         boolean updateAvailable = isInstalled
                 && game.versionId != null && game.versionId.endsWith("_UPDATE_AVAILABLE");
         TextView checkmark = new TextView(this);
-        checkmark.setText(updateAvailable ? "✓ 已安装 — 有可用更新" : "✓ Installed");
+        checkmark.setText(updateAvailable ? "✓ 已安装 — 有可用更新" : "✓ 已安装");
         checkmark.setTextColor(updateAvailable ? 0xFFFFAA00 : 0xFF4CAF50);
         checkmark.setTextSize(10f);
         checkmark.setVisibility(isInstalled ? View.VISIBLE : View.GONE);

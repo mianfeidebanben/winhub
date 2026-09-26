@@ -145,7 +145,7 @@ public class EpicGameDetailActivity extends Activity {
         body.addView(makeSectionHeader("DLC"), new LinearLayout.LayoutParams(-1, -2));
         body.addView(makeDlcCard(), new LinearLayout.LayoutParams(-1, -2));
 
-        body.addView(makeSectionHeader("CLOUD SAVES"), new LinearLayout.LayoutParams(-1, -2));
+        body.addView(makeSectionHeader("云存档"), new LinearLayout.LayoutParams(-1, -2));
         body.addView(makeCloudSavesCard(), new LinearLayout.LayoutParams(-1, -2));
 
         scroll.addView(body);
