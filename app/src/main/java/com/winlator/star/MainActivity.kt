@@ -384,8 +384,8 @@ private fun AllFilesAccessDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
         title = { Text("需要所有文件访问权限") },
         text = {
             Text(
-                "In order to grant access to additional storage devices such as USB storage, " +
-                "the All Files Access permission must be granted. Press OK to open Android Settings."
+                "为授予对 USB 存储等附加存储设备的访问权限，" +
+                "必须授予「所有文件访问」权限。按「确定」打开 Android 设置。"
             )
         },
         confirmButton = { TextButton(onClick = onConfirm) { Text("确定") } },
@@ -433,10 +433,10 @@ private fun AboutDialog(onDismiss: () -> Unit) {
 
                 // Powered by
                 AboutSection(title = "技术支持") {
-                    AboutRow("Wine",    "Windows compatibility layer")
-                    AboutRow("Box64",   "x86_64 emulation on ARM")
-                    AboutRow("FEX-Emu", "Fast x86 emulator")
-                    AboutRow("Turnip",  "Open-source Vulkan driver")
+                    AboutRow("Wine",    "Windows 兼容层")
+                    AboutRow("Box64",   "ARM 上的 x86_64 模拟")
+                    AboutRow("FEX-Emu", "快速的 x86 模拟器")
+                    AboutRow("Turnip",  "开源 Vulkan 驱动")
                 }
 
                 Spacer(androidx.compose.ui.Modifier.height(4.dp))
@@ -444,13 +444,13 @@ private fun AboutDialog(onDismiss: () -> Unit) {
                 Spacer(androidx.compose.ui.Modifier.height(4.dp))
 
                 // Credits
-                AboutSection(title = "Credits") {
-                    AboutRow("brunodev85",      "Winlator — original project")
+                AboutSection(title = "鸣谢") {
+                    AboutRow("brunodev85",      "Winlator——原始项目")
                     AboutRow("MishaMixXx",      "Winlator Bionic")
                     AboutRow("The412Banner",    "Star-Compose / Star Bionic")
                     AboutRow("ptitSeb",         "Box64")
-                    AboutRow("WineHQ",          "Wine project")
-                    AboutRow("Mesa / Freedreno","Turnip Vulkan driver")
+                    AboutRow("WineHQ",          "Wine 项目")
+                    AboutRow("Mesa / Freedreno","Turnip Vulkan 驱动")
                 }
 
                 Spacer(androidx.compose.ui.Modifier.height(8.dp))
