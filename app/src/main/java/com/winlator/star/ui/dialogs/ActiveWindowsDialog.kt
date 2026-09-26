@@ -52,12 +52,12 @@ fun ActiveWindowsDialog(state: XServerDialogState) {
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text("Active Windows", style = MaterialTheme.typography.titleMedium)
+                Text("活动窗口", style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.height(12.dp))
 
                 if (windows.isEmpty()) {
                     Text(
-                        text = "No windows open",
+                        text = "没有打开的窗口",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(vertical = 16.dp)
@@ -82,7 +82,7 @@ fun ActiveWindowsDialog(state: XServerDialogState) {
 
                 Spacer(Modifier.height(8.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    TextButton(onClick = { state.dismiss() }) { Text("Close") }
+                    TextButton(onClick = { state.dismiss() }) { Text("关闭") }
                 }
             }
         }

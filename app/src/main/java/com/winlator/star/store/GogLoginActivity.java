@@ -164,7 +164,7 @@ public class GogLoginActivity extends Activity {
             } catch (Exception e) {
                 Log.e(TAG, "Login post-processing failed", e);
                 runOnUiThread(() -> {
-                    Toast.makeText(GogLoginActivity.this, "Login error, please try again",
+                    Toast.makeText(GogLoginActivity.this, "登录出错，请重试",
                             Toast.LENGTH_SHORT).show();
                     webView.loadUrl(AUTH_URL);
                 });

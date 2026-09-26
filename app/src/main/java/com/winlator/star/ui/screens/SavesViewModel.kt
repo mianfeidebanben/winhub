@@ -52,7 +52,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 saveManager.addSave(title, path, container)
                 withContext(Dispatchers.Main) { refresh(); onDone(true, "") }
             } catch (e: Exception) {
-                withContext(Dispatchers.Main) { onDone(false, e.message ?: "Failed to add save") }
+                withContext(Dispatchers.Main) { onDone(false, e.message ?: "添加存档失败") }
             }
         }
     }
@@ -63,7 +63,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 saveManager.updateSave(save, newTitle, save.path, save.container)
                 withContext(Dispatchers.Main) { refresh(); onDone(true, "") }
             } catch (e: Exception) {
-                withContext(Dispatchers.Main) { onDone(false, e.message ?: "Failed to update save") }
+                withContext(Dispatchers.Main) { onDone(false, e.message ?: "更新存档失败") }
             }
         }
     }
@@ -92,7 +92,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (!saveDirectory.exists() || !saveDirectory.isDirectory) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        Toast.makeText(context, "Save directory is invalid.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "存档目录无效。", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
@@ -100,7 +100,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (!saveJsonFile.exists()) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        Toast.makeText(context, "Save .json file is missing.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "缺少存档 .json 文件。", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
@@ -125,7 +125,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
 
                 withContext(Dispatchers.Main) {
                     _isLoading.value = false
-                    Toast.makeText(context, "Save exported to ${exportFile.absolutePath}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "存档已导出到 ${exportFile.absolutePath}", Toast.LENGTH_LONG).show()
                     if (shareAfterExport) {
                         val fileUri = FileProvider.getUriForFile(context, "com.winlator.fileprovider", exportFile)
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
@@ -133,13 +133,13 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                             putExtra(Intent.EXTRA_STREAM, fileUri)
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
-                        context.startActivity(Intent.createChooser(shareIntent, "Share Save Archive"))
+                        context.startActivity(Intent.createChooser(shareIntent, "分享存档压缩包"))
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     _isLoading.value = false
-                    Toast.makeText(context, "Failed to export save.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "导出存档失败。", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -156,7 +156,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (!TarCompressorUtils.extract(TarCompressorUtils.Type.XZ, context, uri, tempDir)) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        onDone(false, "Failed to decompress archive.")
+                        onDone(false, "解压压缩包失败。")
                     }
                     return@launch
                 }
@@ -165,7 +165,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (extractedFiles == null || extractedFiles.size != 1 || !extractedFiles[0].isDirectory) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        onDone(false, "Unexpected archive structure.")
+                        onDone(false, "压缩包结构异常。")
                     }
                     return@launch
                 }
@@ -175,7 +175,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (jsonFiles == null || jsonFiles.size != 1) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        onDone(false, "JSON file not found in the archive.")
+                        onDone(false, "压缩包中未找到 JSON 文件。")
                     }
                     return@launch
                 }
@@ -197,7 +197,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 withContext(Dispatchers.Main) {
                     _isLoading.value = false
                     refresh()
-                    onDone(true, "Save imported successfully.")
+                    onDone(true, "存档导入成功。")
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {

@@ -28,13 +28,13 @@ fun AppTopBar(
                 if (showBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = "返回",
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
                 } else {
                     Icon(
                         imageVector = Icons.Filled.Menu,
-                        contentDescription = "Open menu",
+                        contentDescription = "打开菜单",
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
                 }

@@ -88,13 +88,13 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
                     progressBar.visibility  = View.VISIBLE
                     progressBar.progress    = pct
                     progressText.visibility = View.VISIBLE
-                    progressText.text       = "Downloading… $pct%  (${fmtSize(done)} / ${fmtSize(total)})"
+                    progressText.text       = "下载中… $pct%  (${fmtSize(done)} / ${fmtSize(total)})"
                     installBtn.isEnabled    = true
-                    installBtn.text         = "Cancel"
+                    installBtn.text         = "取消"
                     installBtn.setBackgroundColor(COLOR_CANCEL)
                     pauseBtn.isEnabled      = true
                     pauseBtn.alpha          = 1f
-                    pauseBtn.text           = "Pause"
+                    pauseBtn.text           = "暂停"
                     pauseBtn.setBackgroundColor(COLOR_PAUSE)
                 }
             }
@@ -110,13 +110,13 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
                     progressBar.visibility  = View.VISIBLE
                     progressBar.progress    = pct
                     progressText.visibility = View.VISIBLE
-                    progressText.text       = "Paused — $pct%  (${fmtSize(done)} / ${fmtSize(total)})"
+                    progressText.text       = "已暂停 — $pct%  (${fmtSize(done)} / ${fmtSize(total)})"
                     installBtn.isEnabled    = true
-                    installBtn.text         = "Cancel"
+                    installBtn.text         = "取消"
                     installBtn.setBackgroundColor(COLOR_CANCEL)
                     pauseBtn.isEnabled      = true
                     pauseBtn.alpha          = 1f
-                    pauseBtn.text           = "Resume"
+                    pauseBtn.text           = "继续"
                     pauseBtn.setBackgroundColor(COLOR_RESUME)
                 }
             }
@@ -138,10 +138,10 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
                 ui.post {
                     progressBar.visibility  = View.GONE
                     progressText.visibility = View.GONE
-                    statusText.text = "Download cancelled"
+                    statusText.text = "下载已取消"
                     statusText.setTextColor(Color.parseColor("#AAAAAA"))
                     installBtn.isEnabled = true
-                    installBtn.text = "Install"
+                    installBtn.text = "安装"
                     installBtn.setBackgroundColor(COLOR_INSTALL)
                     resetPauseBtn()
                 }
@@ -156,10 +156,10 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
                 ui.post {
                     progressBar.visibility  = View.GONE
                     progressText.visibility = View.GONE
-                    statusText.text = "Download failed: $reason\nDebug log: $logPath"
+                    statusText.text = "下载失败：$reason\n调试日志：$logPath"
                     statusText.setTextColor(Color.parseColor("#FF5555"))
                     installBtn.isEnabled = true
-                    installBtn.text = "Retry"
+                    installBtn.text = "重试"
                     installBtn.setBackgroundColor(COLOR_INSTALL)
                     resetPauseBtn()
                 }
@@ -170,7 +170,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
     private fun resetPauseBtn() {
         pauseBtn.isEnabled = false
         pauseBtn.alpha     = 0.4f
-        pauseBtn.text      = "Pause"
+        pauseBtn.text      = "暂停"
         pauseBtn.setBackgroundColor(COLOR_PAUSE)
     }
 
@@ -195,13 +195,13 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
                         progressBar.visibility  = View.VISIBLE
                         progressBar.progress    = pct
                         progressText.visibility = View.VISIBLE
-                        progressText.text       = "Downloading… $pct%"
+                        progressText.text       = "下载中… $pct%"
                         installBtn.isEnabled    = true
-                        installBtn.text         = "Cancel"
+                        installBtn.text         = "取消"
                         installBtn.setBackgroundColor(COLOR_CANCEL)
                         pauseBtn.isEnabled      = true
                         pauseBtn.alpha          = 1f
-                        pauseBtn.text           = "Pause"
+                        pauseBtn.text           = "暂停"
                         pauseBtn.setBackgroundColor(COLOR_PAUSE)
                     } else {
                         // Stale record (app was killed mid-download) — clean up
@@ -212,13 +212,13 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
                     progressBar.visibility  = View.VISIBLE
                     progressBar.progress    = pct
                     progressText.visibility = View.VISIBLE
-                    progressText.text       = "Paused — $pct%  (${fmtSize(dlRow.bytesDownloaded)} / ${fmtSize(dlRow.bytesTotal)})"
+                    progressText.text       = "已暂停 — $pct%  (${fmtSize(dlRow.bytesDownloaded)} / ${fmtSize(dlRow.bytesTotal)})"
                     installBtn.isEnabled    = true
-                    installBtn.text         = "Cancel"
+                    installBtn.text         = "取消"
                     installBtn.setBackgroundColor(COLOR_CANCEL)
                     pauseBtn.isEnabled      = true
                     pauseBtn.alpha          = 1f
-                    pauseBtn.text           = "Resume"
+                    pauseBtn.text           = "继续"
                     pauseBtn.setBackgroundColor(COLOR_RESUME)
                 }
             }
@@ -233,17 +233,17 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         sizeText.text = if (g.sizeBytes > 0) "~${fmtSize(g.sizeBytes)}" else "Size unknown"
 
         if (g.isInstalled) {
-            statusText.text = "Installed"
+            statusText.text = "已安装"
             statusText.setTextColor(Color.parseColor("#4CAF50"))
-            installBtn.text = "Uninstall"
+            installBtn.text = "卸载"
             installBtn.setBackgroundColor(COLOR_UNINSTALL)
             installBtn.isEnabled = true
             launchBtn.isEnabled  = true
             launchBtn.alpha      = 1f
         } else {
-            statusText.text = "Not installed"
+            statusText.text = "未安装"
             statusText.setTextColor(Color.parseColor("#AAAAAA"))
-            installBtn.text = "Install"
+            installBtn.text = "安装"
             installBtn.setBackgroundColor(COLOR_INSTALL)
             installBtn.isEnabled = true
             launchBtn.isEnabled  = false
@@ -278,9 +278,9 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
             if (dir.isNotEmpty()) Thread { File(dir).deleteRecursively() }.start()
             progressBar.visibility  = View.GONE
             progressText.visibility = View.GONE
-            statusText.text = "Download cancelled"
+            statusText.text = "下载已取消"
             statusText.setTextColor(Color.parseColor("#AAAAAA"))
-            installBtn.text = "Install"
+            installBtn.text = "安装"
             installBtn.setBackgroundColor(COLOR_INSTALL)
             installBtn.isEnabled = true
             resetPauseBtn()
@@ -296,9 +296,9 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
             if (dir.isNotEmpty()) Thread { File(dir).deleteRecursively() }.start()
             progressBar.visibility  = View.GONE
             progressText.visibility = View.GONE
-            statusText.text = "Download cancelled"
+            statusText.text = "下载已取消"
             statusText.setTextColor(Color.parseColor("#AAAAAA"))
-            installBtn.text = "Install"
+            installBtn.text = "安装"
             installBtn.setBackgroundColor(COLOR_INSTALL)
             installBtn.isEnabled = true
             resetPauseBtn()
@@ -323,11 +323,11 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
             // Immediately flip button to Resume — don't wait for DownloadPaused event
             handle.pause.run()
             downloadHandle = null
-            pauseBtn.text = "Resume"
+            pauseBtn.text = "继续"
             pauseBtn.setBackgroundColor(COLOR_RESUME)
             pauseBtn.isEnabled = true
             pauseBtn.alpha = 1f
-            installBtn.text = "Cancel"
+            installBtn.text = "取消"
             installBtn.isEnabled = true
             val cur = progressText.text.toString()
             if (cur.startsWith("Downloading")) progressText.text = cur.replace("Downloading", "Pausing")
@@ -337,9 +337,9 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
             if (dlRow.status != SteamDatabase.DL_PAUSED) return
             pauseBtn.isEnabled = false
             pauseBtn.alpha = 0.4f
-            pauseBtn.text = "Resuming…"
+            pauseBtn.text = "正在继续…"
             installBtn.isEnabled = false
-            installBtn.text = "Starting…"
+            installBtn.text = "启动中…"
             downloadHandle = SteamDepotDownloader.resumeApp(appId, applicationContext, lastThreadCount)
         }
     }
@@ -347,7 +347,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
     private fun onLaunchClicked() {
         val g = game ?: return
         if (!g.isInstalled || g.installDir.isEmpty()) {
-            Toast.makeText(this, "Game not installed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "游戏未安装", Toast.LENGTH_SHORT).show()
             return
         }
         val installDir = File(g.installDir)
@@ -357,7 +357,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
 
             if (exeFiles.isEmpty()) {
                 ui.post {
-                    Toast.makeText(this, "No .exe found in install directory", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "安装目录中未找到 .exe", Toast.LENGTH_LONG).show()
                 }
                 return@Thread
             }
@@ -395,15 +395,15 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         var selected = 0  // default: Safe
 
         AlertDialog.Builder(this)
-            .setTitle("Download speed")
+            .setTitle("下载速度")
             .setSingleChoiceItems(options, selected) { _, which -> selected = which }
-            .setPositiveButton("Download") { _, _ ->
+            .setPositiveButton("下载") { _, _ ->
                 lastThreadCount = threadCounts[selected]
                 installBtn.isEnabled = false
-                installBtn.text = "Starting…"
+                installBtn.text = "启动中…"
                 downloadHandle = SteamDepotDownloader.installApp(appId, applicationContext, lastThreadCount)
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("取消", null)
             .show()
     }
 
@@ -416,7 +416,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
 
         ui.post {
             AlertDialog.Builder(this)
-                .setTitle("Select game executable")
+                .setTitle("选择游戏可执行文件")
                 .setItems(labels) { _, which ->
                     Thread { onSelected(candidates[which]) }.start()
                 }
@@ -445,7 +445,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
             setBackgroundColor(Color.parseColor("#212121"))
         }
         val backBtn = Button(this).apply {
-            text = "← Back"
+            text = "← 返回"
             setTextColor(Color.WHITE)
             setBackgroundColor(Color.TRANSPARENT)
             setOnClickListener { finish() }
@@ -468,7 +468,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         }
 
         nameText = TextView(this).apply {
-            text = "Loading…"
+            text = "正在加载…"
             textSize = 22f
             setTextColor(Color.WHITE)
         }
@@ -485,7 +485,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
             setBackgroundColor(Color.parseColor("#263238"))
         }
         sizeText = TextView(this).apply {
-            text = "Size unknown"
+            text = "大小未知"
             textSize = 12f
             setTextColor(Color.parseColor("#AAAAAA"))
             setPadding(dp(12), 0, 0, 0)
@@ -495,7 +495,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         info.addView(row1)
 
         statusText = TextView(this).apply {
-            text = "Not installed"
+            text = "未安装"
             textSize = 12f
             setTextColor(Color.parseColor("#AAAAAA"))
             setPadding(0, dp(4), 0, dp(12))
@@ -527,7 +527,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         }
 
         installBtn = Button(this).apply {
-            text = "Install"
+            text = "安装"
             setTextColor(Color.WHITE)
             setBackgroundColor(COLOR_INSTALL)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply {
@@ -537,7 +537,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         }
 
         pauseBtn = Button(this).apply {
-            text = "Pause"
+            text = "暂停"
             setTextColor(Color.WHITE)
             setBackgroundColor(COLOR_PAUSE)
             isEnabled = false
@@ -549,7 +549,7 @@ class SteamGameDetailActivity : Activity(), SteamRepository.SteamEventListener {
         }
 
         launchBtn = Button(this).apply {
-            text = "Launch"
+            text = "启动"
             setTextColor(Color.WHITE)
             setBackgroundColor(COLOR_LAUNCH)
             isEnabled = false

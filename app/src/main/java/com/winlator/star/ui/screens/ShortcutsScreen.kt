@@ -198,12 +198,12 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
             }
             Box {
                 IconButton(onClick = { showSortMenu = true }) {
-                    Icon(Icons.Filled.SwapVert, contentDescription = "Sort", tint = androidx.compose.ui.graphics.Color.White)
+                    Icon(Icons.Filled.SwapVert, contentDescription = "排序", tint = androidx.compose.ui.graphics.Color.White)
                 }
                 DropdownMenu(expanded = showSortMenu, onDismissRequest = { showSortMenu = false }) {
                     val orders = listOf(
-                        ShortcutSortOrder.NAME_ASC  to "Name A→Z",
-                        ShortcutSortOrder.NAME_DESC to "Name Z→A",
+                        ShortcutSortOrder.NAME_ASC  to "名称 A→Z",
+                        ShortcutSortOrder.NAME_DESC to "名称 Z→A",
                         ShortcutSortOrder.CONTAINER to "Container",
                     )
                     orders.forEach { (order, label) ->
@@ -228,7 +228,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
         Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
             if (shortcuts.isEmpty()) {
                 Text(
-                    text = "No shortcuts yet.",
+                    text = "还没有快捷方式。",
                     color = OnSurfaceVariant,
                     modifier = Modifier.align(Alignment.Center),
                 )
@@ -281,7 +281,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
         ) {
             Icon(Icons.Filled.Add, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Add Shortcut")
+            Text("添加快捷方式")
         }
     }
 
@@ -290,11 +290,11 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
         val containers = vm.containers()
         AlertDialog(
             onDismissRequest = { showImportContainerPicker = false },
-            title = { Text("Select container") },
+            title = { Text("选择容器") },
             text = {
                 Column {
                     if (containers.isEmpty()) {
-                        Text("No containers found.", color = OnSurfaceVariant)
+                        Text("未找到容器。", color = OnSurfaceVariant)
                     } else {
                         containers.forEachIndexed { index, c ->
                             Text(
@@ -314,7 +314,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                 }
             },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { showImportContainerPicker = false }) { Text("Cancel") } },
+            dismissButton = { TextButton(onClick = { showImportContainerPicker = false }) { Text("取消") } },
         )
     }
 
@@ -323,12 +323,12 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
         var newName by remember { mutableStateOf(renameDialogName) }
         AlertDialog(
             onDismissRequest = { showRenameDialog = false },
-            title = { Text("Rename Shortcut") },
+            title = { Text("重命名快捷方式") },
             text = {
                 OutlinedTextField(
                     value = newName,
                     onValueChange = { newName = it },
-                    label = { Text("Shortcut name") },
+                    label = { Text("快捷方式名称") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -340,14 +340,14 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                         vm.renameImportedShortcut(renameDialogContainerIndex, renameDialogName, name)
                     }
                     showRenameDialog = false
-                    Toast.makeText(context, "Shortcut imported.", Toast.LENGTH_SHORT).show()
-                }) { Text("Save") }
+                    Toast.makeText(context, "已导入快捷方式。", Toast.LENGTH_SHORT).show()
+                }) { Text("保存") }
             },
             dismissButton = {
                 TextButton(onClick = {
                     showRenameDialog = false
-                    Toast.makeText(context, "Shortcut imported.", Toast.LENGTH_SHORT).show()
-                }) { Text("Skip") }
+                    Toast.makeText(context, "已导入快捷方式。", Toast.LENGTH_SHORT).show()
+                }) { Text("跳过") }
             },
         )
     }
@@ -356,20 +356,20 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
     confirmRemove?.let { s ->
         AlertDialog(
             onDismissRequest = { confirmRemove = null },
-            title = { Text("Remove shortcut?") },
-            text = { Text("Remove \"${s.name}\"?") },
+            title = { Text("删除快捷方式？") },
+            text = { Text("删除 \"${s.name}\"？") },
             confirmButton = {
                 TextButton(onClick = {
                     val ok = vm.remove(s, context)
                     confirmRemove = null
                     Toast.makeText(
                         context,
-                        if (ok) "Shortcut removed." else "Failed to remove shortcut.",
+                        if (ok) "快捷方式已删除。" else "删除快捷方式失败。",
                         Toast.LENGTH_SHORT,
                     ).show()
-                }) { Text("Remove") }
+                }) { Text("删除") }
             },
-            dismissButton = { TextButton(onClick = { confirmRemove = null }) { Text("Cancel") } },
+            dismissButton = { TextButton(onClick = { confirmRemove = null }) { Text("取消") } },
         )
     }
 
@@ -378,7 +378,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
         val containers = vm.containers()
         AlertDialog(
             onDismissRequest = { cloneTarget = null },
-            title = { Text("Select container") },
+            title = { Text("选择容器") },
             text = {
                 Column {
                     containers.forEach { c ->
@@ -391,7 +391,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                                     cloneTarget = null
                                     Toast.makeText(
                                         context,
-                                        if (ok) "Shortcut cloned." else "Failed to clone shortcut.",
+                                        if (ok) "快捷方式已克隆。" else "克隆快捷方式失败。",
                                         Toast.LENGTH_SHORT,
                                     ).show()
                                     if (ok) vm.refresh()
@@ -403,7 +403,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                 }
             },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { cloneTarget = null }) { Text("Cancel") } },
+            dismissButton = { TextButton(onClick = { cloneTarget = null }) { Text("取消") } },
         )
     }
 
@@ -422,21 +422,21 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
         var didReset by remember { mutableStateOf(false) }
         AlertDialog(
             onDismissRequest = { propertiesShortcut = null },
-            title = { Text("Properties") },
+            title = { Text("属性") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(if (didReset) "Number of times played: 0" else "Number of times played: $playCount")
-                    Text(if (didReset) "Playtime: 0d 00h 00m 00s" else "Playtime: $formatted")
+                    Text(if (didReset) "已玩次数：0" else "Number of times played: $playCount")
+                    Text(if (didReset) "游玩时长：0d 00h 00m 00s" else "Playtime: $formatted")
                     Button(
                         onClick = {
                             playtimePrefs.edit().remove(playtimeKey).remove(playCountKey).apply()
                             didReset = true
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Reset Properties") }
+                    ) { Text("重置属性") }
                 }
             },
-            confirmButton = { TextButton(onClick = { propertiesShortcut = null }) { Text("Close") } }
+            confirmButton = { TextButton(onClick = { propertiesShortcut = null }) { Text("关闭") } }
         )
     }
 
@@ -530,36 +530,36 @@ private fun ShortcutItem(
         }
         Box {
             IconButton(onClick = { menuExpanded = true }) {
-                Icon(Icons.Filled.MoreVert, contentDescription = "Options", tint = OnSurfaceVariant)
+                Icon(Icons.Filled.MoreVert, contentDescription = "选项", tint = OnSurfaceVariant)
             }
             DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                 DropdownMenuItem(
-                    text = { Text("Settings") },
+                    text = { Text("设置") },
                     leadingIcon = { Icon(Icons.Filled.Settings, null) },
                     onClick = { menuExpanded = false; onSettings() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Remove") },
+                    text = { Text("删除") },
                     leadingIcon = { Icon(Icons.Filled.Delete, null) },
                     onClick = { menuExpanded = false; onRemove() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Clone to container") },
+                    text = { Text("克隆到容器") },
                     leadingIcon = { Icon(Icons.Filled.ContentCopy, null) },
                     onClick = { menuExpanded = false; onClone() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Add to home screen") },
+                    text = { Text("添加到主屏幕") },
                     leadingIcon = { Icon(Icons.Filled.AddToHomeScreen, null) },
                     onClick = { menuExpanded = false; onAddToHome() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Export") },
+                    text = { Text("导出") },
                     leadingIcon = { Icon(Icons.Filled.Upload, null) },
                     onClick = { menuExpanded = false; onExport() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Properties") },
+                    text = { Text("属性") },
                     leadingIcon = { Icon(Icons.Filled.Info, null) },
                     onClick = { menuExpanded = false; onProperties() },
                 )
@@ -643,12 +643,12 @@ private fun ShortcutGridItem(
 
         // Long-press context menu
         DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
-            DropdownMenuItem(text = { Text("Settings") }, leadingIcon = { Icon(Icons.Filled.Settings, null) }, onClick = { menuExpanded = false; onSettings() })
-            DropdownMenuItem(text = { Text("Remove") }, leadingIcon = { Icon(Icons.Filled.Delete, null) }, onClick = { menuExpanded = false; onRemove() })
-            DropdownMenuItem(text = { Text("Clone to container") }, leadingIcon = { Icon(Icons.Filled.ContentCopy, null) }, onClick = { menuExpanded = false; onClone() })
-            DropdownMenuItem(text = { Text("Add to home screen") }, leadingIcon = { Icon(Icons.Filled.AddToHomeScreen, null) }, onClick = { menuExpanded = false; onAddToHome() })
-            DropdownMenuItem(text = { Text("Export") }, leadingIcon = { Icon(Icons.Filled.Upload, null) }, onClick = { menuExpanded = false; onExport() })
-            DropdownMenuItem(text = { Text("Properties") }, leadingIcon = { Icon(Icons.Filled.Info, null) }, onClick = { menuExpanded = false; onProperties() })
+            DropdownMenuItem(text = { Text("设置") }, leadingIcon = { Icon(Icons.Filled.Settings, null) }, onClick = { menuExpanded = false; onSettings() })
+            DropdownMenuItem(text = { Text("删除") }, leadingIcon = { Icon(Icons.Filled.Delete, null) }, onClick = { menuExpanded = false; onRemove() })
+            DropdownMenuItem(text = { Text("克隆到容器") }, leadingIcon = { Icon(Icons.Filled.ContentCopy, null) }, onClick = { menuExpanded = false; onClone() })
+            DropdownMenuItem(text = { Text("添加到主屏幕") }, leadingIcon = { Icon(Icons.Filled.AddToHomeScreen, null) }, onClick = { menuExpanded = false; onAddToHome() })
+            DropdownMenuItem(text = { Text("导出") }, leadingIcon = { Icon(Icons.Filled.Upload, null) }, onClick = { menuExpanded = false; onExport() })
+            DropdownMenuItem(text = { Text("属性") }, leadingIcon = { Icon(Icons.Filled.Info, null) }, onClick = { menuExpanded = false; onProperties() })
         }
     }
 }
@@ -818,7 +818,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
 
     // Tab
     var selectedTab by remember { mutableIntStateOf(0) }
-    val tabTitles = listOf("Win Components", "Env Vars", "Advanced")
+    val tabTitles = listOf("Win 组件", "环境变量", "高级")
 
     // Icon picker
     val iconPickerLauncher = rememberLauncherForActivityResult(
@@ -979,7 +979,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                 ) {
                     Text(shortcut.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                     IconButton(onClick = onDismiss) {
-                        Icon(Icons.Default.Close, contentDescription = "Close")
+                        Icon(Icons.Default.Close, contentDescription = "关闭")
                     }
                 }
                 Divider(color = DividerColor)
@@ -1018,14 +1018,14 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                             OutlinedTextField(
                                 value = customWidth,
                                 onValueChange = { customWidth = it },
-                                label = { Text("Width") },
+                                label = { Text("宽") },
                                 modifier = Modifier.weight(1f),
                                 singleLine = true
                             )
                             OutlinedTextField(
                                 value = customHeight,
                                 onValueChange = { customHeight = it },
-                                label = { Text("Height") },
+                                label = { Text("高") },
                                 modifier = Modifier.weight(1f),
                                 singleLine = true
                             )
@@ -1042,7 +1042,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                             )
                         }
                         OutlinedButton(onClick = { iconPickerLauncher.launch("image/*") }, modifier = Modifier.weight(1f)) {
-                            Text("Select Icon")
+                            Text("选择图标")
                         }
                     }
 
@@ -1054,7 +1054,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                         onSelect = { selectedGfxDriver = it }
                     )
                     OutlinedButton(onClick = { showGfxConfig = true }, modifier = Modifier.fillMaxWidth()) {
-                        Text("${stringResource(R.string.graphics_driver)}: ${GraphicsDriverConfigDialog.getVersion(graphicsDriverConfig)}")
+                        Text("${stringResource(R.string.graphics_driver)}：${GraphicsDriverConfigDialog.getVersion(graphicsDriverConfig)}")
                     }
 
                     // DX Wrapper
@@ -1071,7 +1071,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                             else showWineD3DConfig = true
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("DX Wrapper Config") }
+                    ) { Text("DX 包装器配置") }
 
                     // Audio driver
                     LabeledDropdown(
@@ -1083,7 +1083,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
 
                     // Emulator
                     LabeledDropdown(
-                        label = "Emulator",
+                        label = "模拟器",
                         options = emulatorEntries,
                         selectedOption = selectedEmulator,
                         onSelect = { selectedEmulator = it },
@@ -1094,7 +1094,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                     if (midiList.isNotEmpty()) {
                         val midiDisplay = midiList.firstOrNull { it == selectedMidi } ?: midiList.first()
                         LabeledDropdown(
-                            label = "MIDI Sound Font",
+                            label = "MIDI 音色库",
                             options = midiList,
                             selectedOption = midiDisplay,
                             onSelect = { selectedMidi = it }
@@ -1117,7 +1117,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                     }
 
                     // Input section
-                    SectionBox(title = "Input") {
+                    SectionBox(title = "输入") {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Switch(
                                 checked = enableXInput,
@@ -1146,18 +1146,18 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
                                 }
                             )
                             Spacer(Modifier.width(8.dp))
-                            Text("Exclusive Input", modifier = Modifier.weight(1f))
+                            Text("独占输入", modifier = Modifier.weight(1f))
                         }
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(checked = disabledXInput, onCheckedChange = { disabledXInput = it })
-                            Text("Disable XInput")
+                            Text("禁用 XInput")
                         }
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(checked = simTouchScreen, onCheckedChange = { simTouchScreen = it })
-                            Text("Touchscreen Mode")
+                            Text("触摸屏模式")
                         }
                         LabeledDropdown(
-                            label = "Num Controllers",
+                            label = "控制器数量",
                             options = numControllersEntries,
                             selectedOption = selectedNumControllers,
                             onSelect = { selectedNumControllers = it }
@@ -1297,7 +1297,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
 private fun ScWinComponentsTab(components: androidx.compose.runtime.snapshots.SnapshotStateList<WinComponentEntry>) {
     val directx = components.filter { it.key.startsWith("direct") }
     val general = components.filterNot { it.key.startsWith("direct") }
-    val options = listOf("Builtin (Wine)", "Native (Windows)")
+    val options = listOf("内置（Wine）", "原生（Windows）")
 
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         if (directx.isNotEmpty()) {
@@ -1318,7 +1318,7 @@ private fun ScWinComponentsTab(components: androidx.compose.runtime.snapshots.Sn
             Spacer(Modifier.height(8.dp))
         }
         if (general.isNotEmpty()) {
-            SectionBox(title = "General") {
+            SectionBox(title = "常规") {
                 general.forEach { comp ->
                     LabeledDropdown(
                         label = comp.label,
@@ -1367,7 +1367,7 @@ private fun ScEnvVarsTab(shortcut: Shortcut, envVarsViewRef: MutableState<EnvVar
         ) {
             Icon(Icons.Default.Add, contentDescription = null)
             Spacer(Modifier.width(4.dp))
-            Text("Add Environment Variable")
+            Text("添加环境变量")
         }
     }
     if (showAddEnvVar) {
@@ -1442,7 +1442,7 @@ private fun ScAdvancedTab(
                     contentPadding = PaddingValues(0.dp),
                     shape = RoundedCornerShape(8.dp)
                 ) {
-                    Icon(Icons.Default.Settings, contentDescription = "Download Box64", tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Settings, contentDescription = "下载 Box64", tint = MaterialTheme.colorScheme.primary)
                 }
             }
             Spacer(Modifier.height(8.dp))
@@ -1472,7 +1472,7 @@ private fun ScAdvancedTab(
                         contentPadding = PaddingValues(0.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Icon(Icons.Default.Settings, contentDescription = "Download FEXCore", tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.Settings, contentDescription = "下载 FEXCore", tint = MaterialTheme.colorScheme.primary)
                     }
                 }
                 Spacer(Modifier.height(8.dp))
@@ -1489,7 +1489,7 @@ private fun ScAdvancedTab(
         val profileNames = mutableListOf(stringResource(R.string.none))
         profileNames.addAll(controlsProfiles.map { it.getName() })
         LabeledDropdown(
-            label = "Controls Profile",
+            label = "控制配置",
             options = profileNames,
             selectedOption = profileNames.getOrElse(selectedControlsProfileIndex) { profileNames.first() },
             onSelect = { opt -> onControlsProfileChange(profileNames.indexOf(opt).coerceAtLeast(0)) }
@@ -1514,22 +1514,22 @@ private fun ScAdvancedTab(
             )
         }
 
-        SectionBox(title = "Sharpness (VKBasalt)") {
+        SectionBox(title = "锐化（VKBasalt）") {
             LabeledDropdown(
-                label = "Effect",
+                label = "效果",
                 options = sharpnessEffectEntries,
                 selectedOption = selectedSharpnessEffect,
                 onSelect = onSharpnessEffectChange
             )
             Spacer(Modifier.height(8.dp))
-            Text("Level: $sharpnessLevel%", style = MaterialTheme.typography.bodySmall)
+            Text("强度：$sharpnessLevel%", style = MaterialTheme.typography.bodySmall)
             Slider(
                 value = sharpnessLevel.toFloat(),
                 onValueChange = { onSharpnessLevelChange(it.toInt()) },
                 valueRange = 0f..100f,
                 steps = 99
             )
-            Text("Denoise: $sharpnessDenoise%", style = MaterialTheme.typography.bodySmall)
+            Text("降噪：$sharpnessDenoise%", style = MaterialTheme.typography.bodySmall)
             Slider(
                 value = sharpnessDenoise.toFloat(),
                 onValueChange = { onSharpnessDenoiseChange(it.toInt()) },
@@ -1604,7 +1604,7 @@ private fun exportShortcut(context: Context, shortcut: Shortcut) {
         val folderUri = Uri.parse(uriString)
         val pickedDir = DocumentFile.fromTreeUri(context, folderUri)
         if (pickedDir == null || !pickedDir.canWrite()) {
-            Toast.makeText(context, "Cannot write to the selected folder", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "无法写入所选文件夹", Toast.LENGTH_SHORT).show()
             return
         }
         File(FileUtils.getFilePathFromUri(context, folderUri))
@@ -1613,7 +1613,7 @@ private fun exportShortcut(context: Context, shortcut: Shortcut) {
     }
 
     if (!shortcutsDir.exists() && !shortcutsDir.mkdirs()) {
-        Toast.makeText(context, "Failed to create default directory", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "创建默认目录失败", Toast.LENGTH_SHORT).show()
         return
     }
 
@@ -1645,7 +1645,7 @@ private fun exportShortcut(context: Context, shortcut: Shortcut) {
             Toast.LENGTH_LONG,
         ).show()
     } catch (_: IOException) {
-        Toast.makeText(context, "Failed to export shortcut", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "导出快捷方式失败", Toast.LENGTH_LONG).show()
     }
 }
 

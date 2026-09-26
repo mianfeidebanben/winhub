@@ -95,7 +95,7 @@ fun VegasDownloadSheet(
                 errorMsg = "Failed to parse releases: ${e.message}"
             }
         } else {
-            errorMsg = "Failed to fetch releases from GitHub"
+            errorMsg = "无法从 GitHub 获取发布版"
         }
         isLoading = false
     }
@@ -111,7 +111,7 @@ fun VegasDownloadSheet(
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(32.dp)) {
                     CircularProgressIndicator(color = Color(0xFF8B6BE0))
                     Spacer(Modifier.height(16.dp))
-                    Text("Installing VEGAS\u2026", color = Color.White)
+                    Text("正在安装 VEGAS…", color = Color.White)
                 }
             }
         }
@@ -121,16 +121,16 @@ fun VegasDownloadSheet(
     errorMsg?.let { msg ->
         AlertDialog(
             onDismissRequest = { errorMsg = null },
-            title = { Text("Error", color = Color.White) },
+            title = { Text("错误", color = Color.White) },
             text = { Text(msg, color = Color(0xFFCCCCCC)) },
-            confirmButton = { TextButton(onClick = { errorMsg = null }) { Text("OK") } }
+            confirmButton = { TextButton(onClick = { errorMsg = null }) { Text("确定") } }
         )
     }
 
     // Main dialog
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("VEGAS Downloads", color = Color.White) },
+        title = { Text("VEGAS 下载", color = Color.White) },
         text = {
             if (isLoading) {
                 Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
@@ -139,7 +139,7 @@ fun VegasDownloadSheet(
             } else if (releases.isEmpty()) {
                 Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
                     Text(
-                        if (errorMsg != null) "Could not load releases." else "No releases available.",
+                        if (errorMsg != null) "无法加载发布版。" else "暂无可用发布版。",
                         color = OnSurfaceVariant
                     )
                 }
@@ -176,16 +176,16 @@ fun VegasDownloadSheet(
                                                         onContentChanged()
                                                         onDismiss()
                                                     } else {
-                                                        errorMsg = "Install failed."
+                                                        errorMsg = "安装失败。"
                                                     }
                                                 }
                                             } else {
-                                                errorMsg = "Download failed."
+                                                errorMsg = "下载失败。"
                                             }
                                         }
                                     }
                                 ) {
-                                    Icon(Icons.Filled.Download, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                                    Icon(Icons.Filled.Download, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
                                 }
                             }
                         }
@@ -194,7 +194,7 @@ fun VegasDownloadSheet(
                 }
             }
         },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("Close") } },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("关闭") } },
     )
 }
 

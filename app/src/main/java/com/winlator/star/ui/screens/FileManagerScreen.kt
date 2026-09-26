@@ -17,6 +17,6 @@ fun FileManagerScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text = "File Manager — coming soon", color = OnSurfaceVariant)
+        Text(text = "文件管理器——即将推出", color = OnSurfaceVariant)
     }
 }

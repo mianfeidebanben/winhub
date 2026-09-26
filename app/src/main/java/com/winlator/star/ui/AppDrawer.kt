@@ -110,14 +110,14 @@ fun AppDrawerContent(
 
         Divider(color = DividerColor)
 
-        SectionHeader("Emulation")
+        SectionHeader("模拟")
         DrawerItem(Screen.Shortcuts,     currentRoute, onNavigate)
         DrawerItem(Screen.Containers,    currentRoute, onNavigate)
         DrawerItem(Screen.Settings,      currentRoute, onNavigate)
 
         Divider(color = DividerColor, modifier = Modifier.padding(top = 4.dp))
 
-        SectionHeader("Tools")
+        SectionHeader("工具")
         DrawerItem(Screen.InputControls, currentRoute, onNavigate)
         DrawerItem(Screen.AdrenoTools,   currentRoute, onNavigate)
         DrawerItem(Screen.Saves,         currentRoute, onNavigate)
@@ -125,21 +125,21 @@ fun AppDrawerContent(
 
         Divider(color = DividerColor, modifier = Modifier.padding(top = 4.dp))
 
-        SectionHeader("Game Stores")
+        SectionHeader("游戏商店")
         Screen.storeItems.forEach { screen ->
             DrawerStoreItem(screen, onLaunchStore)
         }
 
         Divider(color = DividerColor, modifier = Modifier.padding(top = 4.dp))
 
-        SectionHeader("About And Support")
+        SectionHeader("关于与支持")
         DrawerIconItem(
-            label = "About",
+            label = "关于",
             icon = Icons.Filled.Info,
             onClick = onAbout,
         )
         DrawerIconItem(
-            label = "Help and Support",
+            label = "帮助与支持",
             icon = Icons.Filled.HelpOutline,
             onClick = { showHelp = true },
         )
@@ -236,29 +236,29 @@ private fun DrawerIconItem(label: String, icon: ImageVector, onClick: () -> Unit
 private fun HelpSupportDialog(onDismiss: () -> Unit, onOpenUrl: (String) -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Help & Support") },
+        title = { Text("帮助与支持") },
         text = {
             androidx.compose.foundation.layout.Column(
                 verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    "For bug reports, feature requests, and support, visit the GitHub repository.",
+                    "如需反馈 Bug、功能建议或获取支持，请访问 GitHub 仓库。",
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 SupportLink(
-                    label = "GitHub Repository",
+                    label = "GitHub 仓库",
                     url = "https://github.com/The412Banner/star-compose",
                     onOpenUrl = onOpenUrl
                 )
                 SupportLink(
-                    label = "Report an Issue",
+                    label = "报告问题",
                     url = "https://github.com/The412Banner/star-compose/issues",
                     onOpenUrl = onOpenUrl
                 )
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text("Close") }
+            TextButton(onClick = onDismiss) { Text("关闭") }
         }
     )
 }

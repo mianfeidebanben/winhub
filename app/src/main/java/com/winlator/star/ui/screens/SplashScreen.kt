@@ -80,11 +80,11 @@ private val SPARKLE_SPECS: List<SparkleSpec> = run {
 }
 
 private val STATUS_LABELS = listOf(
-    "Installing system files",
-    "Extracting Wine prefix",
-    "Setting up Proton",
-    "Configuring runtime",
-    "Finalizing setup",
+    "正在安装系统文件",
+    "正在解压 Wine 前缀",
+    "正在设置 Proton",
+    "正在配置运行时",
+    "正在完成设置",
 )
 
 @Composable
@@ -101,7 +101,7 @@ fun SplashScreen(
         label = "counter",
     )
 
-    val statusText = if (progress >= 100) "Installation complete"
+    val statusText = if (progress >= 100) "安装完成"
                      else STATUS_LABELS[minOf((progress / 22), STATUS_LABELS.size - 1)]
 
     val dotPhase by infiniteTransition.animateFloat(
@@ -216,7 +216,7 @@ fun SplashScreen(
                         shape   = RoundedCornerShape(8.dp),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        Text("Proceed", color = Color.White, fontWeight = FontWeight.SemiBold)
+                        Text("继续", color = Color.White, fontWeight = FontWeight.SemiBold)
                     }
                 }
             }

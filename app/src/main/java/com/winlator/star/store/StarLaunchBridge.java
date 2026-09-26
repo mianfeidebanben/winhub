@@ -95,11 +95,11 @@ public final class StarLaunchBridge {
                 }
 
                 h.post(() -> new AlertDialog.Builder(activity)
-                        .setTitle("Add \"" + gameName + "\" to…")
+                        .setTitle("添加 \"" + gameName + "\" 到…")
                         .setItems(names, (dialog, which) ->
                                 writeShortcut(activity, containers.get(which),
                                         gameName, exePath, coverArtUrl, h))
-                        .setNegativeButton("Cancel", null)
+                        .setNegativeButton("取消", null)
                         .show());
 
             } catch (Exception e) {

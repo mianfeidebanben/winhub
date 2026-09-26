@@ -686,10 +686,10 @@ public class SettingsFragment extends Fragment {
 
 	private void showBackupConfirmationDialog() {
         new AlertDialog.Builder(getContext())
-                .setTitle("Backup Data")
-                .setMessage("Do you want to create a backup of the app's data directory?")
-                .setPositiveButton("Yes", (dialog, which) -> backupAppData())
-                .setNegativeButton("No", null)
+                .setTitle("备份数据")
+                .setMessage("是否要备份应用的数据目录？")
+                .setPositiveButton("是", (dialog, which) -> backupAppData())
+                .setNegativeButton("否", null)
                 .show();
     }
 

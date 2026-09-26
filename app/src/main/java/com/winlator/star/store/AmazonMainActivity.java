@@ -66,7 +66,7 @@ public class AmazonMainActivity extends Activity {
             AmazonCredentialStore.Credentials creds = AmazonCredentialStore.load(this);
             if (creds != null) {
                 long minutesLeft = (creds.expiresAt - System.currentTimeMillis()) / 60000L;
-                statusView.setText("Signed in to Amazon Games\nToken expires in ~"
+                statusView.setText("已登录 Amazon Games\n令牌将在约 "
                         + minutesLeft + " min");
             }
         }
@@ -91,7 +91,7 @@ public class AmazonMainActivity extends Activity {
         card.addView(title);
 
         TextView sub = new TextView(this);
-        sub.setText("Sign in to access your Amazon game library");
+        sub.setText("登录以访问你的 Amazon 游戏库");
         sub.setTextSize(14f);
         sub.setTextColor(0xFFAAAAAA);
         sub.setGravity(Gravity.CENTER);
@@ -100,7 +100,7 @@ public class AmazonMainActivity extends Activity {
         card.addView(sub, subLp);
 
         Button loginBtn = new Button(this);
-        loginBtn.setText("Login with Amazon");
+        loginBtn.setText("使用 Amazon 登录");
         loginBtn.setBackgroundColor(0xFFFF9900);
         loginBtn.setTextColor(0xFF000000);
         LinearLayout.LayoutParams btnLp = new LinearLayout.LayoutParams(-2, dp(48));
@@ -140,7 +140,7 @@ public class AmazonMainActivity extends Activity {
         card.addView(statusView, statusLp);
 
         Button libraryBtn = new Button(this);
-        libraryBtn.setText("View Game Library");
+        libraryBtn.setText("查看游戏库");
         libraryBtn.setBackgroundColor(0xFFFF9900);
         libraryBtn.setTextColor(0xFF000000);
         LinearLayout.LayoutParams libLp = new LinearLayout.LayoutParams(-2, dp(48));
@@ -150,7 +150,7 @@ public class AmazonMainActivity extends Activity {
         card.addView(libraryBtn, libLp);
 
         Button signOutBtn = new Button(this);
-        signOutBtn.setText("Sign Out");
+        signOutBtn.setText("退出登录");
         signOutBtn.setBackgroundColor(0xFF444444);
         signOutBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams soLp = new LinearLayout.LayoutParams(-2, dp(48));
@@ -171,6 +171,6 @@ public class AmazonMainActivity extends Activity {
         }
         AmazonCredentialStore.clear(this);
         refreshView();
-        Toast.makeText(this, "Signed out of Amazon Games", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "已退出 Amazon Games", Toast.LENGTH_SHORT).show();
     }
 }

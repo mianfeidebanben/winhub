@@ -33,7 +33,7 @@ fun VibrationDialog(state: XServerDialogState) {
 
     AlertDialog(
         onDismissRequest = { state.dismiss() },
-        title = { Text("Vibration") },
+        title = { Text("震动") },
         text = {
             Column {
                 slots.forEachIndexed { i, (name, _) ->
@@ -59,7 +59,7 @@ fun VibrationDialog(state: XServerDialogState) {
             }
         },
         confirmButton = {
-            TextButton(onClick = { state.dismiss() }) { Text("OK") }
+            TextButton(onClick = { state.dismiss() }) { Text("确定") }
         }
     )
 }

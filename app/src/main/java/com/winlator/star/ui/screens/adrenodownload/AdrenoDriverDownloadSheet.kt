@@ -102,7 +102,7 @@ fun AdrenoDriverDownloadSheet(
                 .fillMaxHeight(0.92f)
         ) {
             Text(
-                text = "Download GPU drivers",
+                text = "下载 GPU 驱动",
                 style = MaterialTheme.typography.titleLarge,
                 color = cs.onSurface,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 12.dp),
@@ -138,7 +138,7 @@ fun AdrenoDriverDownloadSheet(
                     )
                     entries.isEmpty() -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Text(
-                            "No drivers found.",
+                            "未找到驱动。",
                             color = cs.onSurfaceVariant,
                         )
                     }
@@ -157,7 +157,7 @@ fun AdrenoDriverDownloadSheet(
         if (!downloading) {
             AlertDialog(
                 onDismissRequest = { pendingEntry = null },
-                title = { Text("Download driver?") },
+                title = { Text("下载驱动？") },
                 text = {
                     Column {
                         Text(entry.displayName, style = MaterialTheme.typography.bodyMedium)
@@ -169,7 +169,7 @@ fun AdrenoDriverDownloadSheet(
                         )
                         Spacer(Modifier.height(8.dp))
                         Text(
-                            "The driver will be downloaded and installed automatically.",
+                            "驱动将被自动下载并安装。",
                             style = MaterialTheme.typography.bodySmall,
                             color = cs.onSurfaceVariant,
                         )
@@ -192,12 +192,12 @@ fun AdrenoDriverDownloadSheet(
                                         downloading = false
                                         pendingEntry = null
                                         if (driverId.isNotEmpty()) {
-                                            Toast.makeText(context, "Installed: $driverId", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(context, "已安装：$driverId", Toast.LENGTH_SHORT).show()
                                             onDriverInstalled(driverId)
                                         } else {
                                             Toast.makeText(
                                                 context,
-                                                "Install failed — invalid driver package",
+                                                "安装失败——驱动包无效",
                                                 Toast.LENGTH_LONG,
                                             ).show()
                                         }
@@ -213,10 +213,10 @@ fun AdrenoDriverDownloadSheet(
                                     },
                                 )
                         }
-                    }) { Text("Download") }
+                    }) { Text("下载") }
                 },
                 dismissButton = {
-                    TextButton(onClick = { pendingEntry = null }) { Text("Cancel") }
+                    TextButton(onClick = { pendingEntry = null }) { Text("取消") }
                 },
             )
         } else {
@@ -304,7 +304,7 @@ private fun EntryRow(entry: RemoteDriverEntry, onClick: () -> Unit) {
         )
         Icon(
             imageVector = Icons.Filled.CloudDownload,
-            contentDescription = "Download",
+            contentDescription = "下载",
             tint = cs.primary,
             modifier = Modifier.size(22.dp),
         )
@@ -319,7 +319,7 @@ private fun CenteredLoading() {
             CircularProgressIndicator()
             Spacer(Modifier.height(8.dp))
             Text(
-                "Loading drivers…",
+                "正在加载驱动…",
                 color = cs.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -343,7 +343,7 @@ private fun CenteredError(message: String, onRetry: () -> Unit) {
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Could not load drivers",
+                "无法加载驱动",
                 color = cs.onSurface,
                 style = MaterialTheme.typography.bodyMedium,
             )
@@ -354,7 +354,7 @@ private fun CenteredError(message: String, onRetry: () -> Unit) {
                 style = MaterialTheme.typography.bodySmall,
             )
             Spacer(Modifier.height(12.dp))
-            TextButton(onClick = onRetry) { Text("Retry") }
+            TextButton(onClick = onRetry) { Text("重试") }
         }
     }
 }

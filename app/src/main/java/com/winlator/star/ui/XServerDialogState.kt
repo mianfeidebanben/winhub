@@ -222,7 +222,7 @@ object XServerDialogState {
     private val _tmCpuTitle  = MutableStateFlow("CPU")
     val tmCpuTitle: StateFlow<String> = _tmCpuTitle
 
-    private val _tmMemTitle  = MutableStateFlow("Memory")
+    private val _tmMemTitle  = MutableStateFlow("内存")
     val tmMemTitle: StateFlow<String> = _tmMemTitle
 
     private val _tmMemInfo   = MutableStateFlow("")
@@ -289,7 +289,7 @@ object XServerDialogState {
         _tmProcesses.value     = emptyList()
         _tmCpuCores.value      = emptyList()
         _tmCpuTitle.value      = "CPU"
-        _tmMemTitle.value      = "Memory"
+        _tmMemTitle.value      = "内存"
         _tmMemInfo.value       = ""
         _tmCount.value         = 0
         onMagnifierZoom = null; onMagnifierHide = null

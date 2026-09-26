@@ -75,12 +75,12 @@ class ShortcutsViewModel(app: Application) : AndroidViewModel(app) {
     fun importShortcut(containerIndex: Int, uri: Uri, context: Context): ImportResult {
         val containers = manager.getContainers()
         if (containerIndex < 0 || containerIndex >= containers.size) {
-            return ImportResult.Error("Invalid container.")
+            return ImportResult.Error("容器无效。")
         }
         val container = containers[containerIndex]
 
         val sourceName = DocumentFile.fromSingleUri(context, uri)?.name
-            ?: return ImportResult.Error("Could not read picked file.")
+            ?: return ImportResult.Error("无法读取所选文件。")
         val ext = sourceName.substringAfterLast('.', "").lowercase()
 
         return when (ext) {
@@ -92,7 +92,7 @@ class ShortcutsViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun importExe(container: Container, uri: Uri, sourceName: String, context: Context): ImportResult {
         val realPath = resolveLocalPath(context, uri)
-            ?: return ImportResult.Error("EXE must be on local storage. Cloud / SAF locations aren't supported.")
+            ?: return ImportResult.Error("EXE 必须位于本地存储。不支持云盘/SAF 位置。")
         val exeFile = File(realPath)
         if (!exeFile.isFile) {
             return ImportResult.Error("Could not access EXE on disk: $realPath")
@@ -131,7 +131,7 @@ class ShortcutsViewModel(app: Application) : AndroidViewModel(app) {
             }, "exe-import-cover-art").start()
             ImportResult.Success(shortcutFile.nameWithoutExtension)
         } catch (e: IOException) {
-            Log.e(TAG, "Failed to write EXE shortcut", e)
+            Log.e(TAG, "写入 EXE 快捷方式失败", e)
             ImportResult.Error("Failed to write shortcut: ${e.message ?: e.javaClass.simpleName}")
         }
     }
@@ -149,7 +149,7 @@ class ShortcutsViewModel(app: Application) : AndroidViewModel(app) {
         return try {
             context.contentResolver.openInputStream(uri)?.use { input ->
                 FileOutputStream(dest).use { output -> input.copyTo(output) }
-            } ?: return ImportResult.Error("Could not open picked file.")
+            } ?: return ImportResult.Error("无法打开所选文件。")
             if (ext == "desktop") {
                 val lines = dest.readLines().map { line ->
                     if (line.startsWith("container_id:")) "container_id:${container.id}" else line

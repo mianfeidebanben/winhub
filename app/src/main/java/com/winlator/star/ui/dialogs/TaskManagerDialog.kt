@@ -84,10 +84,10 @@ fun TaskManagerDialog(state: XServerDialogState) {
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             Column(modifier = Modifier.padding(16.dp).verticalScroll(rememberScrollState())) {
-                Text("Task Manager", style = MaterialTheme.typography.titleMedium)
+                Text("任务管理器", style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "Processes: $count",
+                    text = "进程：$count",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -97,7 +97,7 @@ fun TaskManagerDialog(state: XServerDialogState) {
                 // Process list
                 if (processes.isEmpty()) {
                     Text(
-                        text = "No processes",
+                        text = "无进程",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(vertical = 8.dp)
@@ -132,12 +132,12 @@ fun TaskManagerDialog(state: XServerDialogState) {
                         state.onTmDismissed?.run()
                         state.dismiss()
                         state.onTmNewTask?.run()
-                    }) { Text("New Task…") }
+                    }) { Text("新建任务…") }
                     Spacer(Modifier.weight(1f))
                     TextButton(onClick = {
                         state.onTmDismissed?.run()
                         state.dismiss()
-                    }) { Text("Close") }
+                    }) { Text("关闭") }
                 }
             }
         }
@@ -187,14 +187,14 @@ private fun ProcessRow(proc: XServerDialogState.TmProcess, state: XServerDialogS
 
         Box {
             IconButton(onClick = { menuExpanded = true }) {
-                Icon(Icons.Default.MoreVert, contentDescription = "Options")
+                Icon(Icons.Default.MoreVert, contentDescription = "选项")
             }
             DropdownMenu(
                 expanded = menuExpanded,
                 onDismissRequest = { menuExpanded = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("Bring to Front") },
+                    text = { Text("置于前部") },
                     onClick = {
                         menuExpanded = false
                         state.onTmBringToFront?.invoke(proc.name)
@@ -202,7 +202,7 @@ private fun ProcessRow(proc: XServerDialogState.TmProcess, state: XServerDialogS
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text("End Process") },
+                    text = { Text("结束进程") },
                     onClick = {
                         menuExpanded = false
                         state.onTmKillProcess?.invoke(proc.name)

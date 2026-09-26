@@ -94,7 +94,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
         }, wrapLp().also { it.bottomMargin = dp(8) })
 
         ll.addView(TextView(this).apply {
-            text = "Sign in to your account"
+            text = "登录你的账户"
             textSize = 14f
             setTextColor(GRAY_TEXT)
             gravity = Gravity.CENTER
@@ -113,7 +113,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
 
         // Login button
         btnLogin = Button(this).apply {
-            text = "Sign In"
+            text = "登录"
             setTextColor(Color.WHITE)
             setBackgroundColor(STEAM_BLUE)
             setOnClickListener { onLoginClicked() }
@@ -122,7 +122,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
 
         // QR login link
         btnQr = Button(this).apply {
-            text = "Sign in with QR Code"
+            text = "使用二维码登录"
             setTextColor(GRAY_TEXT)
             setBackgroundColor(Color.TRANSPARENT)
             setOnClickListener {
@@ -153,8 +153,8 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
     private fun onLoginClicked() {
         val username = etUsername.text.toString().trim()
         val password  = etPassword.text.toString()
-        if (username.isEmpty()) { tvStatus.text = "Enter your username."; return }
-        if (password.isEmpty())  { tvStatus.text = "Enter your password."; return }
+        if (username.isEmpty()) { tvStatus.text = "请输入用户名。"; return }
+        if (password.isEmpty())  { tvStatus.text = "请输入密码。"; return }
         hideKeyboard()
         setLoading(true, "Connecting to Steam\u2026")
 
@@ -202,7 +202,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
     override fun onSteamGuardEmailRequired(emailDomain: String, codeWrong: Boolean) {
         setLoading(false, "")
         showCodeDialog(
-            title     = if (codeWrong) "Incorrect code \u2014 try again" else "Steam Guard",
+            title     = if (codeWrong) "验证码错误——请重试" else "Steam Guard",
             message   = "Enter the code Steam sent to your email ending in \u2026$emailDomain",
             isNumeric = false,
         )
@@ -211,7 +211,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
     override fun onSteamGuardTotpRequired(codeWrong: Boolean) {
         setLoading(false, "")
         showCodeDialog(
-            title     = if (codeWrong) "Incorrect code \u2014 try again" else "Steam Guard",
+            title     = if (codeWrong) "验证码错误——请重试" else "Steam Guard",
             message   = "Enter the code from your Steam Guard Mobile Authenticator app",
             isNumeric = true,
         )
@@ -253,16 +253,16 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
             .setTitle(title)
             .setMessage(message)
             .setView(input)
-            .setPositiveButton("Submit") { _, _ ->
+            .setPositiveButton("提交") { _, _ ->
                 val code = input.text.toString().trim()
                 if (code.isEmpty()) {
-                    tvStatus.text = "No code entered."
+                    tvStatus.text = "未输入验证码。"
                     return@setPositiveButton
                 }
                 setLoading(true, "Verifying\u2026")
                 SteamAuthManager.getInstance().submitGuardCode(code)
             }
-            .setNegativeButton("Cancel") { _, _ ->
+            .setNegativeButton("取消") { _, _ ->
                 SteamAuthManager.getInstance().cancelAuth()
                 setLoading(false, "Sign-in cancelled.")
             }

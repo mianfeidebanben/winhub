@@ -102,7 +102,7 @@ public class EpicFreeGamesActivity extends Activity {
         header.addView(backBtn, new LinearLayout.LayoutParams(-2, dp(40)));
 
         TextView titleTV = new TextView(this);
-        titleTV.setText("Free Games");
+        titleTV.setText("免费游戏");
         titleTV.setTextColor(COLOR_ACCENT);
         titleTV.setTextSize(18f);
         titleTV.setTypeface(null, Typeface.BOLD);
@@ -139,7 +139,7 @@ public class EpicFreeGamesActivity extends Activity {
         statusRow.addView(progressBar, pbLp);
 
         statusTV = new TextView(this);
-        statusTV.setText("Loading free games…");
+        statusTV.setText("正在加载免费游戏…");
         statusTV.setTextColor(0xFFCCCCCC);
         statusTV.setTextSize(13f);
         statusRow.addView(statusTV, new LinearLayout.LayoutParams(0, -2, 1f));
@@ -313,14 +313,14 @@ public class EpicFreeGamesActivity extends Activity {
                 (upcoming.isEmpty() ? "" : "  •  " + upcoming.size() + " coming soon"), false);
 
         if (!current.isEmpty()) {
-            contentLayout.addView(makeSectionLabel("FREE THIS WEEK", 0xFF00C853));
+            contentLayout.addView(makeSectionLabel("本周免费", 0xFF00C853));
             for (FreeGameEntry g : current) {
                 contentLayout.addView(makeGameCard(g, true));
             }
         }
 
         if (!upcoming.isEmpty()) {
-            contentLayout.addView(makeSectionLabel("FREE NEXT WEEK", 0xFFFFAA00));
+            contentLayout.addView(makeSectionLabel("下周免费", 0xFFFFAA00));
             for (FreeGameEntry g : upcoming) {
                 contentLayout.addView(makeGameCard(g, false));
             }
@@ -359,7 +359,7 @@ public class EpicFreeGamesActivity extends Activity {
 
         // Badge
         TextView badge = new TextView(this);
-        badge.setText(isFree ? "FREE" : "SOON");
+        badge.setText(isFree ? "免费" : "SOON");
         badge.setTextColor(isFree ? 0xFF00C853 : 0xFFFFAA00);
         badge.setTextSize(10f);
         badge.setTypeface(null, Typeface.BOLD);

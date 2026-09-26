@@ -390,7 +390,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
         XServerDialogState.onInitGraphicsTab?.run()
     }
 
-    SectionHeader("Graphics")
+    SectionHeader("图形")
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -401,7 +401,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
             .clickable { state.onToggleFullscreen?.run(); state.onClose?.run() }
             .padding(horizontal = 12.dp, vertical = 10.dp)
     ) {
-        Text("Toggle Fullscreen", color = DimWhite, modifier = Modifier.weight(1f))
+        Text("切换全屏", color = DimWhite, modifier = Modifier.weight(1f))
         Icon(
             painter = painterResource(R.drawable.icon_fullscreen),
             contentDescription = null,
@@ -423,7 +423,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
     var fsrLevel by remember(initFsrLevel) { mutableFloatStateOf(initFsrLevel) }
     var hdrEnabled by remember(initHdrEnabled) { mutableStateOf(initHdrEnabled) }
     var modeDropdownExpanded by remember { mutableStateOf(false) }
-    val modeNames = listOf("Super Resolution", "DLS (Color Boost)")
+    val modeNames = listOf("超分辨率", "DLS（色彩增强）")
 
     ToggleRow("FSR", fsrEnabled) { fsrEnabled = it; pushFsrUpdate(fsrEnabled, fsrMode, fsrLevel, hdrEnabled) }
 
@@ -434,7 +434,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
                 value = modeNames.getOrElse(fsrMode) { modeNames[0] },
                 onValueChange = {},
                 readOnly = true,
-                label = { Text("Mode", color = MutedWhite) },
+                label = { Text("模式", color = MutedWhite) },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = modeDropdownExpanded) },
                 modifier = Modifier.fillMaxWidth().menuAnchor(),
                 singleLine = true,
@@ -446,14 +446,14 @@ private fun GraphicsContent(state: XServerDrawerState) {
             }
         }
 
-        LabeledSlider("Strength", fsrLevel, 1f..5f, { fsrLevel = it }, { pushFsrUpdate(fsrEnabled, fsrMode, fsrLevel, hdrEnabled) }, steps = 3)
+        LabeledSlider("强度", fsrLevel, 1f..5f, { fsrLevel = it }, { pushFsrUpdate(fsrEnabled, fsrMode, fsrLevel, hdrEnabled) }, steps = 3)
     }
 
     ToggleRow("HDR", hdrEnabled) { hdrEnabled = it; pushFsrUpdate(fsrEnabled, fsrMode, fsrLevel, hdrEnabled) }
 
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
-    Text("Screen Effects", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("画面效果", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(4.dp))
 
     val seBrightness by XServerDialogState.seBrightness.collectAsState()
@@ -476,17 +476,17 @@ private fun GraphicsContent(state: XServerDrawerState) {
     }
 
     LabeledSlider("Brightness", localBrightness, -100f..100f, { localBrightness = it; applySe() })
-    LabeledSlider("Contrast", localContrast, -100f..100f, { localContrast = it; applySe() })
-    LabeledSlider("Gamma", localGamma, 0.5f..3.0f, { localGamma = it; applySe() }, format = { "%.2f".format(it) })
+    LabeledSlider("对比度", localContrast, -100f..100f, { localContrast = it; applySe() })
+    LabeledSlider("伽马", localGamma, 0.5f..3.0f, { localGamma = it; applySe() }, format = { "%.2f".format(it) })
 
     SeShaderToggle("FXAA", localFxaa) { localFxaa = it; applySe() }
     SeShaderToggle("CRT", localCrt) { localCrt = it; applySe() }
-    SeShaderToggle("Toon", localToon) { localToon = it; applySe() }
+    SeShaderToggle("卡通", localToon) { localToon = it; applySe() }
     SeShaderToggle("NTSC", localNtsc) { localNtsc = it; applySe() }
 
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
-    ToggleRow("Vegas FrameGen", lsfgEnabled) { state.onLsfgToggle?.run() }
+    ToggleRow("Vegas 帧生成", lsfgEnabled) { state.onLsfgToggle?.run() }
 
     if (lsfgEnabled) {
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -497,10 +497,10 @@ private fun GraphicsContent(state: XServerDrawerState) {
             LsfgInlineDropdown("Quality", listOf("performance", "balanced", "quality"), state.getLsfgQuality()) { opt ->
                 state.setLsfgQuality(opt); state.onApplyLsfg?.run()
             }
-            LabeledSlider("Flow Scale", state.getLsfgFlowScale().toFloat(), 50f..200f, { state.setLsfgFlowScale(it.toInt()) }, { state.onApplyLsfg?.run() }, steps = 14, format = { "${it.toInt()}%" })
-            LabeledSlider("Max Input Latency", state.getLsfgMaxLatency().toFloat(), 0f..33f, { state.setLsfgMaxLatency(it.toInt()) }, { state.onApplyLsfg?.run() }, steps = 32, format = { "${it.toInt()}ms" })
+            LabeledSlider("光流比例", state.getLsfgFlowScale().toFloat(), 50f..200f, { state.setLsfgFlowScale(it.toInt()) }, { state.onApplyLsfg?.run() }, steps = 14, format = { "${it.toInt()}%" })
+            LabeledSlider("最大输入延迟", state.getLsfgMaxLatency().toFloat(), 0f..33f, { state.setLsfgMaxLatency(it.toInt()) }, { state.onApplyLsfg?.run() }, steps = 32, format = { "${it.toInt()}ms" })
 
-            AccentButton("Reset to GPU Defaults") { state.onResetLsfg?.run(); Unit }
+            AccentButton("重置为 GPU 默认值") { state.onResetLsfg?.run(); Unit }
         }
     }
 }
@@ -598,17 +598,17 @@ private fun HudContent(state: XServerDrawerState) {
     ).joinToString(",")
 
     // Size and Opacity sliders
-    LabeledSlider("HUD Scale", scaleValue, 50f..200f, { scaleValue = it }, { state.onFpsConfigApply?.invoke(buildConfig()) }, format = { "${it.toInt()}%" })
-    LabeledSlider("HUD Opacity", transValue, 0f..100f, { transValue = it }, { state.onFpsConfigApply?.invoke(buildConfig()) }, format = { "${it.toInt()}%" })
+    LabeledSlider("HUD 缩放", scaleValue, 50f..200f, { scaleValue = it }, { state.onFpsConfigApply?.invoke(buildConfig()) }, format = { "${it.toInt()}%" })
+    LabeledSlider("HUD 不透明度", transValue, 0f..100f, { transValue = it }, { state.onFpsConfigApply?.invoke(buildConfig()) }, format = { "${it.toInt()}%" })
 
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
-    ToggleRow("Show FPS", showFPS) { showFPS = !showFPS; state.onFpsConfigApply?.invoke(buildConfig()) }
-    ToggleRow("Show CPU Load", showCPULoad) { showCPULoad = !showCPULoad; state.onFpsConfigApply?.invoke(buildConfig()) }
-    ToggleRow("Show GPU Load", showGPULoad) { showGPULoad = !showGPULoad; state.onFpsConfigApply?.invoke(buildConfig()) }
-    ToggleRow("Show RAM", showRAM) { showRAM = !showRAM; state.onFpsConfigApply?.invoke(buildConfig()) }
-    ToggleRow("Show Renderer", showRenderer) { showRenderer = !showRenderer; state.onFpsConfigApply?.invoke(buildConfig()) }
-    ToggleRow("Show Battery Temp", showBatteryTemp) { showBatteryTemp = !showBatteryTemp; state.onFpsConfigApply?.invoke(buildConfig()) }
+    ToggleRow("显示 FPS", showFPS) { showFPS = !showFPS; state.onFpsConfigApply?.invoke(buildConfig()) }
+    ToggleRow("显示 CPU 负载", showCPULoad) { showCPULoad = !showCPULoad; state.onFpsConfigApply?.invoke(buildConfig()) }
+    ToggleRow("显示 GPU 负载", showGPULoad) { showGPULoad = !showGPULoad; state.onFpsConfigApply?.invoke(buildConfig()) }
+    ToggleRow("显示内存", showRAM) { showRAM = !showRAM; state.onFpsConfigApply?.invoke(buildConfig()) }
+    ToggleRow("显示渲染器", showRenderer) { showRenderer = !showRenderer; state.onFpsConfigApply?.invoke(buildConfig()) }
+    ToggleRow("显示电池温度", showBatteryTemp) { showBatteryTemp = !showBatteryTemp; state.onFpsConfigApply?.invoke(buildConfig()) }
 }
 
 // ───── Controls Tab ─────
@@ -626,24 +626,24 @@ private fun ControlsContent(state: XServerDrawerState) {
     val isRelativeMouse by state.isRelativeMouseMovement.collectAsState()
     val isMouseDisabled by state.isMouseDisabled.collectAsState()
 
-    SectionHeader("Controls")
+    SectionHeader("控制")
 
     // Input Controls section
     var selectedIdx by remember(initProfileIdx) { mutableIntStateOf(initProfileIdx) }
     var showTouchscreen by remember(initTouchscreen) { mutableStateOf(initTouchscreen) }
     var timeoutEnabled by remember(initTimeout) { mutableStateOf(initTimeout) }
     var hapticsEnabled by remember(initHaptics) { mutableStateOf(initHaptics) }
-    val allItems = listOf("-- Disabled --") + profiles
+    val allItems = listOf("-- 已禁用 --") + profiles
     var dropdownExpanded by remember { mutableStateOf(false) }
 
-    Text("Input Controls", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("输入控件", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(6.dp))
 
     ExposedDropdownMenuBox(expanded = dropdownExpanded, onExpandedChange = { dropdownExpanded = it }) {
         OutlinedTextField(
-            value = allItems.getOrElse(selectedIdx) { "-- Disabled --" },
+            value = allItems.getOrElse(selectedIdx) { "-- 已禁用 --" },
             onValueChange = {}, readOnly = true,
-            label = { Text("Profile", color = MutedWhite) },
+            label = { Text("配置文件", color = MutedWhite) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
             modifier = Modifier.fillMaxWidth().menuAnchor(),
             singleLine = true,
@@ -661,15 +661,15 @@ private fun ControlsContent(state: XServerDrawerState) {
 
     Spacer(Modifier.height(6.dp))
 
-    ToggleRow("Show Touchscreen Controls", showTouchscreen) {
+    ToggleRow("显示触摸控制", showTouchscreen) {
         showTouchscreen = it
         XServerDialogState.onInputControlsConfirm?.invoke(selectedIdx, showTouchscreen, timeoutEnabled, hapticsEnabled)
     }
-    ToggleRow("Enable Timeout", timeoutEnabled) {
+    ToggleRow("启用超时", timeoutEnabled) {
         timeoutEnabled = it
         XServerDialogState.onInputControlsConfirm?.invoke(selectedIdx, showTouchscreen, timeoutEnabled, hapticsEnabled)
     }
-    ToggleRow("Enable Haptics", hapticsEnabled) {
+    ToggleRow("启用触觉反馈", hapticsEnabled) {
         hapticsEnabled = it
         XServerDialogState.onInputControlsConfirm?.invoke(selectedIdx, showTouchscreen, timeoutEnabled, hapticsEnabled)
     }
@@ -683,11 +683,11 @@ private fun ControlsContent(state: XServerDrawerState) {
         },
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
-    ) { Text("Profile Settings\u2026") }
+    ) { Text("配置设置…") }
 
     Spacer(Modifier.height(4.dp))
 
-    AccentButton("Apply & Close") {
+    AccentButton("应用并关闭") {
         XServerDialogState.onInputControlsConfirm?.invoke(selectedIdx, showTouchscreen, timeoutEnabled, hapticsEnabled)
         state.onClose?.run()
         Unit
@@ -696,23 +696,23 @@ private fun ControlsContent(state: XServerDrawerState) {
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
     // Mouse & Cursor section
-    Text("Mouse & Cursor", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("鼠标与光标", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(4.dp))
 
-    ToggleRow("Move Cursor to Touchpoint", moveCursorToTouch) {
+    ToggleRow("移动光标到触点", moveCursorToTouch) {
         state.onMoveCursorToTouchpoint?.run(); state.onClose?.run()
     }
-    ToggleRow("Relative Mouse Movement", isRelativeMouse) {
+    ToggleRow("相对鼠标移动", isRelativeMouse) {
         state.onRelativeMouseMovement?.run(); state.onClose?.run()
     }
-    ToggleRow("Disable Mouse", isMouseDisabled) {
+    ToggleRow("禁用鼠标", isMouseDisabled) {
         state.onDisableMouse?.run(); state.onClose?.run()
     }
 
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
     // Vibration section
-    Text("Vibration", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("震动", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(4.dp))
 
     val vibrationSlots by XServerDialogState.vibrationSlots.collectAsState()
@@ -725,7 +725,7 @@ private fun ControlsContent(state: XServerDrawerState) {
 
 @Composable
 private fun AdvancedContent(state: XServerDrawerState) {
-    SectionHeader("Advanced")
+    SectionHeader("高级")
 
     AdvancedActionRow("Magnifier", R.drawable.icon_magnifier) {
         state.onClose?.run(); state.onMagnifier?.run()
@@ -733,13 +733,13 @@ private fun AdvancedContent(state: XServerDrawerState) {
     AdvancedActionRow("Active Windows", R.drawable.icon_active_windows) {
         state.onClose?.run(); state.onActiveWindows?.run()
     }
-    AdvancedActionRow("Debug Logs", R.drawable.icon_debug) {
+    AdvancedActionRow("调试日志", R.drawable.icon_debug) {
         state.onClose?.run(); state.onLogs?.run()
     }
-    AdvancedActionRow("Picture-in-Picture", R.drawable.ic_picture_in_picture_alt) {
+    AdvancedActionRow("画中画", R.drawable.ic_picture_in_picture_alt) {
         state.onClose?.run(); state.onPipMode?.run()
     }
-    AdvancedActionRow("Show Keyboard", R.drawable.icon_keyboard) {
+    AdvancedActionRow("显示键盘", R.drawable.icon_keyboard) {
         state.onClose?.run(); state.onKeyboard?.run()
     }
 }
@@ -788,10 +788,10 @@ private fun TmContent() {
         onDispose { XServerDialogState.onTmDismissed?.run() }
     }
 
-    SectionHeader("Task Manager")
+    SectionHeader("任务管理器")
 
     Text(
-        text = "Processes: $count",
+        text = "进程：$count",
         color = MutedWhite,
         fontSize = 12.sp,
     )
@@ -807,7 +807,7 @@ private fun TmContent() {
                 .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text("No processes", color = MutedWhite, fontSize = 13.sp)
+            Text("无进程", color = MutedWhite, fontSize = 13.sp)
         }
     } else {
         Column(
@@ -866,9 +866,9 @@ private fun TmContent() {
                 XServerDialogState.onTmDismissed?.run()
                 XServerDialogState.onTmNewTask?.run()
             }
-        ) { Text("New Task\u2026", color = Primary) }
+        ) { Text("新建任务…", color = Primary) }
         Spacer(Modifier.weight(1f))
-        TextButton(onClick = { XServerDialogState.onTmDismissed?.run() }) { Text("Clear", color = MutedWhite) }
+        TextButton(onClick = { XServerDialogState.onTmDismissed?.run() }) { Text("清除", color = MutedWhite) }
     }
 }
 
@@ -918,18 +918,18 @@ private fun TmProcessRow(proc: XServerDialogState.TmProcess) {
 
         Box {
             IconButton(onClick = { menuExpanded = true }) {
-                Icon(Icons.Default.MoreVert, contentDescription = "Options", tint = MutedWhite)
+                Icon(Icons.Default.MoreVert, contentDescription = "选项", tint = MutedWhite)
             }
             DropdownMenu(
                 expanded = menuExpanded,
                 onDismissRequest = { menuExpanded = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("Bring to Front") },
+                    text = { Text("置于前部") },
                     onClick = { menuExpanded = false; XServerDialogState.onTmBringToFront?.invoke(proc.name) },
                 )
                 DropdownMenuItem(
-                    text = { Text("End Process") },
+                    text = { Text("结束进程") },
                     onClick = { menuExpanded = false; XServerDialogState.onTmKillProcess?.invoke(proc.name) },
                 )
             }

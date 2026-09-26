@@ -77,7 +77,7 @@ fun FSROverlay(state: XServerDialogState) {
     var offsetY by remember { mutableFloatStateOf(100f) }
 
     var modeDropdownExpanded by remember { mutableStateOf(false) }
-    val modeNames = listOf("Super Resolution", "DLS (Color Boost)")
+    val modeNames = listOf("超分辨率", "DLS（色彩增强）")
 
     fun pushUpdate() {
         state.onFsrUpdate?.invoke(fsrEnabled, fsrMode, fsrLevel, hdrEnabled)
@@ -130,7 +130,7 @@ fun FSROverlay(state: XServerDialogState) {
                     .padding(bottom = 8.dp)
             ) {
                 Text(
-                    "Graphics Engine",
+                    "图形引擎",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f)
@@ -166,7 +166,7 @@ fun FSROverlay(state: XServerDialogState) {
                     onValueChange = {},
                     readOnly = true,
                     enabled = fsrEnabled,
-                    label = { Text("Mode") },
+                    label = { Text("模式") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = modeDropdownExpanded) },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -231,7 +231,7 @@ fun FSROverlay(state: XServerDialogState) {
                     .padding(vertical = 4.dp)
             ) {
                 Text(
-                    "Vegas FrameGen",
+                    "Vegas 帧生成",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f)
@@ -261,7 +261,7 @@ fun FSROverlay(state: XServerDialogState) {
                             value = "${drawerState.getLsfgMultiplier()}x",
                             onValueChange = {},
                             readOnly = true,
-                            label = { Text("Multiplier") },
+                            label = { Text("倍数") },
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = multiplierExpanded) },
                             modifier = Modifier.fillMaxWidth().menuAnchor()
                         )
@@ -294,7 +294,7 @@ fun FSROverlay(state: XServerDialogState) {
                             value = drawerState.getLsfgQuality(),
                             onValueChange = {},
                             readOnly = true,
-                            label = { Text("Quality") },
+                            label = { Text("质量") },
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = qualityExpanded) },
                             modifier = Modifier.fillMaxWidth().menuAnchor()
                         )
@@ -350,7 +350,7 @@ fun FSROverlay(state: XServerDialogState) {
                         onClick = { drawerState.onResetLsfg?.run() },
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Reset to GPU Defaults")
+                        Text("重置为 GPU 默认值")
                     }
                 }
             }
@@ -363,7 +363,7 @@ fun FSROverlay(state: XServerDialogState) {
                 onClick = { state.setFsrVisible(false) },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Close")
+                Text("关闭")
             }
         }
     }
