@@ -101,7 +101,7 @@ fun LsfgSettingsScreen() {
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "Vegas FrameGen settings and tuning.",
+            text = "Vegas 帧生成的设置与调校。",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -174,7 +174,7 @@ fun LsfgSettingsScreen() {
             onClick = { applyGpuDefaults() },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Reset to GPU Defaults")
+            Text("重置为 GPU 默认值")
         }
         Spacer(Modifier.height(8.dp))
 
@@ -185,7 +185,7 @@ fun LsfgSettingsScreen() {
                 modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
             ) {
                 Text(
-                    text = "Saved \u2014 overrides any live XServer adjustments.",
+                    text = "已保存——将覆盖所有实时 XServer 调整。",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier.padding(12.dp)
@@ -197,11 +197,11 @@ fun LsfgSettingsScreen() {
             onClick = { saveDefaults() },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Save as Defaults")
+            Text("另存为默认值")
         }
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "Saving will override any live XServer adjustments.",
+            text = "保存将覆盖所有实时 XServer 调整。",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.fillMaxWidth()

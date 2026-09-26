@@ -401,7 +401,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
             .clickable { state.onToggleFullscreen?.run(); state.onClose?.run() }
             .padding(horizontal = 12.dp, vertical = 10.dp)
     ) {
-        Text("Toggle Fullscreen", color = DimWhite, modifier = Modifier.weight(1f))
+        Text("切换全屏", color = DimWhite, modifier = Modifier.weight(1f))
         Icon(
             painter = painterResource(R.drawable.icon_fullscreen),
             contentDescription = null,
@@ -434,7 +434,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
                 value = modeNames.getOrElse(fsrMode) { modeNames[0] },
                 onValueChange = {},
                 readOnly = true,
-                label = { Text("Mode", color = MutedWhite) },
+                label = { Text("模式", color = MutedWhite) },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = modeDropdownExpanded) },
                 modifier = Modifier.fillMaxWidth().menuAnchor(),
                 singleLine = true,
@@ -453,7 +453,7 @@ private fun GraphicsContent(state: XServerDrawerState) {
 
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
-    Text("Screen Effects", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("画面效果", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(4.dp))
 
     val seBrightness by XServerDialogState.seBrightness.collectAsState()
@@ -636,14 +636,14 @@ private fun ControlsContent(state: XServerDrawerState) {
     val allItems = listOf("-- Disabled --") + profiles
     var dropdownExpanded by remember { mutableStateOf(false) }
 
-    Text("Input Controls", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("输入控件", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(6.dp))
 
     ExposedDropdownMenuBox(expanded = dropdownExpanded, onExpandedChange = { dropdownExpanded = it }) {
         OutlinedTextField(
             value = allItems.getOrElse(selectedIdx) { "-- Disabled --" },
             onValueChange = {}, readOnly = true,
-            label = { Text("Profile", color = MutedWhite) },
+            label = { Text("配置文件", color = MutedWhite) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
             modifier = Modifier.fillMaxWidth().menuAnchor(),
             singleLine = true,
@@ -683,7 +683,7 @@ private fun ControlsContent(state: XServerDrawerState) {
         },
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
-    ) { Text("Profile Settings\u2026") }
+    ) { Text("配置设置…") }
 
     Spacer(Modifier.height(4.dp))
 
@@ -696,7 +696,7 @@ private fun ControlsContent(state: XServerDrawerState) {
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
     // Mouse & Cursor section
-    Text("Mouse & Cursor", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("鼠标与光标", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(4.dp))
 
     ToggleRow("Move Cursor to Touchpoint", moveCursorToTouch) {
@@ -712,7 +712,7 @@ private fun ControlsContent(state: XServerDrawerState) {
     HorizontalDivider(color = Color(0xFF1A1A1A), modifier = Modifier.padding(vertical = 6.dp))
 
     // Vibration section
-    Text("Vibration", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+    Text("震动", color = Primary, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
     Spacer(Modifier.height(4.dp))
 
     val vibrationSlots by XServerDialogState.vibrationSlots.collectAsState()
@@ -791,7 +791,7 @@ private fun TmContent() {
     SectionHeader("Task Manager")
 
     Text(
-        text = "Processes: $count",
+        text = "进程：$count",
         color = MutedWhite,
         fontSize = 12.sp,
     )
@@ -807,7 +807,7 @@ private fun TmContent() {
                 .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text("No processes", color = MutedWhite, fontSize = 13.sp)
+            Text("无进程", color = MutedWhite, fontSize = 13.sp)
         }
     } else {
         Column(
@@ -866,9 +866,9 @@ private fun TmContent() {
                 XServerDialogState.onTmDismissed?.run()
                 XServerDialogState.onTmNewTask?.run()
             }
-        ) { Text("New Task\u2026", color = Primary) }
+        ) { Text("新建任务…", color = Primary) }
         Spacer(Modifier.weight(1f))
-        TextButton(onClick = { XServerDialogState.onTmDismissed?.run() }) { Text("Clear", color = MutedWhite) }
+        TextButton(onClick = { XServerDialogState.onTmDismissed?.run() }) { Text("清除", color = MutedWhite) }
     }
 }
 
@@ -918,18 +918,18 @@ private fun TmProcessRow(proc: XServerDialogState.TmProcess) {
 
         Box {
             IconButton(onClick = { menuExpanded = true }) {
-                Icon(Icons.Default.MoreVert, contentDescription = "Options", tint = MutedWhite)
+                Icon(Icons.Default.MoreVert, contentDescription = "选项", tint = MutedWhite)
             }
             DropdownMenu(
                 expanded = menuExpanded,
                 onDismissRequest = { menuExpanded = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("Bring to Front") },
+                    text = { Text("置于前部") },
                     onClick = { menuExpanded = false; XServerDialogState.onTmBringToFront?.invoke(proc.name) },
                 )
                 DropdownMenuItem(
-                    text = { Text("End Process") },
+                    text = { Text("结束进程") },
                     onClick = { menuExpanded = false; XServerDialogState.onTmKillProcess?.invoke(proc.name) },
                 )
             }

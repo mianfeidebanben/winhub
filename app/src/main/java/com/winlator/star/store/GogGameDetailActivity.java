@@ -173,7 +173,7 @@ public class GogGameDetailActivity extends Activity {
 
         if (generation > 0) {
             TextView genTV = new TextView(this);
-            genTV.setText("Gen " + generation);
+            genTV.setText("第 " + generation);
             genTV.setTextSize(11f);
             genTV.setTextColor(0xFFFFFFFF);
             genTV.setPadding(dp(8), dp(3), dp(8), dp(3));
@@ -207,7 +207,7 @@ public class GogGameDetailActivity extends Activity {
         sizeTV = new TextView(this);
         sizeTV.setTextColor(0xFFCCCCCC);
         sizeTV.setTextSize(13f);
-        sizeTV.setText("Fetching…");
+        sizeTV.setText("获取中…");
         card.addView(makeInfoRowWithRef("Install size", sizeTV));
 
         if (description != null && !description.isEmpty()) {
@@ -277,7 +277,7 @@ public class GogGameDetailActivity extends Activity {
             new Thread(() -> {
                 List<String> candidates = GogDownloadManager.collectExeCandidates(installPath);
                 if (candidates.isEmpty()) {
-                    uiHandler.post(() -> Toast.makeText(this, "No .exe files found", Toast.LENGTH_SHORT).show());
+                    uiHandler.post(() -> Toast.makeText(this, "未找到 .exe 文件", Toast.LENGTH_SHORT).show());
                     return;
                 }
                 showExePicker(candidates, selected -> {
@@ -286,7 +286,7 @@ public class GogGameDetailActivity extends Activity {
                         uiHandler.post(() -> {
                             refreshActionState();
                             setResult(RESULT_REFRESH);
-                            Toast.makeText(this, "Exe set: " + new File(selected).getName(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "已设置 exe： " + new File(selected).getName(), Toast.LENGTH_SHORT).show();
                         });
                     }
                 });
@@ -302,12 +302,12 @@ public class GogGameDetailActivity extends Activity {
         // Copy to Downloads button
         copyBtn = makeBtn("Copy to Downloads", 0xFF333333);
         copyBtn.setOnClickListener(v -> {
-            Toast.makeText(this, "Copying…", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "复制中…", Toast.LENGTH_SHORT).show();
             new Thread(() -> {
                 String dest = GogDownloadManager.copyToDownloads(this, gameId);
                 uiHandler.post(() -> {
-                    if (dest != null) Toast.makeText(this, "Copied to: " + dest, Toast.LENGTH_LONG).show();
-                    else Toast.makeText(this, "Copy failed — check storage permission", Toast.LENGTH_SHORT).show();
+                    if (dest != null) Toast.makeText(this, "已复制到： " + dest, Toast.LENGTH_LONG).show();
+                    else Toast.makeText(this, "复制失败——请检查存储权限", Toast.LENGTH_SHORT).show();
                 });
             }).start();
         });
@@ -319,7 +319,7 @@ public class GogGameDetailActivity extends Activity {
     // ── Install flow ──────────────────────────────────────────────────────────
 
     private void startInstall() {
-        installBtn.setText("Cancel");
+        installBtn.setText("取消");
         installBtn.setBackgroundColor(0xFFCC3333);
         progressBar.setVisibility(View.VISIBLE);
         progressLabel.setVisibility(View.VISIBLE);
@@ -348,11 +348,11 @@ public class GogGameDetailActivity extends Activity {
                 uiHandler.post(() -> {
                     progressBar.setVisibility(View.GONE);
                     progressLabel.setVisibility(View.GONE);
-                    installBtn.setText("Install");
+                    installBtn.setText("安装");
                     installBtn.setBackgroundColor(0xFF5533CC);
                     launchBtn.setEnabled(true);
                     setExeBtn.setEnabled(true);
-                    Toast.makeText(GogGameDetailActivity.this, "Error: " + msg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(GogGameDetailActivity.this, "错误： " + msg, Toast.LENGTH_LONG).show();
                 });
             }
             @Override public void onCancelled() {
@@ -360,7 +360,7 @@ public class GogGameDetailActivity extends Activity {
                 uiHandler.post(() -> {
                     progressBar.setVisibility(View.GONE);
                     progressLabel.setVisibility(View.GONE);
-                    installBtn.setText("Install");
+                    installBtn.setText("安装");
                     installBtn.setBackgroundColor(0xFF5533CC);
                     launchBtn.setEnabled(true);
                     setExeBtn.setEnabled(true);
@@ -377,10 +377,10 @@ public class GogGameDetailActivity extends Activity {
 
     private void confirmUninstall() {
         new AlertDialog.Builder(this)
-            .setTitle("Uninstall " + title + "?")
-            .setMessage("This will delete all installed game files.")
-            .setPositiveButton("Uninstall", (d, w) -> doUninstall())
-            .setNegativeButton("Cancel", null)
+            .setTitle("卸载 " + title + "?")
+            .setMessage("这将删除所有已安装的游戏文件。")
+            .setPositiveButton("卸载", (d, w) -> doUninstall())
+            .setNegativeButton("取消", null)
             .show();
     }
 
@@ -412,7 +412,7 @@ public class GogGameDetailActivity extends Activity {
         boolean installed = (exe != null && dir != null);
 
         if (installed) {
-            exeNameTV.setText(".exe: " + new File(exe).getName());
+            exeNameTV.setText(".exe：" + new File(exe).getName());
             exeNameTV.setVisibility(View.VISIBLE);
         } else {
             exeNameTV.setVisibility(View.GONE);
@@ -420,7 +420,7 @@ public class GogGameDetailActivity extends Activity {
 
         launchBtn.setVisibility(installed ? View.VISIBLE : View.GONE);
         installBtn.setVisibility(installed ? View.GONE : View.VISIBLE);
-        if (!installed) installBtn.setText("Install");
+        if (!installed) installBtn.setText("安装");
         setExeBtn.setVisibility(installed ? View.VISIBLE : View.GONE);
         uninstallBtn.setVisibility(installed ? View.VISIBLE : View.GONE);
         copyBtn.setVisibility(installed ? View.VISIBLE : View.GONE);
@@ -467,7 +467,7 @@ public class GogGameDetailActivity extends Activity {
         }
         uiHandler.post(() ->
             new AlertDialog.Builder(this)
-                .setTitle("Select game executable")
+                .setTitle("选择游戏可执行文件")
                 .setItems(labels, (d, which) ->
                     new Thread(() -> onSelected.accept(candidates.get(which))).start())
                 .setCancelable(false)
@@ -505,7 +505,7 @@ public class GogGameDetailActivity extends Activity {
 
         if (!installed) {
             TextView tv = new TextView(this);
-            tv.setText("Install the game first to check for updates.");
+            tv.setText("请先安装游戏再检查更新。");
             tv.setTextColor(0xFF555577);
             tv.setTextSize(13f);
             card.addView(tv);
@@ -529,7 +529,7 @@ public class GogGameDetailActivity extends Activity {
         updateBtn.setVisibility(View.GONE);
         updateBtn.setOnClickListener(v -> {
             updateBtn.setVisibility(View.GONE);
-            updateStatusTV.setText("Updating…");
+            updateStatusTV.setText("更新中…");
             startInstall();
         });
         card.addView(updateBtn, btnLp());
@@ -544,7 +544,7 @@ public class GogGameDetailActivity extends Activity {
 
     private void doCheckUpdate() {
         if (updateStatusTV == null) return;
-        updateStatusTV.setText("Checking…");
+        updateStatusTV.setText("检查中…");
         if (checkUpdatesBtn != null) checkUpdatesBtn.setEnabled(false);
 
         new Thread(() -> {
@@ -590,20 +590,20 @@ public class GogGameDetailActivity extends Activity {
                     if (checkUpdatesBtn != null) checkUpdatesBtn.setEnabled(true);
                     if (updateStatusTV == null) return;
                     if (latest == null) {
-                        updateStatusTV.setText("Could not reach update server.");
+                        updateStatusTV.setText("无法连接更新服务器。");
                         return;
                     }
                     String stored = prefs.getString("gog_build_" + gameId, null);
                     if (stored == null) {
                         // First check — store as baseline
                         prefs.edit().putString("gog_build_" + gameId, latest).apply();
-                        updateStatusTV.setText("Up to date (build " + latest.substring(0, Math.min(12, latest.length())) + "…)");
+                        updateStatusTV.setText("已是最新（版本 " + latest.substring(0, Math.min(12, latest.length())) + "…)");
                         if (updateBtn != null) updateBtn.setVisibility(View.GONE);
                     } else if (stored.equals(latest)) {
-                        updateStatusTV.setText("Up to date ✓");
+                        updateStatusTV.setText("已是最新 ✓");
                         if (updateBtn != null) updateBtn.setVisibility(View.GONE);
                     } else {
-                        updateStatusTV.setText("Update available!\nInstalled: "
+                        updateStatusTV.setText("有可用更新！\n已安装： "
                                 + stored.substring(0, Math.min(10, stored.length())) + "…"
                                 + "  →  Latest: " + latest.substring(0, Math.min(10, latest.length())) + "…");
                         if (updateBtn != null) updateBtn.setVisibility(View.VISIBLE);
@@ -612,7 +612,7 @@ public class GogGameDetailActivity extends Activity {
             } catch (Exception e) {
                 uiHandler.post(() -> {
                     if (checkUpdatesBtn != null) checkUpdatesBtn.setEnabled(true);
-                    if (updateStatusTV != null) updateStatusTV.setText("Check failed: " + e.getMessage());
+                    if (updateStatusTV != null) updateStatusTV.setText("检查失败： " + e.getMessage());
                 });
             }
         }, "gog-update-check-" + gameId).start();
@@ -716,7 +716,7 @@ public class GogGameDetailActivity extends Activity {
         String json = prefs.getString("gog_dlcs_" + gameId, null);
         if (json == null || json.equals("[]") || json.isEmpty()) {
             TextView tv = new TextView(this);
-            tv.setText("No DLCs in your library for this game");
+            tv.setText("你的库中没有此游戏的 DLC");
             tv.setTextColor(0xFF555577);
             tv.setTextSize(13f);
             card.addView(tv);
@@ -726,7 +726,7 @@ public class GogGameDetailActivity extends Activity {
             JSONArray arr = new JSONArray(json);
             if (arr.length() == 0) {
                 TextView tv = new TextView(this);
-                tv.setText("No DLCs in your library for this game");
+                tv.setText("你的库中没有此游戏的 DLC");
                 tv.setTextColor(0xFF555577);
                 tv.setTextSize(13f);
                 card.addView(tv);
@@ -741,7 +741,7 @@ public class GogGameDetailActivity extends Activity {
             card.addView(countTV, new LinearLayout.LayoutParams(-1, -2));
 
             TextView noteTV = new TextView(this);
-            noteTV.setText("DLC content is included in gen2 game installs.");
+            noteTV.setText("DLC 内容已包含在第二代游戏安装包中。");
             noteTV.setTextColor(0xFF555577);
             noteTV.setTextSize(11f);
             LinearLayout.LayoutParams noteLp = new LinearLayout.LayoutParams(-1, -2);
@@ -772,7 +772,7 @@ public class GogGameDetailActivity extends Activity {
                 row.addView(dlcTV, new LinearLayout.LayoutParams(0, -2, 1f));
 
                 TextView ownedTV = new TextView(this);
-                ownedTV.setText("Owned");
+                ownedTV.setText("已拥有");
                 ownedTV.setTextColor(0xFF4CAF50);
                 ownedTV.setTextSize(11f);
                 ownedTV.setTypeface(null, Typeface.BOLD);
@@ -785,7 +785,7 @@ public class GogGameDetailActivity extends Activity {
             }
         } catch (Exception e) {
             TextView tv = new TextView(this);
-            tv.setText("Error reading DLC data");
+            tv.setText("读取 DLC 数据出错");
             tv.setTextColor(0xFF555577);
             tv.setTextSize(13f);
             card.addView(tv);
@@ -838,7 +838,7 @@ public class GogGameDetailActivity extends Activity {
         cloudUploadBtn.setEnabled(savedDir != null);
         cloudUploadBtn.setOnClickListener(v -> {
             String dir = prefs.getString("gog_save_dir_" + gameId, null);
-            if (dir == null) { Toast.makeText(this, "Set a save folder first", Toast.LENGTH_SHORT).show(); return; }
+            if (dir == null) { Toast.makeText(this, "请先设置存档文件夹", Toast.LENGTH_SHORT).show(); return; }
             cloudUploadBtn.setEnabled(false);
             cloudDownloadBtn.setEnabled(false);
             showCloudStatus("Preparing upload…");
@@ -855,7 +855,7 @@ public class GogGameDetailActivity extends Activity {
         cloudDownloadBtn.setEnabled(savedDir != null);
         cloudDownloadBtn.setOnClickListener(v -> {
             String dir = prefs.getString("gog_save_dir_" + gameId, null);
-            if (dir == null) { Toast.makeText(this, "Set a save folder first", Toast.LENGTH_SHORT).show(); return; }
+            if (dir == null) { Toast.makeText(this, "请先设置存档文件夹", Toast.LENGTH_SHORT).show(); return; }
             cloudUploadBtn.setEnabled(false);
             cloudDownloadBtn.setEnabled(false);
             showCloudStatus("Preparing download…");
@@ -900,7 +900,7 @@ public class GogGameDetailActivity extends Activity {
                     cloudSaveDirTV.setTextColor(0xFFCCCCCC);
                 }
                 enableCloudBtns(true);
-                Toast.makeText(this, "Save folder set", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "已设置存档文件夹", Toast.LENGTH_SHORT).show();
             }
         }
     }

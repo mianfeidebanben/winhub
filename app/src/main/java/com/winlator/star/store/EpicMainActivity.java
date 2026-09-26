@@ -66,7 +66,7 @@ public class EpicMainActivity extends Activity {
                 String name = (creds.displayName != null && !creds.displayName.isEmpty())
                         ? creds.displayName : "Epic Account";
                 long minutesLeft = (creds.expiresAt - System.currentTimeMillis()) / 60000L;
-                statusView.setText("Signed in as " + name + "\nToken expires in ~" + minutesLeft + " min");
+                statusView.setText("已登录为 " + name + "\nToken expires in ~" + minutesLeft + " min");
             }
         }
     }
@@ -88,7 +88,7 @@ public class EpicMainActivity extends Activity {
         card.addView(title);
 
         TextView sub = new TextView(this);
-        sub.setText("Sign in to access your Epic game library");
+        sub.setText("登录以访问你的 Epic 游戏库");
         sub.setTextSize(14f);
         sub.setTextColor(0xFFAAAAAA);
         sub.setGravity(Gravity.CENTER);
@@ -97,7 +97,7 @@ public class EpicMainActivity extends Activity {
         card.addView(sub, subLp);
 
         Button loginBtn = new Button(this);
-        loginBtn.setText("Login with Epic Games");
+        loginBtn.setText("使用 Epic Games 登录");
         loginBtn.setBackgroundColor(COLOR_EPIC);
         loginBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams btnLp = new LinearLayout.LayoutParams(-2, dp(48));
@@ -135,7 +135,7 @@ public class EpicMainActivity extends Activity {
         card.addView(statusView, statusLp);
 
         Button libraryBtn = new Button(this);
-        libraryBtn.setText("View Game Library");
+        libraryBtn.setText("查看游戏库");
         libraryBtn.setBackgroundColor(COLOR_EPIC);
         libraryBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams libLp = new LinearLayout.LayoutParams(-2, dp(48));
@@ -145,7 +145,7 @@ public class EpicMainActivity extends Activity {
         card.addView(libraryBtn, libLp);
 
         Button signOutBtn = new Button(this);
-        signOutBtn.setText("Sign Out");
+        signOutBtn.setText("退出登录");
         signOutBtn.setBackgroundColor(0xFF444444);
         signOutBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams soLp = new LinearLayout.LayoutParams(-2, dp(48));
@@ -159,6 +159,6 @@ public class EpicMainActivity extends Activity {
     private void signOut() {
         EpicCredentialStore.clear(this);
         refreshView();
-        Toast.makeText(this, "Signed out of Epic Games", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "已退出 Epic Games", Toast.LENGTH_SHORT).show();
     }
 }

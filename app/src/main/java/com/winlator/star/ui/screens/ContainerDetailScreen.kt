@@ -109,7 +109,7 @@ fun ContainerDetailScreen(
                 else
                     MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Check, contentDescription = "Confirm")
+                Icon(Icons.Default.Check, contentDescription = "确认")
             }
         }
     ) { padding ->
@@ -314,7 +314,7 @@ private fun TopLevelFields(
                 contentPadding = PaddingValues(0.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Icon(Icons.Default.Settings, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                Icon(Icons.Default.Settings, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
             }
         }
         Spacer(Modifier.height(8.dp))
@@ -382,7 +382,7 @@ private fun TopLevelFields(
         // Emulator (arm64ec only)
         if (viewModel.isArm64EC) {
             LabeledDropdown(
-                label = "Emulator",
+                label = "模拟器",
                 options = viewModel.emulatorEntries,
                 selectedOption = viewModel.selectedEmulator,
                 enabled = viewModel.emulatorEnabled,
@@ -456,7 +456,7 @@ private fun WineConfigTab(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
 
         // Desktop section
-        SectionBox(title = "Desktop") {
+        SectionBox(title = "桌面") {
             LabeledDropdown(
                 label = stringResource(R.string.theme),
                 options = listOf("Light", "Dark"),
@@ -474,7 +474,7 @@ private fun WineConfigTab(
             if (viewModel.desktopBgTypeIndex == WineThemeManager.BackgroundType.COLOR.ordinal) {
                 Spacer(Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("Background Color", modifier = Modifier.weight(1f))
+                    Text("背景颜色", modifier = Modifier.weight(1f))
                     AndroidView(
                         factory = { ctx ->
                             ColorPickerView(ctx).also { cpv ->
@@ -523,7 +523,7 @@ private fun WinComponentsTab(viewModel: ContainerDetailViewModel) {
             }
         }
         if (generalItems.isNotEmpty()) {
-            SectionBox(title = "General") {
+            SectionBox(title = "常规") {
                 generalItems.forEach { comp ->
                     WinComponentRow(comp) { idx ->
                         val i = viewModel.winComponents.indexOfFirst { it.key == comp.key }
@@ -674,7 +674,7 @@ private fun DriveRow(
             onValueChange = onPathChange,
             modifier = Modifier.weight(1f),
             singleLine = true,
-            label = { Text("Path") }
+            label = { Text("路径") }
         )
         IconButton(onClick = onBrowse) {
             Icon(Icons.Default.FolderOpen, contentDescription = null)
@@ -724,7 +724,7 @@ private fun AdvancedTab(
                     contentPadding = PaddingValues(0.dp),
                     shape = RoundedCornerShape(8.dp)
                 ) {
-                    Icon(Icons.Default.Settings, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Settings, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
                 }
             }
             Spacer(Modifier.height(8.dp))
@@ -754,7 +754,7 @@ private fun AdvancedTab(
                         contentPadding = PaddingValues(0.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Icon(Icons.Default.Settings, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.Settings, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
                     }
                 }
                 Spacer(Modifier.height(8.dp))
@@ -799,7 +799,7 @@ private fun AdvancedTab(
                     onCheckedChange = { viewModel.onExclusiveXInputChanged(it) }
                 )
                 Spacer(Modifier.width(8.dp))
-                Text("Exclusive Input", modifier = Modifier.weight(1f))
+                Text("独占输入", modifier = Modifier.weight(1f))
                 IconButton(onClick = { AppUtils.showHelpBox(context, View(context), R.string.help_exclusive_xinput) }) {
                     Icon(Icons.Default.Help, contentDescription = null, modifier = Modifier.size(18.dp))
                 }
@@ -867,7 +867,7 @@ private fun XRTab(viewModel: ContainerDetailViewModel) {
         )
 
         // Controller button mappings
-        SectionBox(title = "Controller Mapping") {
+        SectionBox(title = "控制器映射") {
             viewModel.xrMappingLabels.forEachIndexed { i, label ->
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                     Text(label, modifier = Modifier.weight(1f))
@@ -909,20 +909,20 @@ internal fun AddEnvVarComposable(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Name") },
+                    label = { Text("名称") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
                 OutlinedTextField(
                     value = value,
                     onValueChange = { value = it },
-                    label = { Text("Value") },
+                    label = { Text("值") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
                 Box {
                     OutlinedButton(onClick = { showPresets = true }, modifier = Modifier.fillMaxWidth()) {
-                        Text("Presets")
+                        Text("预设")
                     }
                     DropdownMenu(expanded = showPresets, onDismissRequest = { showPresets = false }) {
                         knownNames.forEach { preset ->
@@ -1198,7 +1198,7 @@ internal fun GraphicsDriverConfigDialog(
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(checked = fdDevFeatures, onCheckedChange = { fdDevFeatures = it })
-                    Text("OneUI / HyperOS Fix")
+                    Text("OneUI / HyperOS 修复")
                 }
             }
         },
@@ -1242,7 +1242,7 @@ internal fun ExtensionPickerDialog(
         title = { Text(stringResource(R.string.graphics_driver_available_extensions)) },
         text = {
             if (extensions.isEmpty()) {
-                Text("No extensions available for this driver.")
+                Text("此驱动没有可用的扩展。")
             } else {
                 androidx.compose.foundation.lazy.LazyColumn {
                     items(extensions) { ext ->
@@ -1354,7 +1354,7 @@ internal fun DxvkConfigDialog(
                         contentPadding = PaddingValues(0.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Icon(Icons.Default.Settings, contentDescription = "Download VKD3D", tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.Settings, contentDescription = "下载 VKD3D", tint = MaterialTheme.colorScheme.primary)
                     }
                 }
                 Spacer(Modifier.height(8.dp))
@@ -1371,7 +1371,7 @@ internal fun DxvkConfigDialog(
                         contentPadding = PaddingValues(0.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Icon(Icons.Default.Settings, contentDescription = "Download DXVK", tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.Default.Settings, contentDescription = "下载 DXVK", tint = MaterialTheme.colorScheme.primary)
                     }
                 }
                 Spacer(Modifier.height(8.dp))
@@ -1379,14 +1379,14 @@ internal fun DxvkConfigDialog(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Switch(checked = asyncEnabled, onCheckedChange = { asyncEnabled = it })
                         Spacer(Modifier.width(8.dp))
-                        Text("Async")
+                        Text("异步")
                     }
                 }
                 if (dxvkType == DXVKConfigDialog.DXVK_TYPE_GPLASYNC) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Switch(checked = asyncCacheEnabled, onCheckedChange = { asyncCacheEnabled = it })
                         Spacer(Modifier.width(8.dp))
-                        Text("Async Cache")
+                        Text("异步缓存")
                     }
                     Spacer(Modifier.height(8.dp))
                 }
@@ -1532,18 +1532,18 @@ internal fun FpsCounterConfigDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("FPS Counter Settings") },
+        title = { Text("FPS 计数器设置") },
         text = {
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 LabeledDropdown(
-                    label = "FPS Counter Mode",
+                    label = "FPS 计数器模式",
                     options = modeOptions,
                     selectedOption = selectedMode,
                     onSelect = { selectedMode = it }
                 )
 
                 Spacer(Modifier.height(12.dp))
-                Text("HUD Scale: $hudScale%", style = MaterialTheme.typography.bodySmall)
+                Text("HUD 缩放：$hudScale%", style = MaterialTheme.typography.bodySmall)
                 Slider(
                     value = hudScale.toFloat(),
                     onValueChange = { hudScale = it.toInt().coerceAtLeast(50) },
@@ -1551,7 +1551,7 @@ internal fun FpsCounterConfigDialog(
                     steps = 99
                 )
                 Spacer(Modifier.height(4.dp))
-                Text("HUD Transparency: $hudTransparency", style = MaterialTheme.typography.bodySmall)
+                Text("HUD 透明度：$hudTransparency", style = MaterialTheme.typography.bodySmall)
                 Slider(
                     value = hudTransparency.toFloat(),
                     onValueChange = { hudTransparency = it.toInt() },

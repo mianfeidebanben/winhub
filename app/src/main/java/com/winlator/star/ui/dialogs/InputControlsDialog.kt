@@ -48,7 +48,7 @@ fun InputControlsDialog(state: XServerDialogState) {
 
     AlertDialog(
         onDismissRequest = { state.dismiss() },
-        title = { Text("Input Controls") },
+        title = { Text("输入控件") },
         text = {
             Column(modifier = Modifier.fillMaxWidth()) {
                 // Profile dropdown
@@ -60,7 +60,7 @@ fun InputControlsDialog(state: XServerDialogState) {
                         value = allItems.getOrElse(selectedIdx) { "-- Disabled --" },
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Profile") },
+                        label = { Text("配置文件") },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -94,7 +94,7 @@ fun InputControlsDialog(state: XServerDialogState) {
                     onClick = { state.onInputControlsSettings?.run() },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Profile Settings…")
+                    Text("配置设置…")
                 }
             }
         },
@@ -104,10 +104,10 @@ fun InputControlsDialog(state: XServerDialogState) {
                     selectedIdx, showTouchscreen, timeoutEnabled, hapticsEnabled
                 )
                 state.dismiss()
-            }) { Text("OK") }
+            }) { Text("确定") }
         },
         dismissButton = {
-            TextButton(onClick = { state.dismiss() }) { Text("Cancel") }
+            TextButton(onClick = { state.dismiss() }) { Text("取消") }
         }
     )
 }

@@ -90,7 +90,7 @@ public class FolderPickerActivity extends Activity {
         header.setPadding(dp(12), dp(10), dp(12), dp(10));
 
         TextView titleTV = new TextView(this);
-        titleTV.setText("Select Folder");
+        titleTV.setText("选择文件夹");
         titleTV.setTextColor(0xFFFFFFFF);
         titleTV.setTextSize(16f);
         titleTV.setTypeface(null, Typeface.BOLD);
@@ -98,7 +98,7 @@ public class FolderPickerActivity extends Activity {
 
         // Root location spinner
         TextView locationLabel = new TextView(this);
-        locationLabel.setText("Location:");
+        locationLabel.setText("位置：");
         locationLabel.setTextColor(0xFF8888AA);
         locationLabel.setTextSize(11f);
         LinearLayout.LayoutParams llLp = new LinearLayout.LayoutParams(-2, -2);
@@ -229,37 +229,37 @@ public class FolderPickerActivity extends Activity {
 
     private void showNewFolderDialog() {
         EditText input = new EditText(this);
-        input.setHint("Folder name");
+        input.setHint("文件夹名称");
         input.setSingleLine(true);
         LinearLayout.LayoutParams inputLp = new LinearLayout.LayoutParams(-1, -2);
         inputLp.setMargins(dp(20), dp(8), dp(20), dp(8));
         input.setLayoutParams(inputLp);
 
         new AlertDialog.Builder(this)
-            .setTitle("New Folder")
+            .setTitle("新建文件夹")
             .setView(input)
-            .setPositiveButton("Create", (d, w) -> {
+            .setPositiveButton("创建", (d, w) -> {
                 String name = input.getText().toString().trim();
                 if (name.isEmpty()) {
-                    Toast.makeText(this, "Enter a folder name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "输入文件夹名称", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // Reject names with path separators
                 if (name.contains("/") || name.contains("\\")) {
-                    Toast.makeText(this, "Folder name cannot contain slashes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "文件夹名称不能包含斜杠", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 File newDir = new File(currentDir, name);
                 if (newDir.exists()) {
-                    Toast.makeText(this, "Folder already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "文件夹已存在", Toast.LENGTH_SHORT).show();
                 } else if (newDir.mkdir()) {
                     refreshList();
-                    Toast.makeText(this, "Created: " + name, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "创建时间： " + name, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Failed to create folder", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "创建文件夹失败", Toast.LENGTH_SHORT).show();
                 }
             })
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("取消", null)
             .show();
     }
 

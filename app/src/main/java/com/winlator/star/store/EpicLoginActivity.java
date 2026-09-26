@@ -68,7 +68,7 @@ public class EpicLoginActivity extends Activity {
                 if (authCode == null || authCode.isEmpty()) {
                     Log.e(TAG, "authorizationCode not found in page: " + json);
                     codeCaptured.set(false);
-                    Toast.makeText(this, "Epic login failed, please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Epic 登录失败，请重试", Toast.LENGTH_SHORT).show();
                     webView.loadUrl(AUTH_URL);
                     return;
                 }
@@ -82,7 +82,7 @@ public class EpicLoginActivity extends Activity {
                         runOnUiThread(() -> {
                             codeCaptured.set(false);
                             Toast.makeText(EpicLoginActivity.this,
-                                    "Epic login failed, please try again", Toast.LENGTH_SHORT).show();
+                                    "Epic 登录失败，请重试", Toast.LENGTH_SHORT).show();
                             webView.loadUrl(AUTH_URL);
                         });
                         return;

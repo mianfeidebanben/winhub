@@ -165,7 +165,7 @@ class QrLoginActivity : Activity(), SteamQrAuthManager.QrAuthListener {
             qrImage.setImageBitmap(bmp)
         } catch (e: Exception) {
             // ZXing encode failure — unlikely; show URL as text fallback
-            tvStatus.text = "QR error — open in browser:\n$url"
+            tvStatus.text = "二维码错误——请在浏览器中打开：\n$url"
         }
     }
 
@@ -186,14 +186,14 @@ class QrLoginActivity : Activity(), SteamQrAuthManager.QrAuthListener {
 
         // Header
         ll.addView(TextView(this).apply {
-            text = "Sign in via QR Code"
+            text = "通过二维码登录"
             textSize = 22f
             setTextColor(Color.WHITE)
             gravity = Gravity.CENTER
         }, wrapLp().also { it.bottomMargin = dp(8) })
 
         ll.addView(TextView(this).apply {
-            text = "Open the Steam app → ☰ → Sign in via QR code"
+            text = "打开 Steam 应用 → ☰ → 通过二维码登录"
             textSize = 13f
             setTextColor(GRAY_TEXT)
             gravity = Gravity.CENTER
@@ -220,7 +220,7 @@ class QrLoginActivity : Activity(), SteamQrAuthManager.QrAuthListener {
 
         // Status
         tvStatus = TextView(this).apply {
-            text = "Connecting…"
+            text = "连接中…"
             textSize = 13f
             setTextColor(GRAY_TEXT)
             gravity = Gravity.CENTER
@@ -229,7 +229,7 @@ class QrLoginActivity : Activity(), SteamQrAuthManager.QrAuthListener {
 
         // Retry button (hidden until failure)
         btnRetry = Button(this).apply {
-            text = "Retry"
+            text = "重试"
             setTextColor(Color.WHITE)
             setBackgroundColor(STEAM_BLUE)
             visibility = View.GONE
@@ -239,7 +239,7 @@ class QrLoginActivity : Activity(), SteamQrAuthManager.QrAuthListener {
 
         // Cancel / back
         btnCancel = Button(this).apply {
-            text = "← Back"
+            text = "← 返回"
             setTextColor(GRAY_TEXT)
             setBackgroundColor(Color.TRANSPARENT)
             setOnClickListener { finish() }

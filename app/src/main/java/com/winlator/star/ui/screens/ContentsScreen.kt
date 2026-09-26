@@ -172,7 +172,7 @@ fun ContentsScreen(vm: ContentsViewModel = viewModel()) {
         ) {
             Icon(Icons.Filled.FolderOpen, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(modifier = Modifier.size(8.dp))
-            Text("Install content from file")
+            Text("从文件安装内容")
         }
 
         Divider(color = DividerColor)
@@ -185,7 +185,7 @@ fun ContentsScreen(vm: ContentsViewModel = viewModel()) {
                     .weight(1f, fill = false),
                 contentAlignment = Alignment.Center,
             ) {
-                Text("No content available.", color = OnSurfaceVariant)
+                Text("无可用内容。", color = OnSurfaceVariant)
             }
         } else {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -358,7 +358,7 @@ private fun ContentInfoDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         containerColor = Color(0xFF2A2A2A),
-        title = { Text("Content Info", color = Color.White) },
+        title = { Text("附加内容信息", color = Color.White) },
         text = {
             Column(
                 modifier = Modifier
@@ -404,7 +404,7 @@ private fun ContentInfoDialog(
             TextButton(onClick = onConfirm) { Text(confirmLabel, color = MaterialTheme.colorScheme.primary) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel", color = MaterialTheme.colorScheme.primary) }
+            TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.primary) }
         },
     )
 }
@@ -418,7 +418,7 @@ private fun UntrustedDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         containerColor = Color(0xFF2A2A2A),
-        title = { Text("Warning", color = Color(0xFFFF8A80)) },
+        title = { Text("警告", color = Color(0xFFFF8A80)) },
         text = {
             Column(
                 modifier = Modifier
@@ -444,10 +444,10 @@ private fun UntrustedDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onConfirm) { Text("Continue", color = MaterialTheme.colorScheme.primary) }
+            TextButton(onClick = onConfirm) { Text("继续", color = MaterialTheme.colorScheme.primary) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel", color = MaterialTheme.colorScheme.primary) }
+            TextButton(onClick = onDismiss) { Text("取消", color = MaterialTheme.colorScheme.primary) }
         },
     )
 }
@@ -480,7 +480,7 @@ private fun SectionBox(
 @Composable
 private fun InfoRow(label: String, value: String) {
     Row(modifier = Modifier.padding(vertical = 2.dp)) {
-        Text("$label: ", color = Color(0xFFAAAAAA), style = MaterialTheme.typography.bodySmall)
+        Text("$label：", color = Color(0xFFAAAAAA), style = MaterialTheme.typography.bodySmall)
         Text(value,      color = Color(0xFFE0E0E0), style = MaterialTheme.typography.bodySmall)
     }
 }
@@ -516,8 +516,8 @@ private fun ContentItem(
         Column(modifier = Modifier
             .weight(1f)
             .padding(horizontal = 12.dp)) {
-            Text("Version: ${profile.verName}", style = MaterialTheme.typography.bodyLarge, color = OnSurface)
-            Text("Code: ${profile.verCode}",    style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariant)
+            Text("版本：${profile.verName}", style = MaterialTheme.typography.bodyLarge, color = OnSurface)
+            Text("代码：${profile.verCode}",    style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariant)
         }
 
         if (!isLocal) {
@@ -525,7 +525,7 @@ private fun ContentItem(
                 CircularProgressIndicator(modifier = Modifier.size(28.dp), color = MaterialTheme.colorScheme.primary, strokeWidth = 3.dp)
             } else {
                 IconButton(onClick = onDownload) {
-                    Icon(Icons.Filled.Download, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Filled.Download, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
                 }
             }
         }
@@ -533,16 +533,16 @@ private fun ContentItem(
         if (isLocal) {
             Box {
                 IconButton(onClick = { menuExpanded = true }) {
-                    Icon(Icons.Filled.MoreVert, contentDescription = "Options", tint = OnSurfaceVariant)
+                    Icon(Icons.Filled.MoreVert, contentDescription = "选项", tint = OnSurfaceVariant)
                 }
                 DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                     DropdownMenuItem(
-                        text = { Text("Info") },
+                        text = { Text("信息") },
                         leadingIcon = { Icon(Icons.Filled.Info, null) },
                         onClick = { menuExpanded = false; onInfo() },
                     )
                     DropdownMenuItem(
-                        text = { Text("Remove") },
+                        text = { Text("删除") },
                         leadingIcon = { Icon(Icons.Filled.Delete, null) },
                         onClick = { menuExpanded = false; onRemove() },
                     )

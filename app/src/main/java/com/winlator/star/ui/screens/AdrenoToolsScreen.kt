@@ -91,13 +91,13 @@ fun AdrenoToolsScreen() {
             ) {
                 Icon(Icons.Filled.FolderOpen, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.size(8.dp))
-                Text("Install GPU driver")
+                Text("安装 GPU 驱动")
             }
             Spacer(modifier = Modifier.width(8.dp))
             IconButton(onClick = { showDownloadSheet = true }) {
                 Icon(
                     imageVector = Icons.Filled.CloudDownload,
-                    contentDescription = "Download GPU drivers from online sources",
+                    contentDescription = "从在线源下载 GPU 驱动",
                     tint = cs.primary,
                 )
             }
@@ -107,7 +107,7 @@ fun AdrenoToolsScreen() {
 
         if (drivers.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("No GPU drivers installed.", color = cs.onSurfaceVariant)
+                Text("未安装任何 GPU 驱动。", color = cs.onSurfaceVariant)
             }
         } else {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -151,18 +151,18 @@ fun AdrenoToolsScreen() {
     confirmRemoveIndex?.let { idx ->
         AlertDialog(
             onDismissRequest = { confirmRemoveIndex = null },
-            title = { Text("Remove driver?") },
-            text = { Text("Remove \"${manager.getDriverName(drivers[idx])}\"?") },
+            title = { Text("删除驱动？") },
+            text = { Text("删除 \"${manager.getDriverName(drivers[idx])}\"？") },
             confirmButton = {
                 TextButton(onClick = {
                     val id = drivers[idx]
                     manager.removeDriver(id)
                     drivers = drivers.toMutableList().also { it.removeAt(idx) }
                     confirmRemoveIndex = null
-                }) { Text("Remove") }
+                }) { Text("删除") }
             },
             dismissButton = {
-                TextButton(onClick = { confirmRemoveIndex = null }) { Text("Cancel") }
+                TextButton(onClick = { confirmRemoveIndex = null }) { Text("取消") }
             },
         )
     }
@@ -205,7 +205,7 @@ private fun DriverItem(
             Text(text = version, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         }
         IconButton(onClick = onRemove) {
-            Icon(Icons.Filled.Delete, contentDescription = "Remove", tint = cs.onSurfaceVariant)
+            Icon(Icons.Filled.Delete, contentDescription = "删除", tint = cs.onSurfaceVariant)
         }
     }
 }

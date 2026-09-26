@@ -381,15 +381,15 @@ private fun AppShell(
 private fun AllFilesAccessDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("All Files Access Required") },
+        title = { Text("需要所有文件访问权限") },
         text = {
             Text(
                 "In order to grant access to additional storage devices such as USB storage, " +
                 "the All Files Access permission must be granted. Press OK to open Android Settings."
             )
         },
-        confirmButton = { TextButton(onClick = onConfirm) { Text("OK") } },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
+        confirmButton = { TextButton(onClick = onConfirm) { Text("确定") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("取消") } },
     )
 }
 
@@ -432,7 +432,7 @@ private fun AboutDialog(onDismiss: () -> Unit) {
                 Spacer(androidx.compose.ui.Modifier.height(4.dp))
 
                 // Powered by
-                AboutSection(title = "Powered By") {
+                AboutSection(title = "技术支持") {
                     AboutRow("Wine",    "Windows compatibility layer")
                     AboutRow("Box64",   "x86_64 emulation on ARM")
                     AboutRow("FEX-Emu", "Fast x86 emulator")
@@ -457,7 +457,7 @@ private fun AboutDialog(onDismiss: () -> Unit) {
                 TextButton(
                     onClick = onDismiss,
                     modifier = androidx.compose.ui.Modifier.fillMaxWidth()
-                ) { Text("Close") }
+                ) { Text("关闭") }
             }
         }
     }

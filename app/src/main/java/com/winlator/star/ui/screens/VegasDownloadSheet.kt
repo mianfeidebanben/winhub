@@ -111,7 +111,7 @@ fun VegasDownloadSheet(
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(32.dp)) {
                     CircularProgressIndicator(color = Color(0xFF8B6BE0))
                     Spacer(Modifier.height(16.dp))
-                    Text("Installing VEGAS\u2026", color = Color.White)
+                    Text("正在安装 VEGAS…", color = Color.White)
                 }
             }
         }
@@ -121,16 +121,16 @@ fun VegasDownloadSheet(
     errorMsg?.let { msg ->
         AlertDialog(
             onDismissRequest = { errorMsg = null },
-            title = { Text("Error", color = Color.White) },
+            title = { Text("错误", color = Color.White) },
             text = { Text(msg, color = Color(0xFFCCCCCC)) },
-            confirmButton = { TextButton(onClick = { errorMsg = null }) { Text("OK") } }
+            confirmButton = { TextButton(onClick = { errorMsg = null }) { Text("确定") } }
         )
     }
 
     // Main dialog
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("VEGAS Downloads", color = Color.White) },
+        title = { Text("VEGAS 下载", color = Color.White) },
         text = {
             if (isLoading) {
                 Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
@@ -185,7 +185,7 @@ fun VegasDownloadSheet(
                                         }
                                     }
                                 ) {
-                                    Icon(Icons.Filled.Download, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                                    Icon(Icons.Filled.Download, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
                                 }
                             }
                         }
@@ -194,7 +194,7 @@ fun VegasDownloadSheet(
                 }
             }
         },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("Close") } },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("关闭") } },
     )
 }
 

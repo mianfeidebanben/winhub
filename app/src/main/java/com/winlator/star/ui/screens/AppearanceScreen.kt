@@ -96,7 +96,7 @@ fun AppearanceScreen() {
         // ── Custom accent picker ─────────────────────────────────────────
         SectionLabel("Custom Accent Color")
         Text(
-            text = "Selecting a color below switches to Custom preset",
+            text = "选择下方颜色将切换到自定义预设",
             color = OnSurfaceVariant,
             fontSize = 12.sp
         )
@@ -210,14 +210,14 @@ private fun ColorPicker(initialColor: Color, onColorChanged: (Color) -> Unit) {
                     .border(1.dp, Divider, CircleShape)
             )
             Column {
-                Text("Preview", color = OnSurfaceVariant, fontSize = 12.sp)
+                Text("预览", color = OnSurfaceVariant, fontSize = 12.sp)
                 Text(hexInput, color = OnSurface, fontFamily = FontFamily.Monospace, fontSize = 14.sp)
             }
         }
 
         // Hue slider
         SliderRow(
-            label = "Hue",
+            label = "色相",
             value = hue,
             valueRange = 0f..360f,
             trackBrush = Brush.horizontalGradient(
@@ -230,7 +230,7 @@ private fun ColorPicker(initialColor: Color, onColorChanged: (Color) -> Unit) {
 
         // Saturation slider
         SliderRow(
-            label = "Saturation",
+            label = "饱和度",
             value = saturation,
             valueRange = 0f..1f,
             trackBrush = Brush.horizontalGradient(
@@ -244,7 +244,7 @@ private fun ColorPicker(initialColor: Color, onColorChanged: (Color) -> Unit) {
 
         // Brightness slider
         SliderRow(
-            label = "Brightness",
+            label = "亮度",
             value = value,
             valueRange = 0f..1f,
             trackBrush = Brush.horizontalGradient(
@@ -275,11 +275,11 @@ private fun ColorPicker(initialColor: Color, onColorChanged: (Color) -> Unit) {
                     hexError = clean.length > 6
                 }
             },
-            label = { Text("Hex color (#RRGGBB)") },
+            label = { Text("十六进制颜色（#RRGGBB）") },
             isError = hexError,
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
-            supportingText = if (hexError) {{ Text("Enter a valid 6-digit hex color") }} else null
+            supportingText = if (hexError) {{ Text("请输入有效的 6 位十六进制颜色") }} else null
         )
     }
 }

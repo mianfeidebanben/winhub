@@ -102,7 +102,7 @@ fun AdrenoDriverDownloadSheet(
                 .fillMaxHeight(0.92f)
         ) {
             Text(
-                text = "Download GPU drivers",
+                text = "下载 GPU 驱动",
                 style = MaterialTheme.typography.titleLarge,
                 color = cs.onSurface,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 12.dp),
@@ -157,7 +157,7 @@ fun AdrenoDriverDownloadSheet(
         if (!downloading) {
             AlertDialog(
                 onDismissRequest = { pendingEntry = null },
-                title = { Text("Download driver?") },
+                title = { Text("下载驱动？") },
                 text = {
                     Column {
                         Text(entry.displayName, style = MaterialTheme.typography.bodyMedium)
@@ -192,7 +192,7 @@ fun AdrenoDriverDownloadSheet(
                                         downloading = false
                                         pendingEntry = null
                                         if (driverId.isNotEmpty()) {
-                                            Toast.makeText(context, "Installed: $driverId", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(context, "已安装：$driverId", Toast.LENGTH_SHORT).show()
                                             onDriverInstalled(driverId)
                                         } else {
                                             Toast.makeText(
@@ -213,10 +213,10 @@ fun AdrenoDriverDownloadSheet(
                                     },
                                 )
                         }
-                    }) { Text("Download") }
+                    }) { Text("下载") }
                 },
                 dismissButton = {
-                    TextButton(onClick = { pendingEntry = null }) { Text("Cancel") }
+                    TextButton(onClick = { pendingEntry = null }) { Text("取消") }
                 },
             )
         } else {
@@ -304,7 +304,7 @@ private fun EntryRow(entry: RemoteDriverEntry, onClick: () -> Unit) {
         )
         Icon(
             imageVector = Icons.Filled.CloudDownload,
-            contentDescription = "Download",
+            contentDescription = "下载",
             tint = cs.primary,
             modifier = Modifier.size(22.dp),
         )
@@ -354,7 +354,7 @@ private fun CenteredError(message: String, onRetry: () -> Unit) {
                 style = MaterialTheme.typography.bodySmall,
             )
             Spacer(Modifier.height(12.dp))
-            TextButton(onClick = onRetry) { Text("Retry") }
+            TextButton(onClick = onRetry) { Text("重试") }
         }
     }
 }

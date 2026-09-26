@@ -683,7 +683,7 @@ public class XServerDisplayActivity extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_ab_gear_0011)
                 .setContentTitle("Winlator")
-                .setContentText("Winlator is running, do not kill or swipe this notification")
+                .setContentText("Winlator 正在运行，请勿关闭或划掉此通知")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(false);
@@ -2418,7 +2418,7 @@ return true;
             String title = w.getName();
             String cls   = w.getClassName() != null ? w.getClassName() : "";
             if (title == null || title.isEmpty()) title = cls;
-            if (title.isEmpty()) title = "Unnamed Window";
+            if (title.isEmpty()) title = "未命名窗口";
             windowInfoList.add(new XServerDialogState.ActiveWindow(
                 title, cls, activeIcons.get(i), null, w.getHandle()));
         }

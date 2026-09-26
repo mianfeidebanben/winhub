@@ -176,7 +176,7 @@ public class AmazonGamesActivity extends Activity {
 
         // Search bar
         searchBar = new EditText(this);
-        searchBar.setHint("Search games…");
+        searchBar.setHint("搜索游戏…");
         searchBar.setHintTextColor(0xFF666666);
         searchBar.setTextColor(0xFFFFFFFF);
         searchBar.setTextSize(14f);
@@ -194,7 +194,7 @@ public class AmazonGamesActivity extends Activity {
 
         // Sync status
         syncText = new TextView(this);
-        syncText.setText("Loading Amazon library…");
+        syncText.setText("正在加载 Amazon 游戏库…");
         syncText.setTextColor(0xFFCCCCCC);
         syncText.setTextSize(13f);
         syncText.setPadding(dp(12), dp(6), dp(12), dp(6));
@@ -234,7 +234,7 @@ public class AmazonGamesActivity extends Activity {
                 setSync("Not logged in");
                 enableRefresh();
                 uiHandler.post(() -> {
-                    Toast.makeText(this, "Please log in to Amazon Games first",
+                    Toast.makeText(this, "请先登录 Amazon Games",
                             Toast.LENGTH_SHORT).show();
                     finish();
                 });
@@ -557,7 +557,7 @@ public class AmazonGamesActivity extends Activity {
             showInstallConfirm(game, () -> {
                 cancelRef[0] = null;
                 actionBtn.setEnabled(true);
-                actionBtn.setText("Cancel");
+                actionBtn.setText("取消");
                 actionBtn.setBackgroundColor(COLOR_CANCEL);
                 progressBar.setVisibility(View.VISIBLE);
                 statusTV.setVisibility(View.VISIBLE);
@@ -579,8 +579,8 @@ public class AmazonGamesActivity extends Activity {
                             pctTV.setVisibility(View.GONE);
                             checkmark.setVisibility(View.VISIBLE);
                             collapsedCheckTV.setVisibility(View.VISIBLE);
-                            statusTV.setText("Installed");
-                            actionBtn.setText("Add to Launcher");
+                            statusTV.setText("已安装");
+                            actionBtn.setText("添加到启动器");
                             actionBtn.setBackgroundColor(COLOR_ADD);
                             actionBtn.setEnabled(true);
                         });
@@ -589,11 +589,11 @@ public class AmazonGamesActivity extends Activity {
                         uiHandler.post(() -> {
                             cancelRef[0] = null;
                             pctTV.setVisibility(View.GONE);
-                            statusTV.setText("Error: " + msg);
-                            actionBtn.setText("Install");
+                            statusTV.setText("错误： " + msg);
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(COLOR_ACCENT);
                             actionBtn.setEnabled(true);
-                            Toast.makeText(AmazonGamesActivity.this, "Error: " + msg,
+                            Toast.makeText(AmazonGamesActivity.this, "错误： " + msg,
                                     Toast.LENGTH_LONG).show();
                         });
                     }
@@ -604,7 +604,7 @@ public class AmazonGamesActivity extends Activity {
                             progressBar.setVisibility(View.GONE);
                             pctTV.setVisibility(View.GONE);
                             statusTV.setText("");
-                            actionBtn.setText("Install");
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(COLOR_ACCENT);
                             actionBtn.setEnabled(true);
                         });
@@ -777,7 +777,7 @@ public class AmazonGamesActivity extends Activity {
             showInstallConfirm(game, () -> {
                 cancelRef[0] = null;
                 actionBtn.setEnabled(true);
-                actionBtn.setText("Cancel");
+                actionBtn.setText("取消");
                 actionBtn.setBackgroundColor(COLOR_CANCEL);
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -791,7 +791,7 @@ public class AmazonGamesActivity extends Activity {
                             progressBar.setProgress(100);
                             progressBar.setVisibility(View.GONE);
                             checkTV.setVisibility(View.VISIBLE);
-                            actionBtn.setText("Add to Launcher");
+                            actionBtn.setText("添加到启动器");
                             actionBtn.setBackgroundColor(COLOR_ADD);
                             actionBtn.setEnabled(true);
                         });
@@ -800,10 +800,10 @@ public class AmazonGamesActivity extends Activity {
                         uiHandler.post(() -> {
                             cancelRef[0] = null;
                             progressBar.setVisibility(View.GONE);
-                            actionBtn.setText("Install");
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(COLOR_ACCENT);
                             actionBtn.setEnabled(true);
-                            Toast.makeText(AmazonGamesActivity.this, "Error: " + msg,
+                            Toast.makeText(AmazonGamesActivity.this, "错误： " + msg,
                                     Toast.LENGTH_LONG).show();
                         });
                     }
@@ -812,7 +812,7 @@ public class AmazonGamesActivity extends Activity {
                             cancelRef[0] = null;
                             progressBar.setProgress(0);
                             progressBar.setVisibility(View.GONE);
-                            actionBtn.setText("Install");
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(COLOR_ACCENT);
                             actionBtn.setEnabled(true);
                         });
@@ -956,22 +956,22 @@ public class AmazonGamesActivity extends Activity {
         content.setPadding(dp(20), dp(8), dp(20), dp(8));
 
         TextView sizeTV = new TextView(this);
-        sizeTV.setText("Game size:  Fetching…");
+        sizeTV.setText("游戏大小：  获取中…");
         sizeTV.setTextColor(0xFFCCCCCC);
         sizeTV.setTextSize(14f);
         content.addView(sizeTV);
 
         TextView freeTV = new TextView(this);
-        freeTV.setText("Available storage:  " + formatBytes(freeBytesF));
+        freeTV.setText("可用存储：  " + formatBytes(freeBytesF));
         freeTV.setTextColor(0xFF88CC88);
         freeTV.setTextSize(14f);
         content.addView(freeTV);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Install " + game.title + "?")
+                .setTitle("安装 " + game.title + "?")
                 .setView(content)
-                .setPositiveButton("Install", null)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("安装", null)
+                .setNegativeButton("取消", null)
                 .create();
         dialog.show();
 
@@ -982,7 +982,7 @@ public class AmazonGamesActivity extends Activity {
 
         // Fetch game size in background and update label
         if (game.installSize > 0) {
-            sizeTV.setText("Game size:  " + formatBytes(game.installSize));
+            sizeTV.setText("游戏大小：  " + formatBytes(game.installSize));
         } else {
             new Thread(() -> {
                 long size = 0;
@@ -1008,7 +1008,7 @@ public class AmazonGamesActivity extends Activity {
                 final long finalSize = size;
                 uiHandler.post(() -> {
                     if (dialog.isShowing()) {
-                        sizeTV.setText("Game size:  "
+                        sizeTV.setText("游戏大小：  "
                                 + (finalSize > 0 ? formatBytes(finalSize) : "Unknown"));
                     }
                 });
@@ -1058,14 +1058,14 @@ public class AmazonGamesActivity extends Activity {
 
         if (installedExe != null) {
             TextView exeView = new TextView(this);
-            exeView.setText("\n.exe: " + new File(installedExe).getName());
+            exeView.setText("\n.exe：" + new File(installedExe).getName());
             exeView.setTextColor(0xFF888888);
             exeView.setTextSize(12f);
             container.addView(exeView);
 
             // Set .exe button
             Button setExeBtn = new Button(this);
-            setExeBtn.setText("Set .exe…");
+            setExeBtn.setText("设置 .exe…");
             setExeBtn.setTextColor(0xFFFFFFFF);
             setExeBtn.setBackgroundColor(0xFF444444);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-2, -2);
@@ -1073,7 +1073,7 @@ public class AmazonGamesActivity extends Activity {
             setExeBtn.setOnClickListener(v -> {
                 File dir = installedDir != null ? new File(installedDir) : null;
                 if (dir == null || !dir.isDirectory()) {
-                    Toast.makeText(this, "Install directory not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "未找到安装目录", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new Thread(() -> {
@@ -1081,7 +1081,7 @@ public class AmazonGamesActivity extends Activity {
                     AmazonLaunchHelper.collectExe(dir, exeFiles);
                     if (exeFiles.isEmpty()) {
                         uiHandler.post(() -> Toast.makeText(this,
-                                "No .exe files found", Toast.LENGTH_SHORT).show());
+                                "未找到 .exe 文件", Toast.LENGTH_SHORT).show());
                         return;
                     }
                     List<String> candidates = new ArrayList<>();
@@ -1090,9 +1090,9 @@ public class AmazonGamesActivity extends Activity {
                         if (selected != null && !selected.isEmpty()) {
                             prefs.edit().putString("amazon_exe_" + game.productId, selected).apply();
                             uiHandler.post(() -> {
-                                exeView.setText("\n.exe: " + new File(selected).getName());
+                                exeView.setText("\n.exe：" + new File(selected).getName());
                                 Toast.makeText(this,
-                                        "Exe set: " + new File(selected).getName(),
+                                        "已设置 exe： " + new File(selected).getName(),
                                         Toast.LENGTH_SHORT).show();
                             });
                         }
@@ -1105,10 +1105,10 @@ public class AmazonGamesActivity extends Activity {
         AlertDialog.Builder b = new AlertDialog.Builder(this)
                 .setTitle(game.title)
                 .setView(container)
-                .setPositiveButton("Close", null);
+                .setPositiveButton("关闭", null);
 
         if (installedDir != null) {
-            b.setNegativeButton("Uninstall", (d, w) -> {
+            b.setNegativeButton("卸载", (d, w) -> {
                 new Thread(() -> {
                     deleteDir(new File(installedDir));
                     prefs.edit()
@@ -1140,7 +1140,7 @@ public class AmazonGamesActivity extends Activity {
         }
         uiHandler.post(() ->
             new AlertDialog.Builder(this)
-                .setTitle("Select game executable")
+                .setTitle("选择游戏可执行文件")
                 .setItems(labels, (d, which) ->
                     new Thread(() -> onSelected.accept(candidates.get(which))).start())
                 .setCancelable(false)

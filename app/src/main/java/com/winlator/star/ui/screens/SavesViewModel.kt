@@ -92,7 +92,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (!saveDirectory.exists() || !saveDirectory.isDirectory) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        Toast.makeText(context, "Save directory is invalid.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "存档目录无效。", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
@@ -100,7 +100,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
                 if (!saveJsonFile.exists()) {
                     withContext(Dispatchers.Main) {
                         _isLoading.value = false
-                        Toast.makeText(context, "Save .json file is missing.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "缺少存档 .json 文件。", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
@@ -125,7 +125,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
 
                 withContext(Dispatchers.Main) {
                     _isLoading.value = false
-                    Toast.makeText(context, "Save exported to ${exportFile.absolutePath}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "存档已导出到 ${exportFile.absolutePath}", Toast.LENGTH_LONG).show()
                     if (shareAfterExport) {
                         val fileUri = FileProvider.getUriForFile(context, "com.winlator.fileprovider", exportFile)
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
@@ -139,7 +139,7 @@ class SavesViewModel(app: Application) : AndroidViewModel(app) {
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     _isLoading.value = false
-                    Toast.makeText(context, "Failed to export save.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "导出存档失败。", Toast.LENGTH_SHORT).show()
                 }
             }
         }

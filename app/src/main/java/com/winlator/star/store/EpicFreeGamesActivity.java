@@ -102,7 +102,7 @@ public class EpicFreeGamesActivity extends Activity {
         header.addView(backBtn, new LinearLayout.LayoutParams(-2, dp(40)));
 
         TextView titleTV = new TextView(this);
-        titleTV.setText("Free Games");
+        titleTV.setText("免费游戏");
         titleTV.setTextColor(COLOR_ACCENT);
         titleTV.setTextSize(18f);
         titleTV.setTypeface(null, Typeface.BOLD);
@@ -139,7 +139,7 @@ public class EpicFreeGamesActivity extends Activity {
         statusRow.addView(progressBar, pbLp);
 
         statusTV = new TextView(this);
-        statusTV.setText("Loading free games…");
+        statusTV.setText("正在加载免费游戏…");
         statusTV.setTextColor(0xFFCCCCCC);
         statusTV.setTextSize(13f);
         statusRow.addView(statusTV, new LinearLayout.LayoutParams(0, -2, 1f));

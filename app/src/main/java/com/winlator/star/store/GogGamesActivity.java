@@ -129,7 +129,7 @@ public class GogGamesActivity extends Activity {
         header.addView(backBtn, new LinearLayout.LayoutParams(-2, dp(40)));
 
         TextView titleTV = new TextView(this);
-        titleTV.setText("GOG Library");
+        titleTV.setText("GOG 游戏库");
         titleTV.setTextColor(0xFFFF9800);
         titleTV.setTextSize(18f);
         titleTV.setTypeface(null, Typeface.BOLD);
@@ -183,7 +183,7 @@ public class GogGamesActivity extends Activity {
 
         // Search bar
         searchBar = new EditText(this);
-        searchBar.setHint("Search games…");
+        searchBar.setHint("搜索游戏…");
         searchBar.setHintTextColor(0xFF666666);
         searchBar.setTextColor(0xFFFFFFFF);
         searchBar.setTextSize(14f);
@@ -201,7 +201,7 @@ public class GogGamesActivity extends Activity {
 
         // Sync status
         syncText = new TextView(this);
-        syncText.setText("Loading GOG library…");
+        syncText.setText("正在加载 GOG 游戏库…");
         syncText.setTextColor(0xFFCCCCCC);
         syncText.setTextSize(13f);
         syncText.setPadding(dp(12), dp(6), dp(12), dp(6));
@@ -639,7 +639,7 @@ public class GogGamesActivity extends Activity {
         }
 
         TextView checkmark = new TextView(this);
-        checkmark.setText("✓ Installed");
+        checkmark.setText("✓ 已安装");
         checkmark.setTextColor(0xFF4CAF50);
         checkmark.setTextSize(10f);
         checkmark.setVisibility(isInstalled ? View.VISIBLE : View.GONE);
@@ -700,7 +700,7 @@ public class GogGamesActivity extends Activity {
             showInstallConfirm(game, () -> {
                 cancelRef1[0] = null;
                 actionBtn.setEnabled(true);
-                actionBtn.setText("Cancel");
+                actionBtn.setText("取消");
                 actionBtn.setBackgroundColor(0xFFCC3333);
                 progressBar.setVisibility(View.VISIBLE);
                 statusTV.setVisibility(View.VISIBLE);
@@ -722,8 +722,8 @@ public class GogGamesActivity extends Activity {
                             pctTV.setVisibility(View.GONE);
                             checkmark.setVisibility(View.VISIBLE);
                             collapsedCheckTV.setVisibility(View.VISIBLE);
-                            statusTV.setText("Installed");
-                            actionBtn.setText("Add Game");
+                            statusTV.setText("已安装");
+                            actionBtn.setText("添加游戏");
                             actionBtn.setBackgroundColor(0xFF2E7D32);
                             actionBtn.setEnabled(true);
                         });
@@ -732,11 +732,11 @@ public class GogGamesActivity extends Activity {
                         uiHandler.post(() -> {
                             cancelRef1[0] = null;
                             pctTV.setVisibility(View.GONE);
-                            statusTV.setText("Error: " + msg);
-                            actionBtn.setText("Install");
+                            statusTV.setText("错误： " + msg);
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(0xFF7033FF);
                             actionBtn.setEnabled(true);
-                            Toast.makeText(GogGamesActivity.this, "Error: " + msg,
+                            Toast.makeText(GogGamesActivity.this, "错误： " + msg,
                                     Toast.LENGTH_LONG).show();
                         });
                     }
@@ -747,7 +747,7 @@ public class GogGamesActivity extends Activity {
                             progressBar.setVisibility(View.GONE);
                             pctTV.setVisibility(View.GONE);
                             statusTV.setText("");
-                            actionBtn.setText("Install");
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(0xFF7033FF);
                             actionBtn.setEnabled(true);
                         });
@@ -872,7 +872,7 @@ public class GogGamesActivity extends Activity {
         // Gen badge — top-left corner
         if (game.generation > 0) {
             TextView genTV = new TextView(this);
-            genTV.setText("Gen " + game.generation);
+            genTV.setText("第 " + game.generation);
             genTV.setTextSize(8f);
             genTV.setTextColor(0xFFFFFFFF);
             genTV.setPadding(dp(4), dp(2), dp(4), dp(2));
@@ -962,7 +962,7 @@ public class GogGamesActivity extends Activity {
             showInstallConfirm(game, () -> {
                 cancelRef2[0] = null;
                 actionBtn.setEnabled(true);
-                actionBtn.setText("Cancel");
+                actionBtn.setText("取消");
                 actionBtn.setBackgroundColor(0xFFCC3333);
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -978,7 +978,7 @@ public class GogGamesActivity extends Activity {
                             progressBar.setProgress(100);
                             progressBar.setVisibility(View.GONE);
                             checkTV.setVisibility(View.VISIBLE);
-                            actionBtn.setText("Add Game");
+                            actionBtn.setText("添加游戏");
                             actionBtn.setBackgroundColor(0xFF2E7D32);
                             actionBtn.setEnabled(true);
                         });
@@ -987,10 +987,10 @@ public class GogGamesActivity extends Activity {
                         uiHandler.post(() -> {
                             cancelRef2[0] = null;
                             progressBar.setVisibility(View.GONE);
-                            actionBtn.setText("Install");
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(0xFF5533CC);
                             actionBtn.setEnabled(true);
-                            Toast.makeText(GogGamesActivity.this, "Error: " + msg,
+                            Toast.makeText(GogGamesActivity.this, "错误： " + msg,
                                     Toast.LENGTH_LONG).show();
                         });
                     }
@@ -999,7 +999,7 @@ public class GogGamesActivity extends Activity {
                             cancelRef2[0] = null;
                             progressBar.setProgress(0);
                             progressBar.setVisibility(View.GONE);
-                            actionBtn.setText("Install");
+                            actionBtn.setText("安装");
                             actionBtn.setBackgroundColor(0xFF5533CC);
                             actionBtn.setEnabled(true);
                         });
@@ -1090,11 +1090,11 @@ public class GogGamesActivity extends Activity {
         b.setView(content);
 
         if (isInstalled) {
-            b.setPositiveButton("Add to Launcher", (d, w) -> {
+            b.setPositiveButton("添加到启动器", (d, w) -> {
                 String exe = prefs.getString("gog_exe_" + game.gameId, null);
                 if (exe != null) GogLaunchHelper.addToLauncher(this, game.title, exe, game.imageUrl);
             });
-            b.setNeutralButton("Uninstall", (d, w) -> {
+            b.setNeutralButton("卸载", (d, w) -> {
                 String dirName = prefs.getString("gog_dir_" + game.gameId, null);
                 if (dirName != null) {
                     new Thread(() -> {
@@ -1112,9 +1112,9 @@ public class GogGamesActivity extends Activity {
                     }).start();
                 }
             });
-            b.setNegativeButton("Close", null);
+            b.setNegativeButton("关闭", null);
         } else {
-            b.setNegativeButton("Close", null);
+            b.setNegativeButton("关闭", null);
             AlertDialog dialog = b.create();
             dialog.show();
 
@@ -1122,7 +1122,7 @@ public class GogGamesActivity extends Activity {
             Button installBtn = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
             // Reuse negative slot for close; add custom Install button in content
             Button customInstall = new Button(this);
-            customInstall.setText("Install");
+            customInstall.setText("安装");
             customInstall.setTextColor(0xFFFFFFFF);
             customInstall.setBackgroundColor(0xFF7033FF);
             customInstall.setTextSize(13f);
@@ -1139,11 +1139,11 @@ public class GogGamesActivity extends Activity {
                 showInstallConfirm(game, () -> {
                 cancelRef3[0] = null;
                 customInstall.setEnabled(true);
-                customInstall.setText("Cancel");
+                customInstall.setText("取消");
                 customInstall.setBackgroundColor(0xFFCC3333);
                 progressBar.setVisibility(View.VISIBLE);
                 statusTV.setVisibility(View.VISIBLE);
-                statusTV.setText("0%  Starting…");
+                statusTV.setText("0%  启动中…");
                 dialog.setCancelable(false);
 
                 cancelRef3[0] = GogDownloadManager.startDownload(this, game, new GogDownloadManager.Callback() {
@@ -1157,8 +1157,8 @@ public class GogGamesActivity extends Activity {
                         uiHandler.post(() -> {
                             cancelRef3[0] = null;
                             progressBar.setProgress(100);
-                            statusTV.setText("✓ Installed");
-                            customInstall.setText("Add to Launcher");
+                            statusTV.setText("✓ 已安装");
+                            customInstall.setText("添加到启动器");
                             customInstall.setBackgroundColor(0xFF2E7D32);
                             customInstall.setEnabled(true);
                             dialog.setCancelable(true);
@@ -1174,8 +1174,8 @@ public class GogGamesActivity extends Activity {
                         uiHandler.post(() -> {
                             cancelRef3[0] = null;
                             progressBar.setVisibility(View.GONE);
-                            statusTV.setText("Error: " + msg);
-                            customInstall.setText("Install");
+                            statusTV.setText("错误： " + msg);
+                            customInstall.setText("安装");
                             customInstall.setBackgroundColor(0xFF7033FF);
                             customInstall.setEnabled(true);
                             dialog.setCancelable(true);
@@ -1187,7 +1187,7 @@ public class GogGamesActivity extends Activity {
                             progressBar.setProgress(0);
                             progressBar.setVisibility(View.GONE);
                             statusTV.setText("");
-                            customInstall.setText("Install");
+                            customInstall.setText("安装");
                             customInstall.setBackgroundColor(0xFF7033FF);
                             customInstall.setEnabled(true);
                             dialog.setCancelable(true);
@@ -1255,13 +1255,13 @@ public class GogGamesActivity extends Activity {
 
         if (installedExe != null && dirName != null) {
             android.widget.TextView exeView = new android.widget.TextView(this);
-            exeView.setText("\n.exe: " + new java.io.File(installedExe).getName());
+            exeView.setText("\n.exe：" + new java.io.File(installedExe).getName());
             exeView.setTextColor(0xFF888888);
             exeView.setTextSize(12f);
             container.addView(exeView);
 
             Button setExeBtn = new Button(this);
-            setExeBtn.setText("Set .exe\u2026");
+            setExeBtn.setText("设置 .exe…");
             setExeBtn.setTextColor(0xFFFFFFFF);
             setExeBtn.setBackgroundColor(0xFF444444);
             android.widget.LinearLayout.LayoutParams lp =
@@ -1282,7 +1282,7 @@ public class GogGamesActivity extends Activity {
                         if (selected != null && !selected.isEmpty()) {
                             prefs.edit().putString("gog_exe_" + game.gameId, selected).apply();
                             uiHandler.post(() -> {
-                                exeView.setText("\n.exe: " + new java.io.File(selected).getName());
+                                exeView.setText("\n.exe：" + new java.io.File(selected).getName());
                                 Toast.makeText(this,
                                         "Exe set to: " + new java.io.File(selected).getName(),
                                         Toast.LENGTH_SHORT).show();
@@ -1293,12 +1293,12 @@ public class GogGamesActivity extends Activity {
             });
             container.addView(setExeBtn, lp);
 
-            b.setNegativeButton("Uninstall", (dialog, which) -> uninstall(game, onUninstalled));
-            b.setNeutralButton("Copy to Downloads", (dialog, which) -> copyToDownloads(game));
+            b.setNegativeButton("卸载", (dialog, which) -> uninstall(game, onUninstalled));
+            b.setNeutralButton("复制到下载", (dialog, which) -> copyToDownloads(game));
         }
 
         b.setView(container);
-        b.setPositiveButton("Close", null);
+        b.setPositiveButton("关闭", null);
         b.show();
     }
 
@@ -1322,14 +1322,14 @@ public class GogGamesActivity extends Activity {
     }
 
     private void copyToDownloads(GogGame game) {
-        Toast.makeText(this, "Copying to Downloads…", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "正在复制到下载…", Toast.LENGTH_SHORT).show();
         new Thread(() -> {
             String dest = GogDownloadManager.copyToDownloads(this, game.gameId);
             uiHandler.post(() -> {
                 if (dest != null) {
-                    Toast.makeText(this, "Copied to: " + dest, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "已复制到： " + dest, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, "Copy failed — check storage permission",
+                    Toast.makeText(this, "复制失败——请检查存储权限",
                             Toast.LENGTH_SHORT).show();
                 }
             });
@@ -1340,7 +1340,7 @@ public class GogGamesActivity extends Activity {
 
     private TextView makeGenBadge(int generation) {
         TextView badge = new TextView(this);
-        badge.setText("Gen " + generation);
+        badge.setText("第 " + generation);
         badge.setTextSize(10f);
         badge.setTextColor(0xFFFFFFFF);
         badge.setPadding(dp(5), dp(2), dp(5), dp(2));
@@ -1411,13 +1411,13 @@ public class GogGamesActivity extends Activity {
         content.setPadding(dp(20), dp(8), dp(20), dp(8));
 
         TextView gameSizeTV = new TextView(this);
-        gameSizeTV.setText("Game size:  Fetching…");
+        gameSizeTV.setText("游戏大小：  获取中…");
         gameSizeTV.setTextColor(0xFFCCCCCC);
         gameSizeTV.setTextSize(14f);
         content.addView(gameSizeTV);
 
         TextView freeTV = new TextView(this);
-        freeTV.setText("Available storage:  " + GogDownloadManager.formatBytes(finalFree));
+        freeTV.setText("可用存储：  " + GogDownloadManager.formatBytes(finalFree));
         freeTV.setTextColor(0xFF88CC88);
         freeTV.setTextSize(14f);
         LinearLayout.LayoutParams tvLp = new LinearLayout.LayoutParams(-2, -2);
@@ -1425,10 +1425,10 @@ public class GogGamesActivity extends Activity {
         content.addView(freeTV, tvLp);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Install " + game.title + "?")
+                .setTitle("安装 " + game.title + "?")
                 .setView(content)
-                .setPositiveButton("Install", null)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("安装", null)
+                .setNegativeButton("取消", null)
                 .create();
         dialog.show();
 
@@ -1441,10 +1441,10 @@ public class GogGamesActivity extends Activity {
             long size = GogDownloadManager.fetchGameSize(this, game);
             runOnUiThread(() -> {
                 if (!dialog.isShowing()) return;
-                gameSizeTV.setText("Game size:  " + GogDownloadManager.formatBytes(size));
+                gameSizeTV.setText("游戏大小：  " + GogDownloadManager.formatBytes(size));
                 if (size > 0 && finalFree > 0 && size > finalFree) {
                     gameSizeTV.setTextColor(0xFFFF5252);
-                    gameSizeTV.setText("Game size:  " + GogDownloadManager.formatBytes(size)
+                    gameSizeTV.setText("游戏大小：  " + GogDownloadManager.formatBytes(size)
                             + "  ⚠ Not enough space");
                     freeTV.setTextColor(0xFFFF5252);
                 }
@@ -1467,7 +1467,7 @@ public class GogGamesActivity extends Activity {
         }
         uiHandler.post(() ->
             new AlertDialog.Builder(this)
-                .setTitle("Select game executable")
+                .setTitle("选择游戏可执行文件")
                 .setItems(labels, (d, which) ->
                     new Thread(() -> onSelected.accept(candidates.get(which))).start())
                 .setCancelable(false)

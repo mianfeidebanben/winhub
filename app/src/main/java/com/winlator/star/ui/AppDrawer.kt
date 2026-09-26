@@ -134,12 +134,12 @@ fun AppDrawerContent(
 
         SectionHeader("About And Support")
         DrawerIconItem(
-            label = "About",
+            label = "关于",
             icon = Icons.Filled.Info,
             onClick = onAbout,
         )
         DrawerIconItem(
-            label = "Help and Support",
+            label = "帮助与支持",
             icon = Icons.Filled.HelpOutline,
             onClick = { showHelp = true },
         )
@@ -236,7 +236,7 @@ private fun DrawerIconItem(label: String, icon: ImageVector, onClick: () -> Unit
 private fun HelpSupportDialog(onDismiss: () -> Unit, onOpenUrl: (String) -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Help & Support") },
+        title = { Text("帮助与支持") },
         text = {
             androidx.compose.foundation.layout.Column(
                 verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp)
@@ -246,19 +246,19 @@ private fun HelpSupportDialog(onDismiss: () -> Unit, onOpenUrl: (String) -> Unit
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 SupportLink(
-                    label = "GitHub Repository",
+                    label = "GitHub 仓库",
                     url = "https://github.com/The412Banner/star-compose",
                     onOpenUrl = onOpenUrl
                 )
                 SupportLink(
-                    label = "Report an Issue",
+                    label = "报告问题",
                     url = "https://github.com/The412Banner/star-compose/issues",
                     onOpenUrl = onOpenUrl
                 )
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text("Close") }
+            TextButton(onClick = onDismiss) { Text("关闭") }
         }
     )
 }

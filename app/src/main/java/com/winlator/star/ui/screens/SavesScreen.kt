@@ -101,7 +101,7 @@ fun SavesScreen(vm: SavesViewModel = viewModel()) {
     Box(modifier = Modifier.fillMaxSize()) {
         if (saves.isEmpty() && !isLoading) {
             Text(
-                text = "No saves yet. Tap + to add one.",
+                text = "还没有存档。点击 + 添加一个。",
                 color = OnSurfaceVariant,
                 modifier = Modifier.align(Alignment.Center),
             )
@@ -134,13 +134,13 @@ fun SavesScreen(vm: SavesViewModel = viewModel()) {
                 containerColor = Surface,
                 modifier = Modifier.size(48.dp),
             ) {
-                Icon(imageVector = Icons.Filled.FolderOpen, contentDescription = "Import save", tint = MaterialTheme.colorScheme.primary)
+                Icon(imageVector = Icons.Filled.FolderOpen, contentDescription = "导入存档", tint = MaterialTheme.colorScheme.primary)
             }
             FloatingActionButton(
                 onClick = { showNewSaveDialog = true },
                 containerColor = MaterialTheme.colorScheme.primary,
             ) {
-                Icon(imageVector = Icons.Filled.Add, contentDescription = "Add save", tint = Color.White)
+                Icon(imageVector = Icons.Filled.Add, contentDescription = "添加存档", tint = Color.White)
             }
         }
 
@@ -251,33 +251,33 @@ private fun SaveItem(
         }
         Box {
             IconButton(onClick = { menuExpanded = true }) {
-                Icon(imageVector = Icons.Filled.MoreVert, contentDescription = "Options", tint = OnSurfaceVariant)
+                Icon(imageVector = Icons.Filled.MoreVert, contentDescription = "选项", tint = OnSurfaceVariant)
             }
             DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                 DropdownMenuItem(
-                    text = { Text("Edit") },
+                    text = { Text("编辑") },
                     leadingIcon = { Icon(Icons.Filled.Edit, null) },
                     onClick = { menuExpanded = false; onEdit() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Transfer Container") },
+                    text = { Text("转移容器") },
                     leadingIcon = { Icon(Icons.Filled.SwapHoriz, null) },
                     onClick = { menuExpanded = false; onTransfer() },
                 )
                 Divider(color = DividerColor)
                 DropdownMenuItem(
-                    text = { Text("Export") },
+                    text = { Text("导出") },
                     leadingIcon = { Icon(Icons.Filled.FileDownload, null) },
                     onClick = { menuExpanded = false; onExport() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Share") },
+                    text = { Text("分享") },
                     leadingIcon = { Icon(Icons.Filled.Share, null) },
                     onClick = { menuExpanded = false; onShare() },
                 )
                 Divider(color = DividerColor)
                 DropdownMenuItem(
-                    text = { Text("Unregister") },
+                    text = { Text("取消注册") },
                     leadingIcon = { Icon(Icons.Filled.Delete, null) },
                     onClick = { menuExpanded = false; onUnregister() },
                 )
@@ -310,13 +310,13 @@ private fun NewSaveDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("New Save") },
+        title = { Text("新建存档") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text("Save Title") },
+                    label = { Text("存档标题") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -328,7 +328,7 @@ private fun NewSaveDialog(
                         value = selectedContainer?.getName() ?: if (containers.isEmpty()) "No containers" else "",
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Container") },
+                        label = { Text("容器") },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
                         modifier = Modifier.fillMaxWidth().menuAnchor(),
                     )
@@ -356,13 +356,13 @@ private fun NewSaveDialog(
                             }
                             filePickerLauncher.launch(intent)
                         } else {
-                            Toast.makeText(context, "Select a container first", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "请先选择一个容器", Toast.LENGTH_SHORT).show()
                         }
                     },
                     shape = RoundedCornerShape(20.dp),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Text("Select Save Path", color = MaterialTheme.colorScheme.primary)
+                    Text("选择存档路径", color = MaterialTheme.colorScheme.primary)
                 }
                 if (selectedPath.isNotEmpty()) {
                     Text(text = selectedPath, fontSize = 11.sp, color = OnSurfaceVariant)
@@ -374,12 +374,12 @@ private fun NewSaveDialog(
                 if (title.isNotBlank() && selectedPath.isNotEmpty() && selectedContainer != null) {
                     onConfirm(title.trim(), selectedPath, selectedContainer)
                 } else {
-                    Toast.makeText(context, "Fill all fields", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "请填写所有字段", Toast.LENGTH_SHORT).show()
                 }
-            }) { Text("OK") }
+            }) { Text("确定") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = onDismiss) { Text("取消") }
         },
     )
 }
@@ -395,17 +395,17 @@ private fun EditSaveDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Edit Save") },
+        title = { Text("编辑存档") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text("Save Title") },
+                    label = { Text("存档标题") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
-                Text("Original Path", fontSize = 12.sp, color = OnSurfaceVariant)
+                Text("原始路径", fontSize = 12.sp, color = OnSurfaceVariant)
                 Text(save.path, fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
             }
         },
@@ -414,12 +414,12 @@ private fun EditSaveDialog(
                 if (title.isNotBlank()) {
                     onConfirm(title.trim())
                 } else {
-                    Toast.makeText(context, "Name is required", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "名称必填", Toast.LENGTH_SHORT).show()
                 }
-            }) { Text("OK") }
+            }) { Text("确定") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = onDismiss) { Text("取消") }
         },
     )
 }
@@ -437,7 +437,7 @@ private fun TransferSaveDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Transfer Container") },
+        title = { Text("转移容器") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
@@ -453,7 +453,7 @@ private fun TransferSaveDialog(
                         value = containers.getOrNull(selectedIndex)?.getName() ?: "No containers",
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Container") },
+                        label = { Text("容器") },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
                         modifier = Modifier.fillMaxWidth().menuAnchor(),
                     )
@@ -474,10 +474,10 @@ private fun TransferSaveDialog(
         confirmButton = {
             TextButton(onClick = {
                 containers.getOrNull(selectedIndex)?.let { onConfirm(it) }
-            }) { Text("Transfer") }
+            }) { Text("传输") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = onDismiss) { Text("取消") }
         },
     )
 }
@@ -494,7 +494,7 @@ private fun ImportContainerSelectDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Import Save") },
+        title = { Text("导入存档") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
@@ -510,7 +510,7 @@ private fun ImportContainerSelectDialog(
                         value = containers.getOrNull(selectedIndex)?.getName() ?: "No containers",
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Container") },
+                        label = { Text("容器") },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
                         modifier = Modifier.fillMaxWidth().menuAnchor(),
                     )
@@ -531,10 +531,10 @@ private fun ImportContainerSelectDialog(
         confirmButton = {
             TextButton(onClick = {
                 containers.getOrNull(selectedIndex)?.let { onConfirm(it) }
-            }) { Text("Import") }
+            }) { Text("导入") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = onDismiss) { Text("取消") }
         },
     )
 }

@@ -82,7 +82,7 @@ public class GogMainActivity extends Activity {
         if (loggedIn && usernameView != null) {
             String user = getSharedPreferences("bh_gog_prefs", 0)
                     .getString("username", "Unknown");
-            usernameView.setText("Signed in as: " + user);
+            usernameView.setText("已登录： " + user);
         }
     }
 
@@ -107,7 +107,7 @@ public class GogMainActivity extends Activity {
 
         // Subtitle
         TextView sub = new TextView(this);
-        sub.setText("Sign in to access your GOG game library");
+        sub.setText("登录以访问你的 GOG 游戏库");
         sub.setTextSize(14f);
         sub.setTextColor(0xFFAAAAAA);
         sub.setGravity(Gravity.CENTER);
@@ -117,7 +117,7 @@ public class GogMainActivity extends Activity {
 
         // Login button
         Button loginBtn = new Button(this);
-        loginBtn.setText("Login with GOG");
+        loginBtn.setText("使用 GOG 登录");
         loginBtn.setBackgroundColor(0xFF7033FF);
         loginBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams btnLp = new LinearLayout.LayoutParams(-2, -2);
@@ -160,7 +160,7 @@ public class GogMainActivity extends Activity {
 
         // View Library button
         Button libraryBtn = new Button(this);
-        libraryBtn.setText("View Game Library");
+        libraryBtn.setText("查看游戏库");
         libraryBtn.setBackgroundColor(0xFF7033FF);
         libraryBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams libLp = new LinearLayout.LayoutParams(-2, -2);
@@ -171,7 +171,7 @@ public class GogMainActivity extends Activity {
 
         // Sign out button
         Button signOutBtn = new Button(this);
-        signOutBtn.setText("Sign Out");
+        signOutBtn.setText("退出登录");
         signOutBtn.setBackgroundColor(0xFF444444);
         signOutBtn.setTextColor(0xFFFFFFFF);
         LinearLayout.LayoutParams soLp = new LinearLayout.LayoutParams(-2, -2);

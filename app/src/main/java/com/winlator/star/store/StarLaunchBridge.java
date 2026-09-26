@@ -99,7 +99,7 @@ public final class StarLaunchBridge {
                         .setItems(names, (dialog, which) ->
                                 writeShortcut(activity, containers.get(which),
                                         gameName, exePath, coverArtUrl, h))
-                        .setNegativeButton("Cancel", null)
+                        .setNegativeButton("取消", null)
                         .show());
 
             } catch (Exception e) {

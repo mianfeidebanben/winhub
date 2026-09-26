@@ -78,7 +78,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
                 // for apps that haven't changed since last request.
                 ui.post {
                     loadGames()
-                    statusText.text = "${games.size} games in library"
+                    statusText.text = "游戏库中有 ${games.size} 个游戏"
                 }
             }
             event == "LoggedOut" -> {
@@ -87,13 +87,13 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
             event == "Disconnected" -> {
                 // Transient disconnect — auto-reconnect is in progress.
                 // Don't close the activity; just show status.
-                ui.post { statusText.text = "Disconnected — reconnecting…" }
+                ui.post { statusText.text = "连接断开——正在重连…" }
             }
             event == "Connected" -> {
                 // After reconnect, retry sync if still empty.
                 val repo = SteamRepository.getInstance()
                 if (games.isEmpty() && repo.isLoggedIn) {
-                    ui.post { statusText.text = "Reconnected — syncing library…" }
+                    ui.post { statusText.text = "已重新连接——正在同步游戏库…" }
                     repo.syncLibrary()
                 }
             }
@@ -122,7 +122,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
             .map { SteamGame.fromGameRow(it) }
             .sortedBy { it.name.lowercase() }
         if (games.isNotEmpty()) {
-            statusText.text = "${games.size} games in library"
+            statusText.text = "游戏库中有 ${games.size} 个游戏"
         }
         refreshList()
     }
@@ -175,7 +175,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
                 sizeView.visibility = if (game.sizeBytes > 0) View.VISIBLE else View.GONE
 
                 if (game.metacriticScore > 0) {
-                    metaView.text = "Metacritic: ${game.metacriticScore}"
+                    metaView.text = "Metacritic：${game.metacriticScore}"
                     metaView.setTextColor(when {
                         game.metacriticScore >= 75 -> 0xFF4CAF50.toInt()  // green
                         game.metacriticScore >= 50 -> 0xFFFFC107.toInt()  // amber
@@ -277,14 +277,14 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
             setOnClickListener { finish() }
         }
         val title = TextView(this).apply {
-            text = "Steam Library"
+            text = "Steam 游戏库"
             textSize = 18f
             setTextColor(Color.WHITE)
             setPadding(dp(8), 0, 0, 0)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
         val refreshBtn = Button(this).apply {
-            text = "Refresh"
+            text = "刷新"
             textSize = 13f
             setTextColor(Color.WHITE)
             setBackgroundColor(BLUE)
@@ -292,19 +292,19 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
             setOnClickListener { SteamRepository.getInstance().syncLibrary() }
         }
         val logoutBtn = Button(this).apply {
-            text = "Logout"
+            text = "注销"
             textSize = 13f
             setTextColor(Color.WHITE)
             setBackgroundColor(0xFFB71C1C.toInt())
             setPadding(dp(12), 0, dp(12), 0)
             setOnClickListener {
                 android.app.AlertDialog.Builder(this@SteamGamesActivity)
-                    .setTitle("Sign out of Steam?")
-                    .setMessage("Your saved login will be removed. You will need to sign in again.")
-                    .setPositiveButton("Sign Out") { _, _ ->
+                    .setTitle("退出 Steam 登录？")
+                    .setMessage("已保存的登录信息将被移除，你需要重新登录。")
+                    .setPositiveButton("退出登录") { _, _ ->
                         Thread { SteamRepository.getInstance().logout() }.start()
                     }
-                    .setNegativeButton("Cancel", null)
+                    .setNegativeButton("取消", null)
                     .show()
             }
         }
@@ -318,7 +318,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
 
         // Status bar
         statusText = TextView(this).apply {
-            text = "Loading library…"
+            text = "正在加载游戏库…"
             textSize = 12f
             setTextColor(GRAY)
             setPadding(dp(12), dp(5), dp(12), dp(5))
@@ -328,7 +328,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
 
         // Empty state
         emptyText = TextView(this).apply {
-            text = "No games found.\nIf sync just finished, tap Refresh."
+            text = "未找到游戏。\n如果刚同步完成，请点击刷新。"
             textSize = 14f
             setTextColor(GRAY)
             gravity = Gravity.CENTER
@@ -403,7 +403,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
 
         // child 5: installed indicator
         val installedLabel = TextView(this@SteamGamesActivity).apply {
-            text = "● Installed"
+            text = "● 已安装"
             textSize = 11f
             setTextColor(0xFF4CAF50.toInt())  // green
             setPadding(0, dp(3), 0, 0)
@@ -412,7 +412,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
 
         // child 6: uninstall button
         val uninstallBtn = Button(this@SteamGamesActivity).apply {
-            text = "Uninstall"
+            text = "卸载"
             textSize = 11f
             setTextColor(Color.WHITE)
             setBackgroundColor(0xFFB71C1C.toInt())
@@ -422,7 +422,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
 
         // child 7: launch button (choose container + add to shortcuts)
         val launchBtn = Button(this@SteamGamesActivity).apply {
-            text = "Launch / Add to Shortcuts"
+            text = "启动 / 添加到快捷方式"
             textSize = 11f
             setTextColor(Color.WHITE)
             setBackgroundColor(0xFF2E7D32.toInt())  // green
@@ -458,7 +458,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
 
     private fun launchInstalledGame(game: SteamGame) {
         if (game.installDir.isEmpty()) {
-            Toast.makeText(this, "Install directory not set", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "未设置安装目录", Toast.LENGTH_SHORT).show()
             return
         }
         val installDir = java.io.File(game.installDir)
@@ -467,7 +467,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
             AmazonLaunchHelper.collectExe(installDir, exeFiles)
             if (exeFiles.isEmpty()) {
                 ui.post {
-                    Toast.makeText(this, "No .exe found in install directory", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "安装目录中未找到 .exe", Toast.LENGTH_LONG).show()
                 }
                 return@Thread
             }
@@ -491,7 +491,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
             }.toTypedArray()
             ui.post {
                 android.app.AlertDialog.Builder(this)
-                    .setTitle("Select executable for \"${game.name}\"")
+                    .setTitle("为 \"${game.name}\" 选择可执行文件")
                     .setItems(labels) { _, which ->
                         StarLaunchBridge.addToLauncher(this, game.name, candidates[which], coverUrl)
                     }

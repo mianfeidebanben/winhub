@@ -442,7 +442,7 @@ public class BigPictureActivity extends AppCompatActivity {
             playDefaultMp3FromAssets();
 
             // Provide feedback to the user
-            Toast.makeText(this, "MP3 reset to default", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "MP3 已重置为默认", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -675,9 +675,9 @@ public class BigPictureActivity extends AppCompatActivity {
 
     private void updateBgMusicButtonText(Button button, boolean isEnabled) {
         if (isEnabled) {
-            button.setText("Disable BG Music");
+            button.setText("关闭背景音乐");
         } else {
-            button.setText("Enable BG Music");
+            button.setText("开启背景音乐");
         }
     }
 
@@ -826,7 +826,7 @@ public class BigPictureActivity extends AppCompatActivity {
     private void showCoverArtOptionsDialog() {
         // Create an AlertDialog to show the options
         new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Cover Art Options")
+                .setTitle("封面图选项")
                 .setItems(new CharSequence[]{"Remove Custom Cover Art", "Upload New Cover Art"}, (dialog, which) -> {
                     switch (which) {
                         case 0: // Remove Custom Cover Art
@@ -837,7 +837,7 @@ public class BigPictureActivity extends AppCompatActivity {
                             break;
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton("取消", null)
                 .show();
     }
 
@@ -964,8 +964,8 @@ public class BigPictureActivity extends AppCompatActivity {
         SharedPreferences playtimePrefs = getSharedPreferences("playtime_stats", Context.MODE_PRIVATE);
         long totalPlaytime = playtimePrefs.getLong(shortcut.name + "_playtime", 0);
         int playCount = playtimePrefs.getInt(shortcut.name + "_play_count", 0);
-        playCountView.setText("Times Played: " + playCount);
-        playtimeView.setText("Playtime: " + formatPlaytime(totalPlaytime));
+        playCountView.setText("已玩次数： " + playCount);
+        playtimeView.setText("游玩时长： " + formatPlaytime(totalPlaytime));
 
         // Get the associated container for this shortcut (unchanged)
         Container container = manager.getContainerForShortcut(shortcut);
@@ -1028,7 +1028,7 @@ public class BigPictureActivity extends AppCompatActivity {
         } else if (!containerValue.isEmpty()) {
             textView.setText(containerValue); // Fallback to the container's value
         } else {
-            textView.setText("Not Set"); // Fallback if neither are available
+            textView.setText("未设置"); // Fallback if neither are available
         }
     }
 
@@ -1096,7 +1096,7 @@ public class BigPictureActivity extends AppCompatActivity {
             }
 
             uploadText = new TextView(this); // Initialize the uploadText variable
-            uploadText.setText("No suitable cover art found for " + shortcut.name + ". Click the image to upload custom cover art or rename the Shortcut to something SteamGrid can recognize.");
+            uploadText.setText("未找到合适的封面图：" + shortcut.name + ". Click the image to upload custom cover art or rename the Shortcut to something SteamGrid can recognize.");
             uploadText.setTextColor(Color.WHITE);
             uploadText.setTextSize(18);
             uploadText.setPadding(20, 20, 20, 20);
@@ -1219,7 +1219,7 @@ public class BigPictureActivity extends AppCompatActivity {
                     // Show dialog for display preference (center, stretch, tile)
                     String[] displayOptions = {"Center", "Stretch", "Tile"};
                     new AlertDialog.Builder(this)
-                            .setTitle("Select Display Mode")
+                            .setTitle("选择显示模式")
                             .setItems(displayOptions, (dialog, which) -> {
                                 // Save display mode
                                 editor.putString(WALLPAPER_DISPLAY_PREF_KEY, displayOptions[which].toLowerCase());
@@ -1623,14 +1623,14 @@ public class BigPictureActivity extends AppCompatActivity {
         // 1. DocumentFile from the tree URI
         DocumentFile docFolder = DocumentFile.fromTreeUri(this, folderUri);
         if (docFolder == null || !docFolder.isDirectory()) {
-            Toast.makeText(this, "Invalid folder selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "所选文件夹无效！", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // 2. Iterate children
         DocumentFile[] docFiles = docFolder.listFiles();
         if (docFiles == null || docFiles.length == 0) {
-            Toast.makeText(this, "No files in folder!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "文件夹中没有文件！", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -1649,7 +1649,7 @@ public class BigPictureActivity extends AppCompatActivity {
         }
 
         if (bitmaps.isEmpty()) {
-            Toast.makeText(this, "No PNG files found in this folder!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "此文件夹中未找到 PNG 文件！", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -107,7 +107,7 @@ fun ContainersScreen(
     LaunchedEffect(Unit) {
         topBarActions.value = {
             IconButton(onClick = { showImportPicker = true }) {
-                Icon(Icons.Filled.FileDownload, contentDescription = "Import container", tint = androidx.compose.ui.graphics.Color.White)
+                Icon(Icons.Filled.FileDownload, contentDescription = "导入容器", tint = androidx.compose.ui.graphics.Color.White)
             }
         }
     }
@@ -115,7 +115,7 @@ fun ContainersScreen(
         Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
         if (containers.isEmpty() && !isLoading) {
             Text(
-                text = "No containers yet. Tap + to create one.",
+                text = "还没有容器。点击 + 创建一个。",
                 color = OnSurfaceVariant,
                 modifier = Modifier.align(Alignment.Center),
             )
@@ -166,7 +166,7 @@ fun ContainersScreen(
                 .align(Alignment.BottomEnd)
                 .padding(20.dp),
         ) {
-            Icon(imageVector = Icons.Filled.Add, contentDescription = "Add container", tint = androidx.compose.ui.graphics.Color.White)
+            Icon(imageVector = Icons.Filled.Add, contentDescription = "添加容器", tint = androidx.compose.ui.graphics.Color.White)
         }
 
         // Loading overlay
@@ -188,10 +188,10 @@ fun ContainersScreen(
         val backups = remember { vm.availableBackups() }
         AlertDialog(
             onDismissRequest = { showImportPicker = false },
-            title = { Text("Import Container") },
+            title = { Text("导入容器") },
             text = {
                 if (backups.isEmpty()) {
-                    Text("No exported containers found in Downloads/Winlator/Backups/Containers/.")
+                    Text("在 Downloads/Winlator/Backups/Containers/ 中未找到导出的容器。")
                 } else {
                     androidx.compose.foundation.layout.Column {
                         backups.forEach { dir ->
@@ -199,7 +199,7 @@ fun ContainersScreen(
                                 onClick = {
                                     showImportPicker = false
                                     vm.importContainer(dir) {
-                                        Toast.makeText(context, "Container imported: ${dir.name}", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "已导入容器：${dir.name}", Toast.LENGTH_SHORT).show()
                                     }
                                 },
                                 modifier = Modifier.fillMaxWidth(),
@@ -211,7 +211,7 @@ fun ContainersScreen(
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showImportPicker = false }) { Text("Cancel") }
+                TextButton(onClick = { showImportPicker = false }) { Text("取消") }
             },
         )
     }
@@ -222,32 +222,32 @@ fun ContainersScreen(
             is ConfirmAction.Duplicate -> {
                 AlertDialog(
                     onDismissRequest = { confirmDialog = null },
-                    title = { Text("Duplicate container?") },
-                    text = { Text("Duplicate \"${action.container.name}\"?") },
+                    title = { Text("复制容器？") },
+                    text = { Text("复制 \"${action.container.name}\"？") },
                     confirmButton = {
                         TextButton(onClick = {
                             confirmDialog = null
                             vm.duplicate(action.container) {}
-                        }) { Text("Duplicate") }
+                        }) { Text("复制") }
                     },
                     dismissButton = {
-                        TextButton(onClick = { confirmDialog = null }) { Text("Cancel") }
+                        TextButton(onClick = { confirmDialog = null }) { Text("取消") }
                     },
                 )
             }
             is ConfirmAction.Remove -> {
                 AlertDialog(
                     onDismissRequest = { confirmDialog = null },
-                    title = { Text("Remove container?") },
-                    text = { Text("Remove \"${action.container.name}\" permanently?") },
+                    title = { Text("删除容器？") },
+                    text = { Text("永久删除 \"${action.container.name}\"？") },
                     confirmButton = {
                         TextButton(onClick = {
                             confirmDialog = null
                             vm.remove(action.container, context) {}
-                        }) { Text("Remove") }
+                        }) { Text("删除") }
                     },
                     dismissButton = {
-                        TextButton(onClick = { confirmDialog = null }) { Text("Cancel") }
+                        TextButton(onClick = { confirmDialog = null }) { Text("取消") }
                     },
                 )
             }
@@ -296,7 +296,7 @@ private fun ContainerItem(
         IconButton(onClick = onRun) {
             Icon(
                 imageVector = Icons.Filled.PlayArrow,
-                contentDescription = "Run",
+                contentDescription = "运行",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
@@ -305,7 +305,7 @@ private fun ContainerItem(
             IconButton(onClick = { menuExpanded = true }) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Options",
+                    contentDescription = "选项",
                     tint = OnSurfaceVariant,
                 )
             }
@@ -314,27 +314,27 @@ private fun ContainerItem(
                 onDismissRequest = { menuExpanded = false },
             ) {
                 DropdownMenuItem(
-                    text = { Text("Edit") },
+                    text = { Text("编辑") },
                     leadingIcon = { Icon(Icons.Filled.Edit, null) },
                     onClick = { menuExpanded = false; onEdit() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Duplicate") },
+                    text = { Text("复制") },
                     leadingIcon = { Icon(Icons.Filled.ContentCopy, null) },
                     onClick = { menuExpanded = false; onDuplicate() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Remove") },
+                    text = { Text("删除") },
                     leadingIcon = { Icon(Icons.Filled.Delete, null) },
                     onClick = { menuExpanded = false; onRemove() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Export") },
+                    text = { Text("导出") },
                     leadingIcon = { Icon(Icons.Filled.FileUpload, null) },
                     onClick = { menuExpanded = false; onExport() },
                 )
                 DropdownMenuItem(
-                    text = { Text("Info") },
+                    text = { Text("信息") },
                     leadingIcon = { Icon(Icons.Filled.Info, null) },
                     onClick = { menuExpanded = false; onInfo() },
                 )
@@ -378,7 +378,7 @@ private fun StorageInfoDialog(container: Container, onDismiss: () -> Unit) {
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Storage Info") },
+        title = { Text("存储信息") },
         text = {
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -389,13 +389,13 @@ private fun StorageInfoDialog(container: Container, onDismiss: () -> Unit) {
                     modifier = androidx.compose.ui.Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
-                    Text("Drive C", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("C 盘", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(StringUtils.formatBytes(driveCSize), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     Spacer(modifier = androidx.compose.ui.Modifier.size(6.dp))
-                    Text("Cache", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("缓存", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(StringUtils.formatBytes(cacheSize), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     Spacer(modifier = androidx.compose.ui.Modifier.size(6.dp))
-                    Text("Total", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("总计", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(StringUtils.formatBytes(totalSize), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                 }
                 // Right column — circular progress + label
@@ -429,7 +429,7 @@ private fun StorageInfoDialog(container: Container, onDismiss: () -> Unit) {
                 container.putExtra("desktopTheme", null)
                 container.saveData()
                 onDismiss()
-            }) { Text("Clear Cache") }
+            }) { Text("清除缓存") }
         },
     )
 }

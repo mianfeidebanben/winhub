@@ -97,7 +97,7 @@ public class DownloadProgressDialog {
             .setProgress(progress);
 
         ((TextView) dialog.findViewById(R.id.TVProgress))
-            .setText("Installing... " + progress + "%");
+            .setText("正在安装... " + progress + "%");
     }
 
     public void close() {

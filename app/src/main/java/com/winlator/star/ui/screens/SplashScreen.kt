@@ -216,7 +216,7 @@ fun SplashScreen(
                         shape   = RoundedCornerShape(8.dp),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        Text("Proceed", color = Color.White, fontWeight = FontWeight.SemiBold)
+                        Text("继续", color = Color.White, fontWeight = FontWeight.SemiBold)
                     }
                 }
             }

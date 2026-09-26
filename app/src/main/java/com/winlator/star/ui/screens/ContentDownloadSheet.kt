@@ -76,7 +76,7 @@ fun ContentDownloadSheet(
         AlertDialog(
             onDismissRequest = { showInfoProfile = null },
             containerColor = Color(0xFF2A2A2A),
-            title = { Text("Content Info", color = Color.White) },
+            title = { Text("附加内容信息", color = Color.White) },
             text = {
                 androidx.compose.foundation.rememberScrollState().let { scroll ->
                     Column(Modifier.verticalScroll(scroll)) {
@@ -90,7 +90,7 @@ fun ContentDownloadSheet(
                     }
                 }
             },
-            confirmButton = { TextButton(onClick = { showInfoProfile = null }) { Text("OK") } }
+            confirmButton = { TextButton(onClick = { showInfoProfile = null }) { Text("确定") } }
         )
     }
 
@@ -99,8 +99,8 @@ fun ContentDownloadSheet(
         AlertDialog(
             onDismissRequest = { confirmRemoveProfile = null },
             containerColor = Color(0xFF2A2A2A),
-            title = { Text("Remove content?", color = Color.White) },
-            text = { Text("Remove \"${profile.verName}\"?", color = Color(0xFFCCCCCC)) },
+            title = { Text("删除内容？", color = Color.White) },
+            text = { Text("删除 \"${profile.verName}\"？", color = Color(0xFFCCCCCC)) },
             confirmButton = {
                 TextButton(onClick = {
                     cm.removeContent(profile)
@@ -108,9 +108,9 @@ fun ContentDownloadSheet(
                     loadProfiles(cm, contentTypes) { profiles = it }
                     confirmRemoveProfile = null
                     onContentChanged()
-                }) { Text("Remove") }
+                }) { Text("删除") }
             },
-            dismissButton = { TextButton(onClick = { confirmRemoveProfile = null }) { Text("Cancel") } }
+            dismissButton = { TextButton(onClick = { confirmRemoveProfile = null }) { Text("取消") } }
         )
     }
 
@@ -121,7 +121,7 @@ fun ContentDownloadSheet(
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(24.dp)) {
                     CircularProgressIndicator(color = Color(0xFF8B6BE0))
                     Spacer(Modifier.height(16.dp))
-                    Text("Installing\u2026", color = Color.White)
+                    Text("正在安装…", color = Color.White)
                 }
             }
         }
@@ -133,7 +133,7 @@ fun ContentDownloadSheet(
             onDismissRequest = { errorMsg = null },
             containerColor = Color(0xFF2A2A2A),
             text = { Text(msg, color = Color(0xFFCCCCCC)) },
-            confirmButton = { TextButton(onClick = { errorMsg = null }) { Text("OK") } }
+            confirmButton = { TextButton(onClick = { errorMsg = null }) { Text("确定") } }
         )
     }
 
@@ -151,7 +151,7 @@ fun ContentDownloadSheet(
                 }
             } else if (profiles.isEmpty()) {
                 Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
-                    Text("No content available.", color = OnSurfaceVariant)
+                    Text("无可用内容。", color = OnSurfaceVariant)
                 }
             } else {
                 LazyColumn(Modifier.fillMaxWidth()) {
@@ -195,7 +195,7 @@ fun ContentDownloadSheet(
                 }
             }
         },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("Close") } },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("关闭") } },
     )
 }
 
@@ -230,22 +230,22 @@ private fun DownloadContentItem(
         )
         Column(modifier = Modifier.weight(1f).padding(horizontal = 10.dp)) {
             Text(profile.verName, style = MaterialTheme.typography.bodyMedium, color = OnSurface)
-            Text("Code: ${profile.verCode}", style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariant)
+            Text("代码：${profile.verCode}", style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariant)
         }
         if (!isLocal) {
             if (isDownloading) {
                 CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
             } else {
                 IconButton(onClick = onDownload) {
-                    Icon(Icons.Filled.Download, contentDescription = "Download", tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Filled.Download, contentDescription = "下载", tint = MaterialTheme.colorScheme.primary)
                 }
             }
         } else {
             IconButton(onClick = onInfo) {
-                Icon(Icons.Filled.Info, contentDescription = "Info", tint = OnSurfaceVariant)
+                Icon(Icons.Filled.Info, contentDescription = "信息", tint = OnSurfaceVariant)
             }
             IconButton(onClick = onRemove) {
-                Icon(Icons.Filled.Delete, contentDescription = "Remove", tint = Color(0xFFEF5350))
+                Icon(Icons.Filled.Delete, contentDescription = "删除", tint = Color(0xFFEF5350))
             }
         }
     }
@@ -254,7 +254,7 @@ private fun DownloadContentItem(
 @Composable
 private fun InfoField(label: String, value: String) {
     Row(modifier = Modifier.padding(vertical = 2.dp)) {
-        Text("$label: ", color = Color(0xFFAAAAAA), style = MaterialTheme.typography.bodySmall)
+        Text("$label：", color = Color(0xFFAAAAAA), style = MaterialTheme.typography.bodySmall)
         Text(value, color = Color(0xFFE0E0E0), style = MaterialTheme.typography.bodySmall)
     }
 }
