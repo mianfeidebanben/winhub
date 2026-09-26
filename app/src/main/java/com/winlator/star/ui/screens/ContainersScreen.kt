@@ -145,7 +145,7 @@ fun ContainersScreen(
                                 val msg = if (path != null)
                                     "Exported to $path"
                                 else
-                                    "Export failed or already exists"
+                                    "导出失败或已存在"
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
                             }
                         },
@@ -415,7 +415,7 @@ private fun StorageInfoDialog(container: Container, onDismiss: () -> Unit) {
                     }
                     Spacer(modifier = androidx.compose.ui.Modifier.size(6.dp))
                     Text(
-                        "Estimated used space",
+                        "预计占用空间",
                         fontSize = 11.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

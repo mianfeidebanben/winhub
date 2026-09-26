@@ -138,7 +138,7 @@ fun AdrenoDriverDownloadSheet(
                     )
                     entries.isEmpty() -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Text(
-                            "No drivers found.",
+                            "未找到驱动。",
                             color = cs.onSurfaceVariant,
                         )
                     }
@@ -169,7 +169,7 @@ fun AdrenoDriverDownloadSheet(
                         )
                         Spacer(Modifier.height(8.dp))
                         Text(
-                            "The driver will be downloaded and installed automatically.",
+                            "驱动将被自动下载并安装。",
                             style = MaterialTheme.typography.bodySmall,
                             color = cs.onSurfaceVariant,
                         )
@@ -197,7 +197,7 @@ fun AdrenoDriverDownloadSheet(
                                         } else {
                                             Toast.makeText(
                                                 context,
-                                                "Install failed — invalid driver package",
+                                                "安装失败——驱动包无效",
                                                 Toast.LENGTH_LONG,
                                             ).show()
                                         }
@@ -319,7 +319,7 @@ private fun CenteredLoading() {
             CircularProgressIndicator()
             Spacer(Modifier.height(8.dp))
             Text(
-                "Loading drivers…",
+                "正在加载驱动…",
                 color = cs.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -343,7 +343,7 @@ private fun CenteredError(message: String, onRetry: () -> Unit) {
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Could not load drivers",
+                "无法加载驱动",
                 color = cs.onSurface,
                 style = MaterialTheme.typography.bodyMedium,
             )

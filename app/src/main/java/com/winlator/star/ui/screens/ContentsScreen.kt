@@ -367,15 +367,15 @@ private fun ContentInfoDialog(
             ) {
                 // ── Info section ──────────────────────────────────────────────
                 SectionBox(header = "Info") {
-                    InfoRow("Type",    profile.type.toString())
-                    InfoRow("Version", profile.verName)
-                    InfoRow("Code",    profile.verCode.toString())
+                    InfoRow("类型",    profile.type.toString())
+                    InfoRow("版本", profile.verName)
+                    InfoRow("代码",    profile.verCode.toString())
                 }
 
                 // ── Description section ───────────────────────────────────────
                 if (!profile.desc.isNullOrEmpty()) {
                     Spacer(Modifier.height(10.dp))
-                    SectionBox(header = "Description") {
+                    SectionBox(header = "描述") {
                         Text(
                             text = profile.desc,
                             color = Color(0xFFBBBBBB),
@@ -387,7 +387,7 @@ private fun ContentInfoDialog(
                 // ── Files section ─────────────────────────────────────────────
                 if (!profile.fileList.isNullOrEmpty()) {
                     Spacer(Modifier.height(10.dp))
-                    SectionBox(header = "Files") {
+                    SectionBox(header = "文件") {
                         profile.fileList.forEach { file ->
                             Text(
                                 text = "${file.source} → ${file.target}",
@@ -425,9 +425,9 @@ private fun UntrustedDialog(
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState()),
             ) {
-                SectionBox(header = "Unverified Files", borderColor = Color(0xFFFF8A80)) {
+                SectionBox(header = "未验证的文件", borderColor = Color(0xFFFF8A80)) {
                     Text(
-                        "These files could not be verified. Continue only if you trust the source.",
+                        "这些文件无法验证。仅当你信任来源时才继续。",
                         color = Color(0xFFCCCCCC),
                         style = MaterialTheme.typography.bodySmall,
                     )

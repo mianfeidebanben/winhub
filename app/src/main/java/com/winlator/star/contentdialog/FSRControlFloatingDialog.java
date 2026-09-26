@@ -66,8 +66,8 @@ public class FSRControlFloatingDialog extends Dialog {
         if (renderer == null) return;
 
         List<String> modes = new ArrayList<>();
-        modes.add("Super Resolution"); 
-        modes.add("DLS (Color Boost)"); 
+        modes.add("超分辨率"); 
+        modes.add("DLS（色彩增强）"); 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, modes) {
             @Override

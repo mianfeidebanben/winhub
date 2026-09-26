@@ -526,7 +526,7 @@ public class BigPictureActivity extends AppCompatActivity {
                     editor.apply();
                 } else {
                     // Show an error message if the URL is invalid
-                    youtubeUrlInput.setError("Invalid YouTube URL");
+                    youtubeUrlInput.setError("YouTube 链接无效");
                 }
             } else {
                 // Load the default video if no URL is entered
@@ -827,7 +827,7 @@ public class BigPictureActivity extends AppCompatActivity {
         // Create an AlertDialog to show the options
         new androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("封面图选项")
-                .setItems(new CharSequence[]{"Remove Custom Cover Art", "Upload New Cover Art"}, (dialog, which) -> {
+                .setItems(new CharSequence[]{"移除自定义封面", "上传新封面"}, (dialog, which) -> {
                     switch (which) {
                         case 0: // Remove Custom Cover Art
                             removeCustomCoverArt();
@@ -1039,7 +1039,7 @@ public class BigPictureActivity extends AppCompatActivity {
         } else if (!containerValue.isEmpty()) {
             textView.setText(label + containerValue); // Fallback to the container's value
         } else {
-            textView.setText(label + "Not Set"); // Fallback if neither are available
+            textView.setText(label + "未设置"); // Fallback if neither are available
         }
     }
 
@@ -1096,7 +1096,7 @@ public class BigPictureActivity extends AppCompatActivity {
             }
 
             uploadText = new TextView(this); // Initialize the uploadText variable
-            uploadText.setText("未找到合适的封面图：" + shortcut.name + ". Click the image to upload custom cover art or rename the Shortcut to something SteamGrid can recognize.");
+            uploadText.setText("未找到合适的封面图：" + shortcut.name + "。点击图片可上传自定义封面，或将快捷方式重命名为 SteamGrid 能识别的名称。");
             uploadText.setTextColor(Color.WHITE);
             uploadText.setTextSize(18);
             uploadText.setPadding(20, 20, 20, 20);

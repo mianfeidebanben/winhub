@@ -367,7 +367,7 @@ public class AmazonGameDetailActivity extends Activity {
                     uiHandler.post(() -> {
                         setResult(RESULT_REFRESH);
                         refreshActionState();
-                        Toast.makeText(this, title + " uninstalled", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, title + " 已卸载", Toast.LENGTH_SHORT).show();
                     });
                 }).start();
             })
@@ -451,7 +451,7 @@ public class AmazonGameDetailActivity extends Activity {
                     : -1;
             if (size > 0) prefs.edit().putLong("amazon_size_" + productId, size).apply();
             uiHandler.post(() -> {
-                if (sizeTV != null) sizeTV.setText(size > 0 ? formatBytes(size) : "Unknown");
+                if (sizeTV != null) sizeTV.setText(size > 0 ? formatBytes(size) : "未知");
             });
         }, "amazon-size-" + productId).start();
     }
@@ -649,7 +649,7 @@ public class AmazonGameDetailActivity extends Activity {
             }
 
             TextView countTV = new TextView(this);
-            countTV.setText(arr.length() + " DLC" + (arr.length() == 1 ? "" : "s") + " owned");
+            countTV.setText(arr.length() + " DLC" + (arr.length() == 1 ? "" : "s") + " 已拥有");
             countTV.setTextColor(0xFF888888);
             countTV.setTextSize(12f);
             countTV.setTypeface(null, android.graphics.Typeface.BOLD);

@@ -148,7 +148,7 @@ public class ActiveWindowsDialog extends ContentDialog {
             if (title == null || title.isEmpty()) title = "未命名窗口";
 
             tvName.setText(title);
-            tvProcess.setText(className != null && !className.isEmpty() ? className : "Application");
+            tvProcess.setText(className != null && !className.isEmpty() ? className : "应用程序");
 
             if (icon != null) ivIcon.setImageBitmap(icon);
 

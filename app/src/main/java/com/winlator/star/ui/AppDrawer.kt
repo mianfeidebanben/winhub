@@ -110,14 +110,14 @@ fun AppDrawerContent(
 
         Divider(color = DividerColor)
 
-        SectionHeader("Emulation")
+        SectionHeader("模拟")
         DrawerItem(Screen.Shortcuts,     currentRoute, onNavigate)
         DrawerItem(Screen.Containers,    currentRoute, onNavigate)
         DrawerItem(Screen.Settings,      currentRoute, onNavigate)
 
         Divider(color = DividerColor, modifier = Modifier.padding(top = 4.dp))
 
-        SectionHeader("Tools")
+        SectionHeader("工具")
         DrawerItem(Screen.InputControls, currentRoute, onNavigate)
         DrawerItem(Screen.AdrenoTools,   currentRoute, onNavigate)
         DrawerItem(Screen.Saves,         currentRoute, onNavigate)
@@ -125,14 +125,14 @@ fun AppDrawerContent(
 
         Divider(color = DividerColor, modifier = Modifier.padding(top = 4.dp))
 
-        SectionHeader("Game Stores")
+        SectionHeader("游戏商店")
         Screen.storeItems.forEach { screen ->
             DrawerStoreItem(screen, onLaunchStore)
         }
 
         Divider(color = DividerColor, modifier = Modifier.padding(top = 4.dp))
 
-        SectionHeader("About And Support")
+        SectionHeader("关于与支持")
         DrawerIconItem(
             label = "关于",
             icon = Icons.Filled.Info,
@@ -242,7 +242,7 @@ private fun HelpSupportDialog(onDismiss: () -> Unit, onOpenUrl: (String) -> Unit
                 verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    "For bug reports, feature requests, and support, visit the GitHub repository.",
+                    "如需反馈 Bug、功能建议或获取支持，请访问 GitHub 仓库。",
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 SupportLink(

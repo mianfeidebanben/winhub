@@ -77,7 +77,7 @@ fun FSROverlay(state: XServerDialogState) {
     var offsetY by remember { mutableFloatStateOf(100f) }
 
     var modeDropdownExpanded by remember { mutableStateOf(false) }
-    val modeNames = listOf("Super Resolution", "DLS (Color Boost)")
+    val modeNames = listOf("超分辨率", "DLS（色彩增强）")
 
     fun pushUpdate() {
         state.onFsrUpdate?.invoke(fsrEnabled, fsrMode, fsrLevel, hdrEnabled)
@@ -130,7 +130,7 @@ fun FSROverlay(state: XServerDialogState) {
                     .padding(bottom = 8.dp)
             ) {
                 Text(
-                    "Graphics Engine",
+                    "图形引擎",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f)
@@ -231,7 +231,7 @@ fun FSROverlay(state: XServerDialogState) {
                     .padding(vertical = 4.dp)
             ) {
                 Text(
-                    "Vegas FrameGen",
+                    "Vegas 帧生成",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f)

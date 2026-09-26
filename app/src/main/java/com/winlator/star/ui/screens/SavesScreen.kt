@@ -190,7 +190,7 @@ fun SavesScreen(vm: SavesViewModel = viewModel()) {
             onConfirm = { container ->
                 transferTarget = null
                 vm.transferSave(save, container) { ok, msg ->
-                    Toast.makeText(context, if (ok) "Transfer complete" else msg, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, if (ok) "转移完成" else msg, Toast.LENGTH_SHORT).show()
                 }
             },
         )
@@ -325,7 +325,7 @@ private fun NewSaveDialog(
                     onExpandedChange = { dropdownExpanded = it },
                 ) {
                     OutlinedTextField(
-                        value = selectedContainer?.getName() ?: if (containers.isEmpty()) "No containers" else "",
+                        value = selectedContainer?.getName() ?: if (containers.isEmpty()) "无容器" else "",
                         onValueChange = {},
                         readOnly = true,
                         label = { Text("容器") },
@@ -450,7 +450,7 @@ private fun TransferSaveDialog(
                     onExpandedChange = { dropdownExpanded = it },
                 ) {
                     OutlinedTextField(
-                        value = containers.getOrNull(selectedIndex)?.getName() ?: "No containers",
+                        value = containers.getOrNull(selectedIndex)?.getName() ?: "无容器",
                         onValueChange = {},
                         readOnly = true,
                         label = { Text("容器") },
@@ -498,7 +498,7 @@ private fun ImportContainerSelectDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    "Select target container:",
+                    "选择目标容器：",
                     fontSize = 13.sp,
                     color = OnSurfaceVariant,
                 )
@@ -507,7 +507,7 @@ private fun ImportContainerSelectDialog(
                     onExpandedChange = { dropdownExpanded = it },
                 ) {
                     OutlinedTextField(
-                        value = containers.getOrNull(selectedIndex)?.getName() ?: "No containers",
+                        value = containers.getOrNull(selectedIndex)?.getName() ?: "无容器",
                         onValueChange = {},
                         readOnly = true,
                         label = { Text("容器") },

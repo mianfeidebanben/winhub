@@ -202,7 +202,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
     override fun onSteamGuardEmailRequired(emailDomain: String, codeWrong: Boolean) {
         setLoading(false, "")
         showCodeDialog(
-            title     = if (codeWrong) "Incorrect code \u2014 try again" else "Steam Guard",
+            title     = if (codeWrong) "验证码错误——请重试" else "Steam Guard",
             message   = "Enter the code Steam sent to your email ending in \u2026$emailDomain",
             isNumeric = false,
         )
@@ -211,7 +211,7 @@ class SteamLoginActivity : Activity(), SteamAuthManager.AuthListener {
     override fun onSteamGuardTotpRequired(codeWrong: Boolean) {
         setLoading(false, "")
         showCodeDialog(
-            title     = if (codeWrong) "Incorrect code \u2014 try again" else "Steam Guard",
+            title     = if (codeWrong) "验证码错误——请重试" else "Steam Guard",
             message   = "Enter the code from your Steam Guard Mobile Authenticator app",
             isNumeric = true,
         )

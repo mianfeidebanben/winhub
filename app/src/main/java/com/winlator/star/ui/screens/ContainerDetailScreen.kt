@@ -459,16 +459,16 @@ private fun WineConfigTab(
         SectionBox(title = "桌面") {
             LabeledDropdown(
                 label = stringResource(R.string.theme),
-                options = listOf("Light", "Dark"),
-                selectedOption = listOf("Light", "Dark").getOrElse(viewModel.desktopThemeIndex) { "Light" },
-                onSelect = { opt -> viewModel.desktopThemeIndex = listOf("Light", "Dark").indexOf(opt).coerceAtLeast(0) }
+                options = listOf("浅色", "深色"),
+                selectedOption = listOf("浅色", "深色").getOrElse(viewModel.desktopThemeIndex) { "浅色" },
+                onSelect = { opt -> viewModel.desktopThemeIndex = listOf("浅色", "深色").indexOf(opt).coerceAtLeast(0) }
             )
             Spacer(Modifier.height(8.dp))
             LabeledDropdown(
                 label = stringResource(R.string.background),
-                options = listOf("Image", "Solid Color"),
-                selectedOption = listOf("Image", "Solid Color").getOrElse(viewModel.desktopBgTypeIndex) { "Image" },
-                onSelect = { opt -> viewModel.desktopBgTypeIndex = listOf("Image", "Solid Color").indexOf(opt).coerceAtLeast(0) }
+                options = listOf("图片", "纯色"),
+                selectedOption = listOf("图片", "纯色").getOrElse(viewModel.desktopBgTypeIndex) { "图片" },
+                onSelect = { opt -> viewModel.desktopBgTypeIndex = listOf("图片", "纯色").indexOf(opt).coerceAtLeast(0) }
             )
             // Color picker (visible when Solid Color selected)
             if (viewModel.desktopBgTypeIndex == WineThemeManager.BackgroundType.COLOR.ordinal) {
@@ -537,7 +537,7 @@ private fun WinComponentsTab(viewModel: ContainerDetailViewModel) {
 
 @Composable
 private fun WinComponentRow(comp: WinComponentEntry, onSelect: (Int) -> Unit) {
-    val options = listOf("Builtin (Wine)", "Native (Windows)")
+    val options = listOf("内置（Wine）", "原生（Windows）")
     LabeledDropdown(
         label = comp.label,
         options = options,
@@ -1360,7 +1360,7 @@ internal fun DxvkConfigDialog(
                 Spacer(Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     LabeledDropdown(
-                        if (isVegas) "Vegas Selector" else stringResource(R.string.dxvk_version),
+                        if (isVegas) "Vegas 选择器" else stringResource(R.string.dxvk_version),
                         allDxvkVersions.value, selectedDxvk, { selectedDxvk = it },
                         modifier = Modifier.weight(1f)
                     )
@@ -1392,12 +1392,12 @@ internal fun DxvkConfigDialog(
                 }
                 LabeledDropdown(stringResource(R.string.frame_rate), framerateEntries, selectedFramerate, { selectedFramerate = it })
                 Spacer(Modifier.height(8.dp))
-                LabeledDropdown("VKD3D Feature Level", featureLevelEntries, selectedFeatureLevel, { selectedFeatureLevel = it })
+                LabeledDropdown("VKD3D 功能级别", featureLevelEntries, selectedFeatureLevel, { selectedFeatureLevel = it })
                 Spacer(Modifier.height(8.dp))
                 LabeledDropdown("DDraw Wrapper", ddraEntries, selectedDdra, { selectedDdra = it })
                 if (isVegas) {
                     Spacer(Modifier.height(8.dp))
-                    LabeledDropdown("Config Source", configSourceEntries.value, selectedConfigSource, { selectedConfigSource = it })
+                    LabeledDropdown("配置来源", configSourceEntries.value, selectedConfigSource, { selectedConfigSource = it })
                 }
             }
         },
@@ -1467,11 +1467,11 @@ internal fun WineD3DConfigDialog(
                 Spacer(Modifier.height(8.dp))
                 LabeledDropdown(stringResource(R.string.graphics_driver_max_device_memory), videoMemEntries, videoMem, { videoMem = it })
                 Spacer(Modifier.height(8.dp))
-                LabeledDropdown("Strict Shader Math", ssmOptions, ssm, { ssm = it })
+                LabeledDropdown("严格着色器数学", ssmOptions, ssm, { ssm = it })
                 Spacer(Modifier.height(8.dp))
-                LabeledDropdown("Offscreen Rendering Mode", ormOptions, orm, { orm = it })
+                LabeledDropdown("离屏渲染模式", ormOptions, orm, { orm = it })
                 Spacer(Modifier.height(8.dp))
-                LabeledDropdown("Renderer", rendOptions, renderer, { renderer = it })
+                LabeledDropdown("渲染器", rendOptions, renderer, { renderer = it })
             }
         },
         confirmButton = {

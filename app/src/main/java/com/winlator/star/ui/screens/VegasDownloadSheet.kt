@@ -95,7 +95,7 @@ fun VegasDownloadSheet(
                 errorMsg = "Failed to parse releases: ${e.message}"
             }
         } else {
-            errorMsg = "Failed to fetch releases from GitHub"
+            errorMsg = "无法从 GitHub 获取发布版"
         }
         isLoading = false
     }
@@ -139,7 +139,7 @@ fun VegasDownloadSheet(
             } else if (releases.isEmpty()) {
                 Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
                     Text(
-                        if (errorMsg != null) "Could not load releases." else "No releases available.",
+                        if (errorMsg != null) "无法加载发布版。" else "暂无可用发布版。",
                         color = OnSurfaceVariant
                     )
                 }
@@ -176,11 +176,11 @@ fun VegasDownloadSheet(
                                                         onContentChanged()
                                                         onDismiss()
                                                     } else {
-                                                        errorMsg = "Install failed."
+                                                        errorMsg = "安装失败。"
                                                     }
                                                 }
                                             } else {
-                                                errorMsg = "Download failed."
+                                                errorMsg = "下载失败。"
                                             }
                                         }
                                     }

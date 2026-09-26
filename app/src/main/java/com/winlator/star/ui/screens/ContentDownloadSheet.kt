@@ -80,9 +80,9 @@ fun ContentDownloadSheet(
             text = {
                 androidx.compose.foundation.rememberScrollState().let { scroll ->
                     Column(Modifier.verticalScroll(scroll)) {
-                        InfoField("Type", profile.type.toString())
-                        InfoField("Version", profile.verName)
-                        InfoField("Code", profile.verCode.toString())
+                        InfoField("类型", profile.type.toString())
+                        InfoField("版本", profile.verName)
+                        InfoField("代码", profile.verCode.toString())
                         if (!profile.desc.isNullOrEmpty()) {
                             Spacer(Modifier.height(8.dp))
                             Text(profile.desc, color = Color(0xFFBBBBBB), style = MaterialTheme.typography.bodySmall)
@@ -179,11 +179,11 @@ fun ContentDownloadSheet(
                                                 loadProfiles(cm, contentTypes) { profiles = it }
                                                 onContentChanged()
                                             } else {
-                                                errorMsg = "Install failed."
+                                                errorMsg = "安装失败。"
                                             }
                                         }
                                     } else {
-                                        errorMsg = "Download failed."
+                                        errorMsg = "下载失败。"
                                     }
                                 }
                             },

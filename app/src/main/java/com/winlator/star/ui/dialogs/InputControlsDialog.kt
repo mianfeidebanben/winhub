@@ -43,7 +43,7 @@ fun InputControlsDialog(state: XServerDialogState) {
     var timeoutEnabled   by remember(initTimeout)      { mutableStateOf(initTimeout) }
     var hapticsEnabled   by remember(initHaptics)      { mutableStateOf(initHaptics) }
 
-    val allItems = listOf("-- Disabled --") + profiles
+    val allItems = listOf("-- 已禁用 --") + profiles
     var dropdownExpanded by remember { mutableStateOf(false) }
 
     AlertDialog(
@@ -57,7 +57,7 @@ fun InputControlsDialog(state: XServerDialogState) {
                     onExpandedChange = { dropdownExpanded = it }
                 ) {
                     OutlinedTextField(
-                        value = allItems.getOrElse(selectedIdx) { "-- Disabled --" },
+                        value = allItems.getOrElse(selectedIdx) { "-- 已禁用 --" },
                         onValueChange = {},
                         readOnly = true,
                         label = { Text("配置文件") },
@@ -84,9 +84,9 @@ fun InputControlsDialog(state: XServerDialogState) {
 
                 Spacer(Modifier.height(8.dp))
 
-                CheckRow("Show Touchscreen Controls", showTouchscreen) { showTouchscreen = it }
-                CheckRow("Enable Timeout", timeoutEnabled) { timeoutEnabled = it }
-                CheckRow("Enable Haptics", hapticsEnabled) { hapticsEnabled = it }
+                CheckRow("显示触摸控制", showTouchscreen) { showTouchscreen = it }
+                CheckRow("启用超时", timeoutEnabled) { timeoutEnabled = it }
+                CheckRow("启用触觉反馈", hapticsEnabled) { hapticsEnabled = it }
 
                 Spacer(Modifier.height(8.dp))
 

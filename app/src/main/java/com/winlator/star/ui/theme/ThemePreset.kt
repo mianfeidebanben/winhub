@@ -58,7 +58,7 @@ data class ThemePreset(
 
 val themePresets: List<ThemePreset> = listOf(
     ThemePreset(
-        name          = "Classic Dark",
+        name          = "经典深色",
         background    = Color(0xFF1A1A1A),
         surface       = Color(0xFF2A2A2A),
         surfaceVariant= Color(0xFF333333),
@@ -72,35 +72,35 @@ val themePresets: List<ThemePreset> = listOf(
         primary       = Color(0xFFBB86FC),
     ),
     ThemePreset(
-        name          = "Ocean",
+        name          = "海洋",
         background    = Color(0xFF0D1B2A),
         surface       = Color(0xFF162435),
         surfaceVariant= Color(0xFF1E3045),
         primary       = Color(0xFF0EA5E9),
     ),
     ThemePreset(
-        name          = "Forest",
+        name          = "森林",
         background    = Color(0xFF0D1A12),
         surface       = Color(0xFF142010),
         surfaceVariant= Color(0xFF1C2E1A),
         primary       = Color(0xFF22C55E),
     ),
     ThemePreset(
-        name          = "Sunset",
+        name          = "日落",
         background    = Color(0xFF1A0D0D),
         surface       = Color(0xFF251515),
         surfaceVariant= Color(0xFF301C1C),
         primary       = Color(0xFFF97316),
     ),
     ThemePreset(
-        name          = "Rose",
+        name          = "玫瑰",
         background    = Color(0xFF1A0D14),
         surface       = Color(0xFF25151E),
         surfaceVariant= Color(0xFF301C28),
         primary       = Color(0xFFEC4899),
     ),
     ThemePreset(
-        name          = "Steel",
+        name          = "钢铁",
         background    = Color(0xFF131419),
         surface       = Color(0xFF1C1D25),
         surfaceVariant= Color(0xFF252630),

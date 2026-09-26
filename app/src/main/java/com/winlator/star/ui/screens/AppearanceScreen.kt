@@ -68,7 +68,7 @@ fun AppearanceScreen() {
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         // ── Preset themes ────────────────────────────────────────────────
-        SectionLabel("Theme Presets")
+        SectionLabel("主题预设")
 
         val rows = themePresets.chunked(4)
         rows.forEach { row ->
@@ -94,7 +94,7 @@ fun AppearanceScreen() {
         Box(Modifier.fillMaxWidth().height(1.dp).background(Divider))
 
         // ── Custom accent picker ─────────────────────────────────────────
-        SectionLabel("Custom Accent Color")
+        SectionLabel("自定义强调色")
         Text(
             text = "选择下方颜色将切换到自定义预设",
             color = OnSurfaceVariant,

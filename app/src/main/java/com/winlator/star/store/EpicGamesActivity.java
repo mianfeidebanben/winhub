@@ -382,7 +382,7 @@ public class EpicGamesActivity extends Activity {
                 gameListLayout.setPadding(dp(8), dp(8), dp(8), dp(8));
                 TextView emptyTV = new TextView(EpicGamesActivity.this);
                 String q2 = query == null ? "" : query.trim();
-                emptyTV.setText(q2.isEmpty() ? "Your Epic library is empty"
+                emptyTV.setText(q2.isEmpty() ? "你的 Epic 游戏库为空"
                                              : "No results for \u201c" + q2 + "\u201d");
                 emptyTV.setTextColor(0xFF666666);
                 emptyTV.setTextSize(14f);

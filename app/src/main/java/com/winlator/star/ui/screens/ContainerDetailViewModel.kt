@@ -169,9 +169,9 @@ class ContainerDetailViewModel(app: Application) : AndroidViewModel(app) {
     )
 
     val xrMappingLabels = listOf(
-        "Button A", "Button B", "Button X", "Button Y",
-        "Button Grip", "Button Trigger",
-        "Thumbstick Up", "Thumbstick Down", "Thumbstick Left", "Thumbstick Right"
+        "A 键", "B 键", "X 键", "Y 键",
+        "握把键", "扳机键",
+        "摇杆上", "摇杆下", "摇杆左", "摇杆右"
     )
 
     // ── Tab selection ─────────────────────────────────────────────────────────

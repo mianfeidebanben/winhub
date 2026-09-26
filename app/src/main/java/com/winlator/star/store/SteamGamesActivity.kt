@@ -139,7 +139,7 @@ class SteamGamesActivity : Activity(), SteamRepository.SteamEventListener {
         val staleThresholdSec = 4 * 60 * 60L  // 4 hours
         val elapsed = System.currentTimeMillis() / 1000L - repo.lastSyncTime
         if (games.isEmpty() || elapsed > staleThresholdSec) {
-            statusText.text = if (games.isEmpty()) "Syncing library…" else "Refreshing library…"
+            statusText.text = if (games.isEmpty()) "正在同步游戏库…" else "正在刷新游戏库…"
             repo.syncLibrary()
         }
     }

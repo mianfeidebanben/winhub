@@ -805,7 +805,7 @@ public class GogGameDetailActivity extends Activity {
 
         cloudSaveDirTV = new TextView(this);
         String savedDir = prefs.getString("gog_save_dir_" + gameId, null);
-        cloudSaveDirTV.setText(savedDir != null ? shortenPath(savedDir) : "No save folder set");
+        cloudSaveDirTV.setText(savedDir != null ? shortenPath(savedDir) : "未设置存档文件夹");
         cloudSaveDirTV.setTextColor(savedDir != null ? 0xFFCCCCCC : 0xFF555577);
         cloudSaveDirTV.setTextSize(12f);
         cloudSaveDirTV.setMaxLines(2);

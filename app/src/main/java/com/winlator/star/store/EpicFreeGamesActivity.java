@@ -359,7 +359,7 @@ public class EpicFreeGamesActivity extends Activity {
 
         // Badge
         TextView badge = new TextView(this);
-        badge.setText(isFree ? "FREE" : "SOON");
+        badge.setText(isFree ? "免费" : "SOON");
         badge.setTextColor(isFree ? 0xFF00C853 : 0xFFFFAA00);
         badge.setTextSize(10f);
         badge.setTypeface(null, Typeface.BOLD);

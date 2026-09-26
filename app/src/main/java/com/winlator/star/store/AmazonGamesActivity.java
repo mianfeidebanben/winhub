@@ -341,8 +341,8 @@ public class AmazonGamesActivity extends Activity {
                 gameListLayout.setPadding(dp(8), dp(8), dp(8), dp(8));
                 TextView emptyTV = new TextView(AmazonGamesActivity.this);
                 String q2 = query == null ? "" : query.trim();
-                emptyTV.setText(q2.isEmpty() ? "Your Amazon library is empty"
-                                             : "No results for \u201c" + q2 + "\u201d");
+                emptyTV.setText(q2.isEmpty() ? "你的 Amazon 游戏库为空"
+                                             : "未找到与 “" + q2 + "”");
                 emptyTV.setTextColor(0xFF666666);
                 emptyTV.setTextSize(14f);
                 emptyTV.setGravity(Gravity.CENTER);
@@ -494,7 +494,7 @@ public class AmazonGamesActivity extends Activity {
         boolean updateAvailable = isInstalled
                 && game.versionId != null && game.versionId.endsWith("_UPDATE_AVAILABLE");
         TextView checkmark = new TextView(this);
-        checkmark.setText(updateAvailable ? "✓ Installed — Update Available" : "✓ Installed");
+        checkmark.setText(updateAvailable ? "✓ 已安装 — 有可用更新" : "✓ Installed");
         checkmark.setTextColor(updateAvailable ? 0xFFFFAA00 : 0xFF4CAF50);
         checkmark.setTextSize(10f);
         checkmark.setVisibility(isInstalled ? View.VISIBLE : View.GONE);
@@ -529,7 +529,7 @@ public class AmazonGamesActivity extends Activity {
         expandSection.addView(statusTV, stLp);
 
         Button actionBtn = new Button(this);
-        actionBtn.setText(isInstalled ? "Add to Launcher" : "Install");
+        actionBtn.setText(isInstalled ? "添加到启动器" : "Install");
         actionBtn.setTextColor(0xFFFFFFFF);
         actionBtn.setBackgroundColor(isInstalled ? COLOR_ADD : COLOR_ACCENT);
         actionBtn.setTextSize(13f);
@@ -548,7 +548,7 @@ public class AmazonGamesActivity extends Activity {
                 if (cancelRef[0] != null) cancelRef[0].run();
                 return;
             }
-            if ("Add to Launcher".equals(lbl) || "Add Game".equals(lbl)) {
+            if ("添加到启动器".equals(lbl) || "Add Game".equals(lbl)) {
                 String exe = prefs.getString("amazon_exe_" + game.productId, null);
                 if (exe != null) StarLaunchBridge.addToLauncher(this, game.title, exe, game.artUrl);
                 return;
@@ -751,7 +751,7 @@ public class AmazonGamesActivity extends Activity {
         actionRow.addView(progressBar, new LinearLayout.LayoutParams(-1, dp(3)));
 
         Button actionBtn = new Button(this);
-        actionBtn.setText(isInstalled ? "Add to Launcher" : "Install");
+        actionBtn.setText(isInstalled ? "添加到启动器" : "Install");
         actionBtn.setTextColor(0xFFFFFFFF);
         actionBtn.setBackgroundColor(isInstalled ? COLOR_ADD : COLOR_ACCENT);
         actionBtn.setTextSize(10f);
@@ -769,7 +769,7 @@ public class AmazonGamesActivity extends Activity {
                 if (cancelRef[0] != null) cancelRef[0].run();
                 return;
             }
-            if ("Add to Launcher".equals(lbl) || "Add Game".equals(lbl)) {
+            if ("添加到启动器".equals(lbl) || "Add Game".equals(lbl)) {
                 String exe = prefs.getString("amazon_exe_" + game.productId, null);
                 if (exe != null) StarLaunchBridge.addToLauncher(this, game.title, exe, game.artUrl);
                 return;

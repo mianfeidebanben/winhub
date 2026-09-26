@@ -202,8 +202,8 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                 }
                 DropdownMenu(expanded = showSortMenu, onDismissRequest = { showSortMenu = false }) {
                     val orders = listOf(
-                        ShortcutSortOrder.NAME_ASC  to "Name A→Z",
-                        ShortcutSortOrder.NAME_DESC to "Name Z→A",
+                        ShortcutSortOrder.NAME_ASC  to "名称 A→Z",
+                        ShortcutSortOrder.NAME_DESC to "名称 Z→A",
                         ShortcutSortOrder.CONTAINER to "Container",
                     )
                     orders.forEach { (order, label) ->
@@ -364,7 +364,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                     confirmRemove = null
                     Toast.makeText(
                         context,
-                        if (ok) "Shortcut removed." else "Failed to remove shortcut.",
+                        if (ok) "快捷方式已删除。" else "删除快捷方式失败。",
                         Toast.LENGTH_SHORT,
                     ).show()
                 }) { Text("删除") }
@@ -391,7 +391,7 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
                                     cloneTarget = null
                                     Toast.makeText(
                                         context,
-                                        if (ok) "Shortcut cloned." else "Failed to clone shortcut.",
+                                        if (ok) "快捷方式已克隆。" else "克隆快捷方式失败。",
                                         Toast.LENGTH_SHORT,
                                     ).show()
                                     if (ok) vm.refresh()
@@ -425,8 +425,8 @@ fun ShortcutsScreen(vm: ShortcutsViewModel = viewModel()) {
             title = { Text("属性") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(if (didReset) "Number of times played: 0" else "Number of times played: $playCount")
-                    Text(if (didReset) "Playtime: 0d 00h 00m 00s" else "Playtime: $formatted")
+                    Text(if (didReset) "已玩次数：0" else "Number of times played: $playCount")
+                    Text(if (didReset) "游玩时长：0d 00h 00m 00s" else "Playtime: $formatted")
                     Button(
                         onClick = {
                             playtimePrefs.edit().remove(playtimeKey).remove(playCountKey).apply()
@@ -818,7 +818,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
 
     // Tab
     var selectedTab by remember { mutableIntStateOf(0) }
-    val tabTitles = listOf("Win Components", "Env Vars", "Advanced")
+    val tabTitles = listOf("Win 组件", "环境变量", "高级")
 
     // Icon picker
     val iconPickerLauncher = rememberLauncherForActivityResult(
@@ -1297,7 +1297,7 @@ private fun ShortcutSettingsDialogScreen(shortcut: Shortcut, onDismiss: () -> Un
 private fun ScWinComponentsTab(components: androidx.compose.runtime.snapshots.SnapshotStateList<WinComponentEntry>) {
     val directx = components.filter { it.key.startsWith("direct") }
     val general = components.filterNot { it.key.startsWith("direct") }
-    val options = listOf("Builtin (Wine)", "Native (Windows)")
+    val options = listOf("内置（Wine）", "原生（Windows）")
 
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         if (directx.isNotEmpty()) {

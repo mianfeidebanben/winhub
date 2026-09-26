@@ -254,7 +254,7 @@ public class FrameRating extends FrameLayout implements Runnable {
             tvFPS.setTextColor(lastFPS > 30 ? 0xFF4CAF50 :
                                lastFPS > 20 ? 0xFFFFEB3B : 0xFFF44336);
         }
-        if (tvRAM != null) tvRAM.setText(getAvailableRAM() + " Used / " + totalRAM);
+        if (tvRAM != null) tvRAM.setText(getAvailableRAM() + " 已用 / " + totalRAM);
         if (tvCPUTemp != null) tvCPUTemp.setText(String.format(Locale.ENGLISH, "%.1f°C", cpuTemp));
         if (tvGPULoad != null) tvGPULoad.setText(gpuLoad + "%");
         

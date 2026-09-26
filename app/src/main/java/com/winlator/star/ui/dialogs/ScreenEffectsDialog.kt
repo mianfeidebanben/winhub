@@ -66,7 +66,7 @@ fun ScreenEffectsDialog(state: XServerDialogState) {
     var showRemoveConfirm       by remember { mutableStateOf(false) }
     var newProfileName          by remember { mutableStateOf("") }
 
-    val profileItems = listOf("-- Default --") + profiles
+    val profileItems = listOf("-- 默认 --") + profiles
 
     fun resetToDefault() {
         brightness = 0f; contrast = 0f; gamma = 1.0f
@@ -97,7 +97,7 @@ fun ScreenEffectsDialog(state: XServerDialogState) {
                     onExpandedChange = { profileDropdownExpanded = it }
                 ) {
                     OutlinedTextField(
-                        value = profileItems.getOrElse(profileIndex) { "-- Default --" },
+                        value = profileItems.getOrElse(profileIndex) { "-- 默认 --" },
                         onValueChange = {},
                         readOnly = true,
                         label = { Text("配置文件") },
@@ -146,10 +146,10 @@ fun ScreenEffectsDialog(state: XServerDialogState) {
 
                 // Shader toggles
                 Text("着色器", style = MaterialTheme.typography.labelMedium)
-                SeCheckRow("Enable FXAA",        fxaa) { fxaa = it }
-                SeCheckRow("Enable CRT Shader",  crt)  { crt  = it }
-                SeCheckRow("Enable Toon Shader", toon) { toon = it }
-                SeCheckRow("Enable NTSC Effect", ntsc) { ntsc = it }
+                SeCheckRow("启用 FXAA",        fxaa) { fxaa = it }
+                SeCheckRow("启用 CRT 着色器",  crt)  { crt  = it }
+                SeCheckRow("启用卡通着色器", toon) { toon = it }
+                SeCheckRow("启用 NTSC 效果", ntsc) { ntsc = it }
 
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
